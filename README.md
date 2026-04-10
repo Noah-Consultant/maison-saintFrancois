@@ -6,9 +6,9 @@
 
 ## À quoi sert ce projet ?
 
-Ce projet est une micro-application web mono-fichier (`index.html`) conçue pour aider une famille à arbitrer une décision patrimoniale concrète : **vendre une maison familiale maintenant, la mettre en location, ou attendre un meilleur prix**.
+Ce projet est une micro-application web mono-fichier (`index.html`) conçue pour aider ma famille à arbitrer une décision patrimoniale concrète : **vendre une maison familiale maintenant, la mettre en location, ou attendre un meilleur prix**.
 
-Il ne s'agit pas d'un outil générique. Il a été construit pour une situation réelle, avec les chiffres réels de la famille, pour permettre à chacun — maman, les frères, Alexandre — de comprendre l'impact de chaque option en quelques minutes, sans expertise financière préalable.
+Il ne s'agit pas d'un outil générique. Il a été construit pour une situation réelle, avec les chiffres réels de la famille, pour permettre à chacun — maman, mes frères, Alexandre — de comprendre l'impact de chaque option en quelques minutes, sans expertise financière préalable.
 
 ---
 
@@ -66,7 +66,7 @@ Section d'argumentation structurée, rédigée en langage accessible, pour étay
 ## Structure du projet
 
 ```
-strategie-patrimoniale/
+maison-saintFrancois/
 ├── index.html      ← Application complète (mono-fichier)
 └── README.md       ← Ce fichier
 ```
@@ -79,32 +79,11 @@ Aucun framework, aucun build, aucune configuration. Ouvrez `index.html` dans un 
 
 ---
 
-## Déploiement sur GitHub Pages
-
-```bash
-# 1. Créer un nouveau dépôt sur GitHub
-# 2. Cloner et ajouter les fichiers
-git clone https://github.com/votre-compte/strategie-patrimoniale.git
-cd strategie-patrimoniale
-cp /chemin/vers/strategie-patrimoniale.html index.html
-git add .
-git commit -m "Initial commit — simulation patrimoniale"
-git push origin main
-
-# 3. Activer GitHub Pages dans les Settings du dépôt
-# Settings → Pages → Source : Deploy from branch → main → / (root)
-```
-
-L'application sera disponible à l'adresse :  
-`https://noah-consultant.github.io/maison-saintFrancois/`
-
----
-
 ## Important — avertissement
 
 Ce document est un **outil d'aide à la décision familiale**. Il ne constitue pas un conseil juridique, fiscal ou patrimonial. Les chiffres sont des estimations fondées sur les données partagées en famille et des hypothèses de marché raisonnables.
 
-**Avant toute décision engageant le patrimoine, consultez ensemble un notaire et un conseiller en gestion de patrimoine indépendant.** En particulier pour la validation précise de l'impact fiscal de la date des 70 ans et des stratégies d'assurance-vie.
+**Avant toute décision engageant le patrimoine, consultons ensemble un notaire et un conseiller en gestion de patrimoine indépendant.** En particulier pour la validation précise de l'impact fiscal de la date des 70 ans et des stratégies d'assurance-vie.
 
 ---
 
