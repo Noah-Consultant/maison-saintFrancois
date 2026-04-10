@@ -600,6 +600,66 @@ footer .footer-brand {
 .updating {
   animation: countUp 0.3s var(--ease-out);
 }
+
+/* ═══════════════════════════════════════════
+   BLOC NARRATIF MAMAN
+   ═══════════════════════════════════════════ */
+.narrative {
+  background: var(--ink-soft);
+  border-top: 1px solid rgba(200,164,85,0.1);
+  border-bottom: 1px solid rgba(200,164,85,0.1);
+  padding: 4rem 0;
+}
+.narrative-inner { max-width: 720px; }
+.narrative-eyebrow {
+  font-size: 0.68rem; font-weight: 600; letter-spacing: 0.18em;
+  text-transform: uppercase; color: var(--gold);
+  display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1.75rem;
+}
+.narrative-eyebrow::before { content: ''; width: 24px; height: 1px; background: var(--gold); }
+.narrative-quote {
+  font-family: var(--font-display);
+  font-size: clamp(1.25rem, 2.2vw, 1.7rem);
+  font-weight: 400; font-style: italic;
+  color: var(--pearl); line-height: 1.55; margin-bottom: 2rem;
+  padding-left: 1.5rem; border-left: 2px solid rgba(200,164,85,0.4);
+}
+.narrative-body { font-size: 0.95rem; color: var(--silver); line-height: 1.85; }
+.narrative-body p { margin-bottom: 1rem; }
+.narrative-body p:last-child { margin-bottom: 0; }
+.narrative-body strong { color: var(--pearl); font-weight: 500; }
+
+/* ═══════════════════════════════════════════
+   GRILLE QUALITATIVE BIEN-ÊTRE
+   ═══════════════════════════════════════════ */
+.wellbeing-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 0.45rem;
+  margin-top: 1.25rem;
+}
+.wellbeing-item {
+  display: flex; align-items: center; gap: 0.55rem;
+  font-size: 0.76rem; padding: 0.5rem 0.65rem;
+  border-radius: 3px; line-height: 1.3;
+}
+.wellbeing-item .wb-icon { font-size: 0.95rem; flex-shrink: 0; }
+.wellbeing-item .wb-label { color: var(--slate); flex: 1; }
+.wellbeing-item .wb-score {
+  font-weight: 600; font-size: 0.68rem; letter-spacing: 0.04em;
+  padding: 0.12rem 0.45rem; border-radius: 2px; white-space: nowrap;
+}
+.wb-good { background: rgba(58,125,92,0.08); }
+.wb-good .wb-score { background: rgba(58,125,92,0.15); color: var(--success); }
+.wb-warn { background: rgba(196,122,58,0.08); }
+.wb-warn .wb-score { background: rgba(196,122,58,0.15); color: var(--warn); }
+.wb-bad  { background: rgba(168,66,66,0.08); }
+.wb-bad  .wb-score { background: rgba(168,66,66,0.15); color: var(--danger); }
+.wellbeing-title {
+  font-size: 0.67rem; font-weight: 600; letter-spacing: 0.14em;
+  text-transform: uppercase; color: var(--gold);
+  margin-top: 1.4rem; margin-bottom: 0.55rem;
+  display: flex; align-items: center; gap: 0.5rem;
+}
+.wellbeing-title::before { content:''; width: 14px; height: 1px; background: var(--gold); }
 </style>
 </head>
 
@@ -667,13 +727,40 @@ footer .footer-brand {
   </div>
 </section>
 
+<!-- ═══════════ BLOC NARRATIF MAMAN ═══════════ -->
+<section class="narrative">
+  <div class="container">
+    <div class="narrative-inner reveal">
+      <div class="narrative-eyebrow">Un mot avant les chiffres</div>
+      <div class="narrative-quote">
+        "Maman, cette maison n'est pas qu'un bien immobilier pour toi.<br>
+        C'est un morceau de notre histoire. Nous le savons."
+      </div>
+      <div class="narrative-body">
+        <p>
+          Ce document n'a pas été préparé pour te convaincre de quoi que ce soit, ni pour minimiser ce que tu ressens. Il a été préparé parce que nous t'aimons, et parce que nous voulons que <strong>cette décision soit la tienne</strong> — éclairée, sereine, et prise en famille plutôt que subie dans l'urgence.
+        </p>
+        <p>
+          Nous savons que l'idée de vendre ressemble à un arrachement. Tu as déjà vécu beaucoup de changements de repères ces dernières années. Cette maison représente une continuité, une présence, quelque chose qui ne se résume pas à un prix au mètre carré. <strong>Tout cela est légitime.</strong>
+        </p>
+        <p>
+          Et c'est précisément parce que nous prenons cela au sérieux que nous avons voulu poser les chiffres clairement. Parce qu'on ne peut pas décider sainement sans les voir. Non pas pour remplacer l'émotion par une feuille de calcul — mais pour que l'émotion ne soit pas, elle non plus, remplacée par une incertitude qui dure, une charge mentale qui s'installe, une situation qui se dégrade sans qu'on ait choisi.
+        </p>
+        <p>
+          <strong>Ce que nous souhaitons pour toi, c'est une retraite sereine. Avec des revenus à toi. Sans dépendre d'Alexandre pour le quotidien. Et sans avoir à penser à cette maison chaque semaine.</strong> C'est ça, l'objectif. Pas "faire un coup financier". Protéger maman.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- ═══════════ SCÉNARIOS ═══════════ -->
 <section class="section scenarios-section" id="scenarios">
   <div class="container">
     <div class="reveal">
       <div class="section-label">Comparaison des scénarios</div>
-      <h2 class="section-title">Trois options, un seul chiffre qui compte :<br>le revenu net réel</h2>
-      <p class="section-subtitle">Chaque scénario est évalué sur le revenu annuel net disponible pour la propriétaire, la charge mentale induite, et l'impact sur la transmission avant 70 ans.</p>
+      <h2 class="section-title">Trois options — les chiffres<br><em>et</em> ce que ça change vraiment pour maman</h2>
+      <p class="section-subtitle">Chaque scénario est évalué sur deux niveaux : le revenu net réel disponible, et ce qu'il implique concrètement en termes de charge mentale, d'autonomie et de sérénité.</p>
     </div>
 
     <div class="scenarios-grid reveal reveal-delay-1">
@@ -696,12 +783,44 @@ footer .footer-brand {
 
         <ul class="scenario-facts">
           <li class="good">Capital placé à 3 – 3,25% sans gestion</li>
-          <li class="good">Objectif retraite ≥ 1 200 €/mois atteint</li>
           <li class="good">Fenêtre assurance-vie avant 70 ans sécurisée</li>
           <li class="good">Zéro travaux, zéro locataire, zéro aléa</li>
-          <li class="good">Charge mentale : minimale</li>
-          <li>Deuil émotionnel — page tournée clairement</li>
+          <li class="good">Indépendance financière de maman dès le 1er mois</li>
         </ul>
+
+        <div class="wellbeing-title">Ce que ça signifie pour maman</div>
+        <div class="wellbeing-grid">
+          <div class="wellbeing-item wb-good">
+            <span class="wb-icon">🧘</span>
+            <span class="wb-label">Charge mentale</span>
+            <span class="wb-score">Libérée</span>
+          </div>
+          <div class="wellbeing-item wb-good">
+            <span class="wb-icon">💶</span>
+            <span class="wb-label">Autonomie financière</span>
+            <span class="wb-score">Totale</span>
+          </div>
+          <div class="wellbeing-item wb-good">
+            <span class="wb-icon">🔒</span>
+            <span class="wb-label">Sécurité à long terme</span>
+            <span class="wb-score">Forte</span>
+          </div>
+          <div class="wellbeing-item wb-warn">
+            <span class="wb-icon">💛</span>
+            <span class="wb-label">Deuil de la maison</span>
+            <span class="wb-score">À traverser</span>
+          </div>
+          <div class="wellbeing-item wb-good">
+            <span class="wb-icon">🤝</span>
+            <span class="wb-label">Décision familiale claire</span>
+            <span class="wb-score">Oui</span>
+          </div>
+          <div class="wellbeing-item wb-good">
+            <span class="wb-icon">🌿</span>
+            <span class="wb-label">Page tournée</span>
+            <span class="wb-score">Consciente</span>
+          </div>
+        </div>
       </div>
 
       <!-- OPTION B : LOUER -->
@@ -721,13 +840,45 @@ footer .footer-brand {
         <div class="scenario-divider"></div>
 
         <ul class="scenario-facts">
-          <li>Loyer brut 2 500 – 3 000 €/mois</li>
-          <li class="bad">Charges + foncier + IR : −30 à 40% du brut</li>
           <li class="bad">Travaux cave : 40 k€ minimum à avancer</li>
-          <li class="bad">Inflation chantier : +5–8%/an sur les devis</li>
+          <li class="bad">Charges + foncier + IR : −30 à 40% du brut</li>
           <li class="bad">Risque DPE, vacance locative, impayés</li>
           <li class="bad">Fenêtre succession 70 ans potentiellement ratée</li>
         </ul>
+
+        <div class="wellbeing-title">Ce que ça signifie pour maman</div>
+        <div class="wellbeing-grid">
+          <div class="wellbeing-item wb-bad">
+            <span class="wb-icon">⚡</span>
+            <span class="wb-label">Charge mentale</span>
+            <span class="wb-score">Forte</span>
+          </div>
+          <div class="wellbeing-item wb-warn">
+            <span class="wb-icon">💶</span>
+            <span class="wb-label">Autonomie financière</span>
+            <span class="wb-score">Partielle</span>
+          </div>
+          <div class="wellbeing-item wb-warn">
+            <span class="wb-icon">🔒</span>
+            <span class="wb-label">Sécurité à long terme</span>
+            <span class="wb-score">Incertaine</span>
+          </div>
+          <div class="wellbeing-item wb-good">
+            <span class="wb-icon">🏠</span>
+            <span class="wb-label">Lien à la maison</span>
+            <span class="wb-score">Préservé</span>
+          </div>
+          <div class="wellbeing-item wb-bad">
+            <span class="wb-icon">📞</span>
+            <span class="wb-label">Gestion locative</span>
+            <span class="wb-score">Permanente</span>
+          </div>
+          <div class="wellbeing-item wb-bad">
+            <span class="wb-icon">🌀</span>
+            <span class="wb-label">Incertitude familiale</span>
+            <span class="wb-score">Continue</span>
+          </div>
+        </div>
       </div>
 
       <!-- OPTION C : ATTENDRE 850 -->
@@ -740,20 +891,52 @@ footer .footer-brand {
           <div class="scenario-metric-value negative">0 €</div>
         </div>
         <div class="scenario-metric">
-          <div class="scenario-metric-label">Coût d'opportunité (2 ans)</div>
+          <div class="scenario-metric-label">Coût d'opportunité (selon délai)</div>
           <div class="scenario-metric-value negative" id="sc-wait-cost">−52 000 €</div>
         </div>
 
         <div class="scenario-divider"></div>
 
         <ul class="scenario-facts">
-          <li>Gain hypothétique sur prix : +50 k€ brut</li>
-          <li class="bad">Revenus perdus sur 2 ans : ≈ 52 k€</li>
+          <li class="bad">Revenus perdus pendant toute la période d'attente</li>
           <li class="bad">Risque fiscal succession si &gt; 70 ans : ≈ 40 k€</li>
+          <li class="bad">Marché baissier — les 850 k€ sont hypothétiques</li>
           <li class="bad">Inflation des travaux pendant l'attente</li>
-          <li class="bad">Marché baissier : maisons anciennes sous pression</li>
-          <li class="bad">Charge mentale : maximum — incertitude permanente</li>
         </ul>
+
+        <div class="wellbeing-title">Ce que ça signifie pour maman</div>
+        <div class="wellbeing-grid">
+          <div class="wellbeing-item wb-bad">
+            <span class="wb-icon">⚡</span>
+            <span class="wb-label">Charge mentale</span>
+            <span class="wb-score">Maximum</span>
+          </div>
+          <div class="wellbeing-item wb-bad">
+            <span class="wb-icon">💶</span>
+            <span class="wb-label">Autonomie financière</span>
+            <span class="wb-score">Aucune</span>
+          </div>
+          <div class="wellbeing-item wb-bad">
+            <span class="wb-icon">🔒</span>
+            <span class="wb-label">Sécurité à long terme</span>
+            <span class="wb-score">Fragile</span>
+          </div>
+          <div class="wellbeing-item wb-bad">
+            <span class="wb-icon">🌀</span>
+            <span class="wb-label">Incertitude du marché</span>
+            <span class="wb-score">Permanente</span>
+          </div>
+          <div class="wellbeing-item wb-bad">
+            <span class="wb-icon">⏳</span>
+            <span class="wb-label">Dépendance à Alexandre</span>
+            <span class="wb-score">Prolongée</span>
+          </div>
+          <div class="wellbeing-item wb-bad">
+            <span class="wb-icon">🌀</span>
+            <span class="wb-label">Tension familiale</span>
+            <span class="wb-score">Risque réel</span>
+          </div>
+        </div>
       </div>
     </div>
   </div>
