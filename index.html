@@ -6,559 +6,263 @@
 <title>Introspection Patrimoniale · Maison Saint François · Simulation 2026</title>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
-/* ═══════════════════════════════════════════
-   VARIABLES & RESET
-   ═══════════════════════════════════════════ */
 :root {
-  --ink: #0f1923;
-  --ink-soft: #1a2a3a;
-  --ink-muted: #2d4052;
-  --slate: #6b8299;
-  --silver: #9bb0c4;
-  --pearl: #d4dfe8;
-  --ivory: #f0f3f6;
-  --white: #fafbfc;
-  --gold: #c8a455;
-  --gold-light: #ddc07a;
-  --gold-soft: rgba(200, 164, 85, 0.12);
-  --gold-glow: rgba(200, 164, 85, 0.06);
-  --accent: #2a6f97;
-  --accent-light: #3d8ab5;
-  --success: #3a7d5c;
-  --success-soft: rgba(58, 125, 92, 0.12);
-  --warn: #c47a3a;
-  --warn-soft: rgba(196, 122, 58, 0.12);
-  --danger: #a84242;
-  --danger-soft: rgba(168, 66, 66, 0.12);
+  --ink: #0f1923; --ink-soft: #1a2a3a; --ink-muted: #2d4052;
+  --slate: #6b8299; --silver: #9bb0c4; --pearl: #d4dfe8; --ivory: #f0f3f6; --white: #fafbfc;
+  --gold: #c8a455; --gold-light: #ddc07a; --gold-soft: rgba(200,164,85,0.12); --gold-glow: rgba(200,164,85,0.06);
+  --accent: #2a6f97; --accent-light: #3d8ab5;
+  --success: #3a7d5c; --success-soft: rgba(58,125,92,0.12);
+  --warn: #c47a3a; --warn-soft: rgba(196,122,58,0.12);
+  --danger: #a84242; --danger-soft: rgba(168,66,66,0.12);
+  --target: #2a6f97; --target-soft: rgba(42,111,151,0.12);
   --font-display: 'Cormorant Garamond', Georgia, serif;
   --font-body: 'DM Sans', -apple-system, sans-serif;
-  --ease: cubic-bezier(0.25, 0.46, 0.45, 0.94);
-  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease: cubic-bezier(0.25,0.46,0.45,0.94);
+  --ease-out: cubic-bezier(0.22,1,0.36,1);
   --r: 4px;
 }
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;font-size:16px;}
+body{font-family:var(--font-body);color:var(--ink);background:var(--white);line-height:1.7;font-weight:400;-webkit-font-smoothing:antialiased;overflow-x:hidden;}
 
-*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-html { scroll-behavior: smooth; font-size: 16px; }
+.container{max-width:1080px;margin:0 auto;padding:0 1.5rem;}
+.section{padding:5rem 0;}
+.section-label{font-family:var(--font-body);font-size:.68rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin-bottom:1rem;display:flex;align-items:center;gap:.75rem;}
+.section-label::before{content:'';display:block;width:24px;height:1px;background:var(--gold);}
+.section-title{font-family:var(--font-display);font-size:clamp(1.8rem,3vw,2.6rem);font-weight:600;line-height:1.2;color:var(--ink);margin-bottom:1rem;}
+.section-subtitle{font-size:1rem;color:var(--slate);max-width:620px;line-height:1.75;}
 
-body {
-  font-family: var(--font-body);
-  color: var(--ink);
-  background: var(--white);
-  line-height: 1.7;
-  font-weight: 400;
-  -webkit-font-smoothing: antialiased;
-  overflow-x: hidden;
-}
+@keyframes fadeUp{from{opacity:0;transform:translateY(28px);}to{opacity:1;transform:translateY(0);}}
+@keyframes countUp{from{opacity:.4;transform:translateY(4px);}to{opacity:1;transform:translateY(0);}}
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .75s var(--ease-out),transform .75s var(--ease-out);}
+.reveal.visible{opacity:1;transform:translateY(0);}
+.reveal-delay-1{transition-delay:.1s;}.reveal-delay-2{transition-delay:.2s;}.reveal-delay-3{transition-delay:.3s;}
+.updating{animation:countUp .3s var(--ease-out);}
 
-/* ═══════════════════════════════════════════
-   UTILITIES
-   ═══════════════════════════════════════════ */
-.container { max-width: 1080px; margin: 0 auto; padding: 0 1.5rem; }
-.section { padding: 5rem 0; }
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:1.1rem 0;transition:all .4s var(--ease);background:transparent;}
+nav.scrolled{background:rgba(15,25,35,.96);backdrop-filter:blur(20px);padding:.7rem 0;box-shadow:0 1px 0 rgba(200,164,85,.12);}
+.nav-inner{max-width:1080px;margin:0 auto;padding:0 1.5rem;display:flex;justify-content:space-between;align-items:center;}
+.nav-brand{font-family:var(--font-display);font-size:1rem;font-weight:600;color:var(--pearl);letter-spacing:.02em;}
+.nav-badge{font-family:var(--font-body);font-size:.7rem;font-weight:500;letter-spacing:.08em;color:var(--gold);background:rgba(200,164,85,.12);border:1px solid rgba(200,164,85,.3);padding:.3rem .8rem;border-radius:2px;}
 
-.section-label {
-  font-family: var(--font-body);
-  font-size: 0.68rem;
-  font-weight: 600;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: var(--gold);
-  margin-bottom: 1rem;
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-}
-.section-label::before { content: ''; display: block; width: 24px; height: 1px; background: var(--gold); }
+/* HERO */
+.hero{min-height:100vh;display:flex;align-items:center;background:var(--ink);position:relative;overflow:hidden;}
+.hero::before{content:'';position:absolute;top:-40%;right:-15%;width:75vw;height:75vw;background:radial-gradient(ellipse,rgba(200,164,85,.05) 0%,transparent 65%);pointer-events:none;}
+.hero::after{content:'';position:absolute;bottom:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(200,164,85,.4),transparent);}
+.hero-content{position:relative;z-index:2;max-width:1080px;margin:0 auto;padding:8rem 1.5rem 5rem;}
+.hero-eyebrow{font-family:var(--font-body);font-size:.7rem;font-weight:500;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:2rem;display:flex;align-items:center;gap:.75rem;opacity:0;animation:fadeUp .8s var(--ease-out) .3s forwards;}
+.hero-eyebrow::before{content:'';width:28px;height:1px;background:var(--gold);}
+.hero h1{font-family:var(--font-display);font-size:clamp(2rem,4.5vw,3.4rem);font-weight:500;line-height:1.15;color:var(--pearl);max-width:800px;margin-bottom:1.5rem;opacity:0;animation:fadeUp .8s var(--ease-out) .5s forwards;}
+.hero h1 em{font-style:italic;color:var(--gold-light);}
+.hero-sub{font-size:1.05rem;font-weight:300;color:var(--silver);max-width:560px;line-height:1.8;margin-bottom:3.5rem;opacity:0;animation:fadeUp .8s var(--ease-out) .7s forwards;}
+.hero-figures{display:flex;flex-wrap:wrap;gap:2.5rem;margin-bottom:3.5rem;opacity:0;animation:fadeUp .8s var(--ease-out) .9s forwards;}
+.hero-figure{position:relative;padding-left:1.25rem;}
+.hero-figure::before{content:'';position:absolute;left:0;top:.15rem;bottom:.15rem;width:2px;background:var(--gold);border-radius:1px;}
+.hero-figure-number{font-family:var(--font-display);font-size:2.2rem;font-weight:600;color:var(--gold-light);line-height:1;margin-bottom:.25rem;}
+.hero-figure-label{font-size:.75rem;font-weight:400;color:var(--silver);}
+.hero-deadline{display:inline-flex;align-items:center;gap:.6rem;font-size:.78rem;font-weight:500;color:var(--warn);background:rgba(196,122,58,.1);border:1px solid rgba(196,122,58,.3);padding:.6rem 1.1rem;border-radius:2px;opacity:0;animation:fadeUp .8s var(--ease-out) 1.1s forwards;}
+.hero-deadline::before{content:'⚡';font-size:.85rem;}
 
-.section-title {
-  font-family: var(--font-display);
-  font-size: clamp(1.8rem, 3vw, 2.6rem);
-  font-weight: 600;
-  line-height: 1.2;
-  color: var(--ink);
-  margin-bottom: 1rem;
-}
+/* VERDICT */
+.verdict{background:var(--ink-soft);border-top:1px solid rgba(200,164,85,.15);border-bottom:1px solid rgba(200,164,85,.15);padding:2.5rem 0;}
+.verdict-inner{display:flex;align-items:flex-start;gap:2rem;flex-wrap:wrap;}
+.verdict-icon{flex-shrink:0;width:52px;height:52px;background:var(--success-soft);border:1px solid rgba(58,125,92,.3);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.3rem;margin-top:.2rem;transition:all .5s var(--ease);}
+.verdict-icon.warn{background:var(--warn-soft);border-color:rgba(196,122,58,.3);}
+.verdict-icon.target-icon{background:var(--target-soft);border-color:rgba(42,111,151,.3);}
+.verdict-icon.danger{background:var(--danger-soft);border-color:rgba(168,66,66,.3);}
+.verdict-body{flex:1;min-width:0;}
+.verdict-label{font-size:.68rem;font-weight:600;letter-spacing:.15em;text-transform:uppercase;color:var(--gold);margin-bottom:.5rem;}
+.verdict-text{font-family:var(--font-display);font-size:clamp(1.2rem,2.2vw,1.6rem);font-weight:500;color:var(--pearl);line-height:1.3;transition:all .4s var(--ease);}
+.verdict-sub{font-size:.9rem;color:var(--silver);margin-top:.5rem;line-height:1.6;transition:all .4s var(--ease);}
 
-.section-subtitle {
-  font-size: 1rem;
-  color: var(--slate);
-  max-width: 620px;
-  line-height: 1.75;
+/* SCENARIOS 2×2 */
+.scenarios-section{background:var(--ivory);}
+.scenarios-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1.25rem;margin-top:2.5rem;}
+@media(max-width:768px){
+  .scenarios-grid{grid-template-columns:1fr;}
+  #card-sell{order:1;}#card-target{order:2;}#card-rent{order:3;}#card-wait{order:4;}
 }
+.scenario-card{background:var(--white);border:1px solid var(--pearl);border-radius:var(--r);padding:1.75rem;transition:all .4s var(--ease);position:relative;overflow:hidden;}
+#card-sell,#card-target{padding:2rem;}
+.scenario-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--pearl);transition:background .4s var(--ease);}
+.scenario-card.winner::before{background:var(--success);}
+.scenario-card.target-card::before{background:var(--accent);}
+.scenario-card.neutral::before{background:var(--warn);}
+.scenario-card.loser::before{background:var(--danger);}
+.scenario-card.winner{border-color:rgba(58,125,92,.25);}
+.scenario-card.target-card{border-color:rgba(42,111,151,.3);}
+.scenario-card.neutral{border-color:rgba(196,122,58,.25);}
+.scenario-card.loser{border-color:rgba(168,66,66,.2);}
 
-/* ═══════════════════════════════════════════
-   ANIMATIONS
-   ═══════════════════════════════════════════ */
-@keyframes fadeUp {
-  from { opacity: 0; transform: translateY(28px); }
-  to   { opacity: 1; transform: translateY(0); }
-}
-@keyframes countUp {
-  from { opacity: 0.4; transform: translateY(4px); }
-  to   { opacity: 1; transform: translateY(0); }
-}
+.scenario-tag{display:inline-flex;align-items:center;gap:.4rem;font-size:.65rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;padding:.3rem .65rem;border-radius:2px;margin-bottom:1rem;}
+.scenario-tag.winner{background:var(--success-soft);color:var(--success);}
+.scenario-tag.target{background:var(--target-soft);color:var(--target);}
+.scenario-tag.neutral{background:var(--warn-soft);color:var(--warn);}
+.scenario-tag.loser{background:var(--danger-soft);color:var(--danger);}
 
-.reveal {
-  opacity: 0;
-  transform: translateY(28px);
-  transition: opacity 0.75s var(--ease-out), transform 0.75s var(--ease-out);
-}
-.reveal.visible { opacity: 1; transform: translateY(0); }
-.reveal-delay-1 { transition-delay: 0.1s; }
-.reveal-delay-2 { transition-delay: 0.2s; }
-.reveal-delay-3 { transition-delay: 0.3s; }
+.scenario-title{font-family:var(--font-display);font-size:1.4rem;font-weight:600;color:var(--ink);margin-bottom:1.25rem;}
+#card-sell .scenario-title,#card-target .scenario-title{font-size:1.55rem;}
 
-/* ═══════════════════════════════════════════
-   NAV
-   ═══════════════════════════════════════════ */
-nav {
-  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-  padding: 1.1rem 0;
-  transition: all 0.4s var(--ease);
-  background: transparent;
-}
-nav.scrolled {
-  background: rgba(15, 25, 35, 0.96);
-  backdrop-filter: blur(20px);
-  padding: 0.7rem 0;
-  box-shadow: 0 1px 0 rgba(200, 164, 85, 0.12);
-}
-.nav-inner {
-  max-width: 1080px; margin: 0 auto; padding: 0 1.5rem;
-  display: flex; justify-content: space-between; align-items: center;
-}
-.nav-brand {
-  font-family: var(--font-display);
-  font-size: 1rem; font-weight: 600; color: var(--pearl); letter-spacing: 0.02em;
-}
-.nav-badge {
-  font-family: var(--font-body);
-  font-size: 0.7rem; font-weight: 500; letter-spacing: 0.08em;
-  color: var(--gold); background: rgba(200, 164, 85, 0.12);
-  border: 1px solid rgba(200, 164, 85, 0.3);
-  padding: 0.3rem 0.8rem; border-radius: 2px;
-}
+.scenario-metric{margin-bottom:.9rem;}
+.scenario-metric-label{font-size:.72rem;font-weight:500;color:var(--slate);text-transform:uppercase;letter-spacing:.1em;margin-bottom:.15rem;}
+.scenario-metric-value{font-family:var(--font-display);font-size:1.5rem;font-weight:600;color:var(--ink);transition:all .35s var(--ease);}
+#card-sell .scenario-metric-value,#card-target .scenario-metric-value{font-size:1.7rem;}
+.scenario-metric-value.positive{color:var(--success);}
+.scenario-metric-value.target-color{color:var(--accent);}
+.scenario-metric-value.neutral{color:var(--warn);}
+.scenario-metric-value.negative{color:var(--danger);}
 
-/* ═══════════════════════════════════════════
-   HERO
-   ═══════════════════════════════════════════ */
-.hero {
-  min-height: 100vh; display: flex; align-items: center;
-  background: var(--ink); position: relative; overflow: hidden;
-}
-.hero::before {
-  content: ''; position: absolute; top: -40%; right: -15%;
-  width: 75vw; height: 75vw;
-  background: radial-gradient(ellipse, rgba(200, 164, 85, 0.05) 0%, transparent 65%);
-  pointer-events: none;
-}
-.hero::after {
-  content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(200,164,85,0.4), transparent);
-}
-.hero-content {
-  position: relative; z-index: 2;
-  max-width: 1080px; margin: 0 auto; padding: 8rem 1.5rem 5rem;
-}
-.hero-eyebrow {
-  font-family: var(--font-body); font-size: 0.7rem; font-weight: 500;
-  letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold);
-  margin-bottom: 2rem; display: flex; align-items: center; gap: 0.75rem;
-  opacity: 0; animation: fadeUp 0.8s var(--ease-out) 0.3s forwards;
-}
-.hero-eyebrow::before { content: ''; width: 28px; height: 1px; background: var(--gold); }
+.scenario-divider{height:1px;background:var(--ivory);margin:1.25rem 0;}
+.scenario-facts{list-style:none;}
+.scenario-facts li{font-size:.85rem;color:var(--slate);padding:.3rem 0;display:flex;align-items:flex-start;gap:.6rem;line-height:1.5;}
+.scenario-facts li::before{content:'—';color:var(--silver);flex-shrink:0;margin-top:.05rem;}
+.scenario-facts li.bad::before{content:'✕';color:var(--danger);}
+.scenario-facts li.good::before{content:'✓';color:var(--success);}
 
-.hero h1 {
-  font-family: var(--font-display);
-  font-size: clamp(2rem, 4.5vw, 3.4rem);
-  font-weight: 500; line-height: 1.15;
-  color: var(--pearl); max-width: 800px; margin-bottom: 1.5rem;
-  opacity: 0; animation: fadeUp 0.8s var(--ease-out) 0.5s forwards;
-}
-.hero h1 em { font-style: italic; color: var(--gold-light); }
+/* BREAK-EVEN */
+.breakeven-box{margin-top:1.25rem;padding:1.1rem 1.25rem;border-radius:var(--r);background:var(--ivory);border:1px solid rgba(42,111,151,.15);}
+.breakeven-line{display:flex;justify-content:space-between;gap:.75rem;padding:.35rem 0;border-bottom:1px dashed rgba(15,25,35,.08);color:var(--slate);font-size:.82rem;}
+.breakeven-line strong{font-weight:600;color:var(--ink);white-space:nowrap;}
+.breakeven-line.neg strong{color:var(--danger);}
+.breakeven-total{display:flex;justify-content:space-between;gap:.75rem;padding:.65rem 0 .35rem;font-weight:700;font-size:.92rem;color:var(--ink);border-top:1px solid rgba(15,25,35,.12);margin-top:.25rem;}
+.breakeven-total strong{font-size:1rem;}
+.breakeven-verdict{margin-top:.75rem;padding:.6rem .9rem;border-radius:var(--r);font-size:.82rem;font-weight:600;text-align:center;transition:background .3s,color .3s;}
+.breakeven-verdict.positive{background:var(--success-soft);color:var(--success);}
+.breakeven-verdict.neutral{background:var(--warn-soft);color:var(--warn);}
+.breakeven-verdict.negative{background:var(--danger-soft);color:var(--danger);}
+.fiscal-alert{margin-top:.75rem;padding:.6rem .9rem;border-radius:var(--r);background:var(--danger-soft);color:var(--danger);font-size:.8rem;font-weight:600;}
 
-.hero-sub {
-  font-size: 1.05rem; font-weight: 300; color: var(--silver);
-  max-width: 560px; line-height: 1.8; margin-bottom: 3.5rem;
-  opacity: 0; animation: fadeUp 0.8s var(--ease-out) 0.7s forwards;
-}
+/* SIMULATEUR */
+.simulator-section{background:var(--white);}
+.sim-layout{display:grid;grid-template-columns:1fr 1fr;gap:2rem;margin-top:2.5rem;}
+@media(max-width:768px){.sim-layout{grid-template-columns:1fr;}}
+.sim-inputs-panel{background:var(--ivory);border-radius:var(--r);padding:2rem;}
+.sim-inputs-panel h3{font-family:var(--font-display);font-size:1.2rem;font-weight:600;color:var(--ink);margin-bottom:.5rem;}
+.sim-section-divider{font-size:.67rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);margin:1.75rem 0 1rem;display:flex;align-items:center;gap:.5rem;}
+.sim-section-divider::before{content:'';flex:0 0 14px;height:1px;background:var(--accent);}
+.input-group{margin-bottom:1.5rem;}
+.input-group label{display:flex;justify-content:space-between;align-items:baseline;font-size:.82rem;font-weight:500;color:var(--ink-muted);margin-bottom:.2rem;}
+.input-hint{font-size:.73rem;color:var(--slate);margin-bottom:.55rem;line-height:1.4;}
+.input-default{font-size:.68rem;color:var(--silver);font-style:italic;}
+.input-value{font-family:var(--font-display);font-size:1rem;font-weight:600;color:var(--gold);}
+.input-value.target-val{color:var(--accent);}
 
-.hero-figures {
-  display: flex; flex-wrap: wrap; gap: 2.5rem; margin-bottom: 3.5rem;
-  opacity: 0; animation: fadeUp 0.8s var(--ease-out) 0.9s forwards;
-}
-.hero-figure { position: relative; padding-left: 1.25rem; }
-.hero-figure::before {
-  content: ''; position: absolute; left: 0; top: 0.15rem; bottom: 0.15rem;
-  width: 2px; background: var(--gold); border-radius: 1px;
-}
-.hero-figure-number {
-  font-family: var(--font-display); font-size: 2.2rem; font-weight: 600;
-  color: var(--gold-light); line-height: 1; margin-bottom: 0.25rem;
-}
-.hero-figure-label { font-size: 0.75rem; font-weight: 400; color: var(--silver); }
+input[type="range"]{-webkit-appearance:none;width:100%;height:4px;border-radius:2px;background:linear-gradient(to right,var(--gold) 0%,var(--gold) var(--pct,50%),var(--pearl) var(--pct,50%));outline:none;cursor:pointer;transition:background .2s var(--ease);}
+input[type="range"].target-range{background:linear-gradient(to right,var(--accent) 0%,var(--accent) var(--pct,50%),var(--pearl) var(--pct,50%));}
+input[type="range"]::-webkit-slider-thumb{-webkit-appearance:none;width:18px;height:18px;border-radius:50%;background:var(--gold);border:2px solid var(--white);box-shadow:0 2px 8px rgba(200,164,85,.3);transition:transform .2s var(--ease),box-shadow .2s var(--ease);}
+input[type="range"].target-range::-webkit-slider-thumb{background:var(--accent);box-shadow:0 2px 8px rgba(42,111,151,.3);}
+input[type="range"]::-webkit-slider-thumb:hover{transform:scale(1.2);box-shadow:0 4px 16px rgba(200,164,85,.4);}
+input[type="range"]::-moz-range-thumb{width:18px;height:18px;border-radius:50%;border:2px solid var(--white);background:var(--gold);box-shadow:0 2px 8px rgba(200,164,85,.3);}
 
-.hero-deadline {
-  display: inline-flex; align-items: center; gap: 0.6rem;
-  font-size: 0.78rem; font-weight: 500; color: var(--warn);
-  background: rgba(196,122,58,0.1); border: 1px solid rgba(196,122,58,0.3);
-  padding: 0.6rem 1.1rem; border-radius: 2px;
-  opacity: 0; animation: fadeUp 0.8s var(--ease-out) 1.1s forwards;
-}
-.hero-deadline::before { content: '⚡'; font-size: 0.85rem; }
+/* RESULTS */
+.sim-results-panel{display:flex;flex-direction:column;gap:1rem;}
+.result-primary{background:var(--ink);border-radius:var(--r);padding:1.75rem;position:relative;overflow:hidden;}
+.result-primary::before{content:'';position:absolute;top:-50%;right:-20%;width:200px;height:200px;background:radial-gradient(ellipse,rgba(200,164,85,.08) 0%,transparent 70%);}
+.result-primary-label{font-size:.68rem;font-weight:600;letter-spacing:.15em;text-transform:uppercase;color:var(--gold);margin-bottom:.6rem;}
+.result-primary-number{font-family:var(--font-display);font-size:clamp(2rem,3vw,2.8rem);font-weight:600;color:var(--gold-light);line-height:1;margin-bottom:.35rem;transition:all .3s var(--ease-out);display:inline-block;}
+.result-primary-sub{font-size:.82rem;color:var(--silver);line-height:1.5;}
+.result-compare{display:grid;grid-template-columns:1fr 1fr;gap:.75rem;}
+.result-card{background:var(--ivory);border:1px solid var(--pearl);border-radius:var(--r);padding:1.25rem;transition:all .3s var(--ease);}
+.result-card.better{background:var(--success-soft);border-color:rgba(58,125,92,.2);}
+.result-card.worse{background:var(--danger-soft);border-color:rgba(168,66,66,.15);}
+.result-card-label{font-size:.68rem;font-weight:500;color:var(--slate);text-transform:uppercase;letter-spacing:.1em;margin-bottom:.4rem;}
+.result-card-value{font-family:var(--font-display);font-size:1.4rem;font-weight:600;color:var(--ink);transition:all .3s var(--ease-out);}
+.result-card.better .result-card-value{color:var(--success);}
+.result-card.worse  .result-card-value{color:var(--danger);}
+.result-delta{background:var(--ink-soft);border-radius:var(--r);padding:1.25rem 1.5rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:.75rem;}
+.result-delta-label{font-size:.78rem;color:var(--silver);font-weight:400;}
+.result-delta-value{font-family:var(--font-display);font-size:1.6rem;font-weight:600;color:var(--gold-light);transition:all .3s var(--ease-out);}
 
-/* ═══════════════════════════════════════════
-   VERDICT BANNER
-   ═══════════════════════════════════════════ */
-.verdict {
-  background: var(--ink-soft);
-  border-top: 1px solid rgba(200,164,85,0.15);
-  border-bottom: 1px solid rgba(200,164,85,0.15);
-  padding: 2.5rem 0;
-}
-.verdict-inner {
-  display: flex; align-items: flex-start; gap: 2rem; flex-wrap: wrap;
-}
-.verdict-icon {
-  flex-shrink: 0; width: 52px; height: 52px;
-  background: var(--success-soft); border: 1px solid rgba(58,125,92,0.3);
-  border-radius: 50%; display: flex; align-items: center; justify-content: center;
-  font-size: 1.3rem; margin-top: 0.2rem; transition: all 0.5s var(--ease);
-}
-.verdict-icon.warn { background: var(--warn-soft); border-color: rgba(196,122,58,0.3); }
-.verdict-icon.danger { background: var(--danger-soft); border-color: rgba(168,66,66,0.3); }
-.verdict-body { flex: 1; min-width: 0; }
-.verdict-label {
-  font-size: 0.68rem; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase;
-  color: var(--gold); margin-bottom: 0.5rem;
-}
-.verdict-text {
-  font-family: var(--font-display);
-  font-size: clamp(1.2rem, 2.2vw, 1.6rem);
-  font-weight: 500; color: var(--pearl); line-height: 1.3;
-  transition: all 0.4s var(--ease);
-}
-.verdict-sub {
-  font-size: 0.9rem; color: var(--silver); margin-top: 0.5rem; line-height: 1.6;
-  transition: all 0.4s var(--ease);
-}
+/* CHART */
+.chart-section{background:var(--ivory);}
+.chart-wrapper{margin-top:2.5rem;background:var(--white);border:1px solid var(--pearl);border-radius:var(--r);padding:2rem;overflow:hidden;}
+.chart-header{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;margin-bottom:2rem;}
+.chart-legend{display:flex;gap:1.5rem;flex-wrap:wrap;}
+.chart-legend-item{display:flex;align-items:center;gap:.5rem;font-size:.75rem;color:var(--slate);}
+.chart-legend-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0;}
+.chart-legend-dot.sell{background:var(--success);}
+.chart-legend-dot.target{background:var(--accent);}
+.chart-legend-dot.rent{background:var(--accent-light);}
+.chart-legend-dot.wait{background:var(--danger);}
+.chart-canvas-wrap{position:relative;height:280px;}
+canvas{width:100%!important;display:block;}
 
-/* ═══════════════════════════════════════════
-   SCENARIO CARDS
-   ═══════════════════════════════════════════ */
-.scenarios-section { background: var(--ivory); }
-.scenarios-grid {
-  display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem; margin-top: 2.5rem;
-}
-@media (max-width: 768px) { .scenarios-grid { grid-template-columns: 1fr; } }
+/* ARGS */
+.args-section{background:var(--white);}
+.args-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.5rem;margin-top:2.5rem;}
+.arg-card{padding:1.75rem;border:1px solid var(--pearl);border-radius:var(--r);position:relative;}
+.arg-card::before{content:'';position:absolute;top:0;left:1.75rem;right:1.75rem;height:1px;background:var(--gold);}
+.arg-number{font-family:var(--font-display);font-size:3rem;font-weight:600;line-height:1;margin-bottom:.5rem;color:rgba(200,164,85,.2);}
+.arg-title{font-family:var(--font-display);font-size:1.15rem;font-weight:600;color:var(--ink);margin-bottom:.6rem;}
+.arg-text{font-size:.88rem;color:var(--slate);line-height:1.7;}
 
-.scenario-card {
-  background: var(--white); border: 1px solid var(--pearl);
-  border-radius: var(--r); padding: 1.75rem;
-  transition: all 0.4s var(--ease); position: relative; overflow: hidden;
-}
-.scenario-card::before {
-  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
-  background: var(--pearl); transition: background 0.4s var(--ease);
-}
-.scenario-card.winner::before { background: var(--success); }
-.scenario-card.neutral::before { background: var(--warn); }
-.scenario-card.loser::before  { background: var(--danger); }
-.scenario-card.winner { border-color: rgba(58,125,92,0.25); }
-.scenario-card.neutral { border-color: rgba(196,122,58,0.25); }
-.scenario-card.loser  { border-color: rgba(168,66,66,0.2); }
+/* BILAN 4 colonnes */
+.bilan-section{background:var(--ink);}
+.bilan-section .section-title{color:var(--pearl);}
+.bilan-section .section-subtitle{color:var(--silver);}
+.bilan-section .section-label{color:var(--gold);}
+.bilan-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;margin-top:2.5rem;}
+@media(max-width:900px){.bilan-grid{grid-template-columns:repeat(2,1fr);}}
+@media(max-width:540px){.bilan-grid{grid-template-columns:1fr;}}
+.bilan-col{padding:1.5rem;border-radius:var(--r);}
+.bilan-col.winner{background:rgba(58,125,92,.12);border:1px solid rgba(58,125,92,.25);}
+.bilan-col.target-col{background:rgba(42,111,151,.1);border:1px solid rgba(42,111,151,.25);}
+.bilan-col.neutral{background:rgba(196,122,58,.08);border:1px solid rgba(196,122,58,.2);}
+.bilan-col.loser{background:rgba(168,66,66,.08);border:1px solid rgba(168,66,66,.15);}
+.bilan-col-title{font-family:var(--font-display);font-size:1.05rem;font-weight:600;color:var(--pearl);margin-bottom:1.1rem;}
+.bilan-row{display:flex;justify-content:space-between;gap:.75rem;padding:.45rem 0;border-bottom:1px solid rgba(255,255,255,.05);font-size:.8rem;}
+.bilan-row:last-child{border-bottom:none;}
+.bilan-row-label{color:var(--silver);}
+.bilan-row-value{font-weight:500;color:var(--pearl);text-align:right;}
+.bilan-row-value.good{color:#6ec996;}
+.bilan-row-value.target{color:#7ab8d9;}
+.bilan-row-value.bad{color:#e08080;}
 
-.scenario-tag {
-  display: inline-flex; align-items: center; gap: 0.4rem;
-  font-size: 0.65rem; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase;
-  padding: 0.3rem 0.65rem; border-radius: 2px; margin-bottom: 1rem;
-}
-.scenario-tag.winner { background: var(--success-soft); color: var(--success); }
-.scenario-tag.neutral { background: var(--warn-soft); color: var(--warn); }
-.scenario-tag.loser  { background: var(--danger-soft); color: var(--danger); }
+/* DISCLAIMER & FOOTER */
+.disclaimer{background:var(--ink-soft);border-top:1px solid rgba(200,164,85,.1);padding:1.5rem 0;}
+.disclaimer p{font-size:.78rem;color:var(--slate);text-align:center;line-height:1.7;}
+footer{background:var(--ink);padding:1.5rem 0;border-top:1px solid rgba(200,164,85,.15);}
+footer .container{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:.75rem;}
+footer p{font-size:.76rem;color:var(--slate);}
+footer .footer-brand{font-family:var(--font-display);font-size:.95rem;color:var(--pearl);}
 
-.scenario-title {
-  font-family: var(--font-display);
-  font-size: 1.4rem; font-weight: 600; color: var(--ink); margin-bottom: 1.25rem;
-}
-.scenario-metric { margin-bottom: 0.9rem; }
-.scenario-metric-label {
-  font-size: 0.72rem; font-weight: 500; color: var(--slate); text-transform: uppercase;
-  letter-spacing: 0.1em; margin-bottom: 0.15rem;
-}
-.scenario-metric-value {
-  font-family: var(--font-display);
-  font-size: 1.5rem; font-weight: 600; color: var(--ink); transition: all 0.35s var(--ease);
-}
-.scenario-metric-value.positive { color: var(--success); }
-.scenario-metric-value.neutral  { color: var(--warn); }
-.scenario-metric-value.negative { color: var(--danger); }
-
-.scenario-divider { height: 1px; background: var(--ivory); margin: 1.25rem 0; }
-
-.scenario-facts { list-style: none; }
-.scenario-facts li {
-  font-size: 0.85rem; color: var(--slate); padding: 0.3rem 0;
-  display: flex; align-items: flex-start; gap: 0.6rem; line-height: 1.5;
-}
-.scenario-facts li::before { content: '—'; color: var(--silver); flex-shrink: 0; margin-top: 0.05rem; }
-.scenario-facts li.bad::before  { content: '✕'; color: var(--danger); }
-.scenario-facts li.good::before { content: '✓'; color: var(--success); }
-
-/* ═══════════════════════════════════════════
-   SIMULATEUR
-   ═══════════════════════════════════════════ */
-.simulator-section { background: var(--white); }
-.sim-layout {
-  display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 2.5rem;
-}
-@media (max-width: 768px) { .sim-layout { grid-template-columns: 1fr; } }
-
-.sim-inputs-panel { background: var(--ivory); border-radius: var(--r); padding: 2rem; }
-.sim-inputs-panel h3 {
-  font-family: var(--font-display);
-  font-size: 1.2rem; font-weight: 600; color: var(--ink); margin-bottom: 1.75rem;
-}
-.input-group { margin-bottom: 1.5rem; }
-.input-group label {
-  display: flex; justify-content: space-between; align-items: baseline;
-  font-size: 0.82rem; font-weight: 500; color: var(--ink-muted); margin-bottom: 0.2rem;
-}
-.input-hint { font-size: 0.73rem; color: var(--slate); margin-bottom: 0.55rem; line-height: 1.4; }
-.input-default { font-size: 0.68rem; color: var(--silver); font-style: italic; }
-.input-value { font-family: var(--font-display); font-size: 1rem; font-weight: 600; color: var(--gold); }
-
-input[type="range"] {
-  -webkit-appearance: none; width: 100%; height: 4px; border-radius: 2px;
-  background: linear-gradient(to right, var(--gold) 0%, var(--gold) var(--pct, 50%), var(--pearl) var(--pct, 50%));
-  outline: none; cursor: pointer; transition: background 0.2s var(--ease);
-}
-input[type="range"]::-webkit-slider-thumb {
-  -webkit-appearance: none; width: 18px; height: 18px; border-radius: 50%;
-  background: var(--gold); border: 2px solid var(--white);
-  box-shadow: 0 2px 8px rgba(200,164,85,0.3);
-  transition: transform 0.2s var(--ease), box-shadow 0.2s var(--ease);
-}
-input[type="range"]::-webkit-slider-thumb:hover {
-  transform: scale(1.2); box-shadow: 0 4px 16px rgba(200,164,85,0.4);
-}
-input[type="range"]::-moz-range-thumb {
-  width: 18px; height: 18px; border-radius: 50%; border: 2px solid var(--white);
-  background: var(--gold); box-shadow: 0 2px 8px rgba(200,164,85,0.3);
+/* MOBILE */
+@media(max-width:640px){
+  .hero-figures{gap:1.5rem;} .hero-figure-number{font-size:1.8rem;}
+  .result-compare{grid-template-columns:1fr;} .chart-canvas-wrap{height:220px;}
+  .scenarios-grid{gap:1rem;} .args-grid{grid-template-columns:1fr;}
+  .section{padding:3.5rem 0;} .sim-layout{gap:1.25rem;} .verdict-inner{gap:1rem;}
 }
 
-/* ═══════════════════════════════════════════
-   RESULTS PANEL
-   ═══════════════════════════════════════════ */
-.sim-results-panel { display: flex; flex-direction: column; gap: 1rem; }
-.result-primary {
-  background: var(--ink); border-radius: var(--r); padding: 1.75rem;
-  position: relative; overflow: hidden;
-}
-.result-primary::before {
-  content: ''; position: absolute; top: -50%; right: -20%; width: 200px; height: 200px;
-  background: radial-gradient(ellipse, rgba(200,164,85,0.08) 0%, transparent 70%);
-}
-.result-primary-label {
-  font-size: 0.68rem; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase;
-  color: var(--gold); margin-bottom: 0.6rem;
-}
-.result-primary-number {
-  font-family: var(--font-display); font-size: clamp(2rem, 3vw, 2.8rem);
-  font-weight: 600; color: var(--gold-light); line-height: 1; margin-bottom: 0.35rem;
-  transition: all 0.3s var(--ease-out); display: inline-block;
-}
-.result-primary-sub { font-size: 0.82rem; color: var(--silver); line-height: 1.5; }
+/* NARRATIVE */
+.narrative{background:var(--ink-soft);border-top:1px solid rgba(200,164,85,.1);border-bottom:1px solid rgba(200,164,85,.1);padding:4rem 0;}
+.narrative-inner{max-width:720px;}
+.narrative-eyebrow{font-size:.68rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);display:flex;align-items:center;gap:.75rem;margin-bottom:1.75rem;}
+.narrative-eyebrow::before{content:'';width:24px;height:1px;background:var(--gold);}
+.narrative-quote{font-family:var(--font-display);font-size:clamp(1.25rem,2.2vw,1.7rem);font-weight:400;font-style:italic;color:var(--pearl);line-height:1.55;margin-bottom:2rem;padding-left:1.5rem;border-left:2px solid rgba(200,164,85,.4);}
+.narrative-body{font-size:.95rem;color:var(--silver);line-height:1.85;}
+.narrative-body p{margin-bottom:1rem;}.narrative-body p:last-child{margin-bottom:0;}
+.narrative-body strong{color:var(--pearl);font-weight:500;}
 
-.result-compare { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; }
-.result-card {
-  background: var(--ivory); border: 1px solid var(--pearl);
-  border-radius: var(--r); padding: 1.25rem; transition: all 0.3s var(--ease);
+/* WELLBEING */
+.wellbeing-grid{display:grid;grid-template-columns:1fr 1fr;gap:.45rem;margin-top:1.25rem;}
+.wellbeing-item{display:flex;align-items:center;gap:.45rem;font-size:.74rem;padding:.45rem .55rem;border-radius:3px;line-height:1.3;min-width:0;}
+.wellbeing-item .wb-icon{font-size:.9rem;flex-shrink:0;}
+.wellbeing-item .wb-label{color:var(--slate);flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.wellbeing-item .wb-score{font-weight:600;font-size:.65rem;letter-spacing:.03em;padding:.1rem .38rem;border-radius:2px;white-space:nowrap;flex-shrink:0;}
+@media(max-width:480px){
+  .wellbeing-grid{grid-template-columns:1fr;}
+  .wellbeing-item .wb-label{white-space:normal;overflow:visible;text-overflow:clip;}
 }
-.result-card.better { background: var(--success-soft); border-color: rgba(58,125,92,0.2); }
-.result-card.worse  { background: var(--danger-soft); border-color: rgba(168,66,66,0.15); }
-.result-card-label {
-  font-size: 0.68rem; font-weight: 500; color: var(--slate); text-transform: uppercase;
-  letter-spacing: 0.1em; margin-bottom: 0.4rem;
-}
-.result-card-value {
-  font-family: var(--font-display); font-size: 1.4rem; font-weight: 600; color: var(--ink);
-  transition: all 0.3s var(--ease-out);
-}
-.result-card.better .result-card-value { color: var(--success); }
-.result-card.worse  .result-card-value { color: var(--danger); }
-
-.result-delta {
-  background: var(--ink-soft); border-radius: var(--r); padding: 1.25rem 1.5rem;
-  display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 0.75rem;
-}
-.result-delta-label { font-size: 0.78rem; color: var(--silver); font-weight: 400; }
-.result-delta-value {
-  font-family: var(--font-display); font-size: 1.6rem; font-weight: 600; color: var(--gold-light);
-  transition: all 0.3s var(--ease-out);
-}
-
-/* ═══════════════════════════════════════════
-   GRAPHIQUE
-   ═══════════════════════════════════════════ */
-.chart-section { background: var(--ivory); }
-.chart-wrapper {
-  margin-top: 2.5rem; background: var(--white); border: 1px solid var(--pearl);
-  border-radius: var(--r); padding: 2rem; overflow: hidden;
-}
-.chart-header {
-  display: flex; justify-content: space-between; align-items: center;
-  flex-wrap: wrap; gap: 1rem; margin-bottom: 2rem;
-}
-.chart-legend { display: flex; gap: 1.5rem; flex-wrap: wrap; }
-.chart-legend-item { display: flex; align-items: center; gap: 0.5rem; font-size: 0.75rem; color: var(--slate); }
-.chart-legend-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
-.chart-legend-dot.sell { background: var(--success); }
-.chart-legend-dot.rent { background: var(--accent-light); }
-.chart-legend-dot.wait { background: var(--danger); }
-.chart-canvas-wrap { position: relative; height: 260px; }
-canvas { width: 100% !important; display: block; }
-
-/* ═══════════════════════════════════════════
-   ARGUMENTATION
-   ═══════════════════════════════════════════ */
-.args-section { background: var(--white); }
-.args-grid {
-  display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 1.5rem; margin-top: 2.5rem;
-}
-.arg-card { padding: 1.75rem; border: 1px solid var(--pearl); border-radius: var(--r); position: relative; }
-.arg-card::before {
-  content: ''; position: absolute; top: 0; left: 1.75rem; right: 1.75rem; height: 1px; background: var(--gold);
-}
-.arg-number {
-  font-family: var(--font-display); font-size: 3rem; font-weight: 600;
-  line-height: 1; margin-bottom: 0.5rem; color: rgba(200, 164, 85, 0.2);
-}
-.arg-title { font-family: var(--font-display); font-size: 1.15rem; font-weight: 600; color: var(--ink); margin-bottom: 0.6rem; }
-.arg-text { font-size: 0.88rem; color: var(--slate); line-height: 1.7; }
-
-/* ═══════════════════════════════════════════
-   BILAN GLOBAL
-   ═══════════════════════════════════════════ */
-.bilan-section { background: var(--ink); }
-.bilan-section .section-title { color: var(--pearl); }
-.bilan-section .section-subtitle { color: var(--silver); }
-.bilan-section .section-label { color: var(--gold); }
-.bilan-grid {
-  display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin-top: 2.5rem;
-}
-@media (max-width: 640px) { .bilan-grid { grid-template-columns: 1fr; } }
-.bilan-col { padding: 1.75rem; border-radius: var(--r); }
-.bilan-col.winner { background: rgba(58,125,92,0.12); border: 1px solid rgba(58,125,92,0.25); }
-.bilan-col.neutral { background: rgba(196,122,58,0.08); border: 1px solid rgba(196,122,58,0.2); }
-.bilan-col.loser  { background: rgba(168,66,66,0.08); border: 1px solid rgba(168,66,66,0.15); }
-.bilan-col-title {
-  font-family: var(--font-display); font-size: 1.15rem; font-weight: 600;
-  color: var(--pearl); margin-bottom: 1.25rem;
-}
-.bilan-row {
-  display: flex; justify-content: space-between; gap: 1rem;
-  padding: 0.5rem 0; border-bottom: 1px solid rgba(255,255,255,0.05); font-size: 0.83rem;
-}
-.bilan-row:last-child { border-bottom: none; }
-.bilan-row-label { color: var(--silver); }
-.bilan-row-value { font-weight: 500; color: var(--pearl); text-align: right; }
-.bilan-row-value.good { color: #6ec996; }
-.bilan-row-value.bad  { color: #e08080; }
-
-/* ═══════════════════════════════════════════
-   DISCLAIMER & FOOTER
-   ═══════════════════════════════════════════ */
-.disclaimer { background: var(--ink-soft); border-top: 1px solid rgba(200,164,85,0.1); padding: 1.5rem 0; }
-.disclaimer p { font-size: 0.78rem; color: var(--slate); text-align: center; line-height: 1.7; }
-footer { background: var(--ink); padding: 1.5rem 0; border-top: 1px solid rgba(200,164,85,0.15); }
-footer .container { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.75rem; }
-footer p { font-size: 0.76rem; color: var(--slate); }
-footer .footer-brand { font-family: var(--font-display); font-size: 0.95rem; color: var(--pearl); }
-
-/* ═══════════════════════════════════════════
-   MOBILE TWEAKS
-   ═══════════════════════════════════════════ */
-@media (max-width: 640px) {
-  .hero-figures { gap: 1.5rem; }
-  .hero-figure-number { font-size: 1.8rem; }
-  .result-compare { grid-template-columns: 1fr; }
-  .chart-canvas-wrap { height: 220px; }
-  .scenarios-grid { gap: 1rem; }
-  .args-grid { grid-template-columns: 1fr; }
-  .section { padding: 3.5rem 0; }
-  .sim-layout { gap: 1.25rem; }
-  .verdict-inner { gap: 1rem; }
-}
-
-.updating { animation: countUp 0.3s var(--ease-out); }
-
-/* ═══════════════════════════════════════════
-   BLOC NARRATIF MAMAN
-   ═══════════════════════════════════════════ */
-.narrative {
-  background: var(--ink-soft);
-  border-top: 1px solid rgba(200,164,85,0.1);
-  border-bottom: 1px solid rgba(200,164,85,0.1);
-  padding: 4rem 0;
-}
-.narrative-inner { max-width: 720px; }
-.narrative-eyebrow {
-  font-size: 0.68rem; font-weight: 600; letter-spacing: 0.18em;
-  text-transform: uppercase; color: var(--gold);
-  display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1.75rem;
-}
-.narrative-eyebrow::before { content: ''; width: 24px; height: 1px; background: var(--gold); }
-.narrative-quote {
-  font-family: var(--font-display);
-  font-size: clamp(1.25rem, 2.2vw, 1.7rem);
-  font-weight: 400; font-style: italic;
-  color: var(--pearl); line-height: 1.55; margin-bottom: 2rem;
-  padding-left: 1.5rem; border-left: 2px solid rgba(200,164,85,0.4);
-}
-.narrative-body { font-size: 0.95rem; color: var(--silver); line-height: 1.85; }
-.narrative-body p { margin-bottom: 1rem; }
-.narrative-body p:last-child { margin-bottom: 0; }
-.narrative-body strong { color: var(--pearl); font-weight: 500; }
-
-/* ═══════════════════════════════════════════
-   GRILLE QUALITATIVE BIEN-ÊTRE
-   ═══════════════════════════════════════════ */
-.wellbeing-grid {
-  display: grid; grid-template-columns: 1fr 1fr; gap: 0.45rem; margin-top: 1.25rem;
-}
-.wellbeing-item {
-  display: flex; align-items: center; gap: 0.45rem;
-  font-size: 0.74rem; padding: 0.45rem 0.55rem; border-radius: 3px; line-height: 1.3;
-  min-width: 0;
-}
-.wellbeing-item .wb-icon { font-size: 0.9rem; flex-shrink: 0; }
-.wellbeing-item .wb-label { color: var(--slate); flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-.wellbeing-item .wb-score {
-  font-weight: 600; font-size: 0.65rem; letter-spacing: 0.03em;
-  padding: 0.1rem 0.38rem; border-radius: 2px; white-space: nowrap; flex-shrink: 0;
-}
-@media (max-width: 480px) {
-  .wellbeing-grid { grid-template-columns: 1fr; }
-  .wellbeing-item .wb-label { white-space: normal; overflow: visible; text-overflow: clip; }
-}
-.wb-good { background: rgba(58,125,92,0.08); }
-.wb-good .wb-score { background: rgba(58,125,92,0.15); color: var(--success); }
-.wb-warn { background: rgba(196,122,58,0.08); }
-.wb-warn .wb-score { background: rgba(196,122,58,0.15); color: var(--warn); }
-.wb-bad  { background: rgba(168,66,66,0.08); }
-.wb-bad  .wb-score { background: rgba(168,66,66,0.15); color: var(--danger); }
-.wellbeing-title {
-  font-size: 0.67rem; font-weight: 600; letter-spacing: 0.14em;
-  text-transform: uppercase; color: var(--gold);
-  margin-top: 1.4rem; margin-bottom: 0.55rem;
-  display: flex; align-items: center; gap: 0.5rem;
-}
-.wellbeing-title::before { content:''; width: 14px; height: 1px; background: var(--gold); }
+.wb-good{background:rgba(58,125,92,.08);}.wb-good .wb-score{background:rgba(58,125,92,.15);color:var(--success);}
+.wb-warn{background:rgba(196,122,58,.08);}.wb-warn .wb-score{background:rgba(196,122,58,.15);color:var(--warn);}
+.wb-bad{background:rgba(168,66,66,.08);}.wb-bad .wb-score{background:rgba(168,66,66,.15);color:var(--danger);}
+.wb-target{background:rgba(42,111,151,.08);}.wb-target .wb-score{background:rgba(42,111,151,.15);color:var(--target);}
+.wellbeing-title{font-size:.67rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);margin-top:1.4rem;margin-bottom:.55rem;display:flex;align-items:center;gap:.5rem;}
+.wellbeing-title::before{content:'';width:14px;height:1px;background:var(--gold);}
 </style>
 </head>
-
 <body>
 
 <nav id="nav">
@@ -589,7 +293,7 @@ footer .footer-brand { font-family: var(--font-display); font-size: 0.95rem; col
       <div class="verdict-icon" id="verdict-icon">✓</div>
       <div class="verdict-body">
         <div class="verdict-label">Verdict de la simulation</div>
-        <div class="verdict-text" id="verdict-text">Vendre maintenant à ≈ 800 k€ domine les deux autres scénarios</div>
+        <div class="verdict-text" id="verdict-text">Vendre maintenant à ≈ 800 k€ domine les autres scénarios</div>
         <div class="verdict-sub" id="verdict-sub">À ces hypothèses, chaque mois d'attente coûte ≈ 2 000 € de revenus perdus, et fragilise la fenêtre fiscale avant 70 ans.</div>
       </div>
     </div>
@@ -604,23 +308,25 @@ footer .footer-brand { font-family: var(--font-display); font-size: 0.95rem; col
       <div class="narrative-body">
         <p>Ce document n'a pas été préparé pour te convaincre de quoi que ce soit, ni pour minimiser ce que tu ressens. Il a été préparé parce que nous t'aimons, et parce que nous voulons que <strong>cette décision soit la tienne</strong> — éclairée, sereine, et prise en famille plutôt que subie dans l'urgence.</p>
         <p>Nous savons que l'idée de vendre ressemble à un arrachement. Tu as déjà vécu beaucoup de changements de repères ces dernières années. Cette maison représente une continuité, une présence, quelque chose qui ne se résume pas à un prix au mètre carré. <strong>Tout cela est légitime.</strong></p>
-        <p>Et c'est précisément parce que nous prenons cela au sérieux que nous avons voulu poser les chiffres clairement. Parce qu'on ne peut pas décider sainement sans les voir. Non pas pour remplacer l'émotion par une feuille de calcul — mais pour que l'émotion ne soit pas, elle non plus, remplacée par une incertitude qui dure, une charge mentale qui s'installe, une situation qui se dégrade sans qu'on ait choisi.</p>
+        <p>Et c'est précisément parce que nous prenons cela au sérieux que nous avons voulu poser les chiffres clairement. Non pas pour remplacer l'émotion par une feuille de calcul — mais pour que l'émotion ne soit pas, elle non plus, remplacée par une incertitude qui dure, une charge mentale qui s'installe, une situation qui se dégrade sans qu'on ait choisi.</p>
         <p><strong>Ce que nous souhaitons pour toi, c'est une retraite sereine. Avec des revenus à toi. Sans dépendre d'Alexandre pour le quotidien. Et sans avoir à penser à cette maison chaque semaine.</strong> C'est ça, l'objectif. Pas "faire un coup financier". Protéger maman.</p>
       </div>
     </div>
   </div>
 </section>
 
+<!-- SCÉNARIOS 2×2 -->
 <section class="section scenarios-section" id="scenarios">
   <div class="container">
     <div class="reveal">
-      <div class="section-label">Comparaison des scénarios</div>
-      <h2 class="section-title">Trois options — les chiffres<br><em>et</em> ce que ça change vraiment pour maman</h2>
+      <div class="section-label">Comparaison des quatre scénarios</div>
+      <h2 class="section-title">Quatre options — les chiffres<br><em>et</em> ce que ça change vraiment pour maman</h2>
       <p class="section-subtitle">Chaque scénario est évalué sur deux niveaux : le revenu net réel disponible, et ce qu'il implique concrètement en termes de charge mentale, d'autonomie et de sérénité.</p>
     </div>
     <div class="scenarios-grid reveal reveal-delay-1">
 
-      <div class="scenario-card winner">
+      <!-- 1 : VENDRE MAINTENANT -->
+      <div class="scenario-card winner" id="card-sell">
         <div class="scenario-tag winner">✓ Recommandé</div>
         <div class="scenario-title">Vendre maintenant<br>≈ 800 k€ net</div>
         <div class="scenario-metric">
@@ -649,7 +355,68 @@ footer .footer-brand { font-family: var(--font-display); font-size: 0.95rem; col
         </div>
       </div>
 
-      <div class="scenario-card neutral">
+      <!-- 2 : PRIX CIBLE -->
+      <div class="scenario-card target-card" id="card-target">
+        <div class="scenario-tag target">🎯 Vendre à cible</div>
+        <div class="scenario-title">Vendre à prix cible<br><span style="font-size:.95rem;font-weight:400;color:var(--slate);">si le marché le permet</span></div>
+        <div class="scenario-metric">
+          <div class="scenario-metric-label">Revenu annuel une fois vendu</div>
+          <div class="scenario-metric-value target-color" id="sc-target-revenue">27 419 €</div>
+        </div>
+        <div class="scenario-metric">
+          <div class="scenario-metric-label">Revenu mensuel une fois vendu</div>
+          <div class="scenario-metric-value target-color" id="sc-target-monthly">2 285 €</div>
+        </div>
+        <div class="scenario-divider"></div>
+        <ul class="scenario-facts">
+          <li>Hypothèse : vendre à <strong id="sc-target-price-label">870 000 €</strong> dans <strong id="sc-target-delay-label">1,5 an</strong></li>
+          <li>Net vendeur estimé (−5,9% agence) : <strong id="sc-target-net-label">819 270 €</strong></li>
+          <li class="bad">Aucun revenu pendant la période d'attente</li>
+          <li class="bad">Risque réel : le marché peut ne jamais atteindre ce prix</li>
+        </ul>
+
+        <div class="breakeven-box">
+          <div class="breakeven-line">
+            <span>Upside brut (prix supérieur)</span>
+            <strong id="beUpside">+19 270 €</strong>
+          </div>
+          <div class="breakeven-line neg">
+            <span>− Revenus placement perdus</span>
+            <strong id="beRevenuPerdu">39 000 €</strong>
+          </div>
+          <div class="breakeven-line neg">
+            <span>− Inflation chantier / matériaux</span>
+            <strong id="beInflation">4 800 €</strong>
+          </div>
+          <div class="breakeven-line neg">
+            <span>− Entretien pendant l'attente</span>
+            <strong id="beEntretien">3 915 €</strong>
+          </div>
+          <div class="breakeven-line neg">
+            <span>− Risque fiscal / successoral</span>
+            <strong id="beRisqueFiscal">40 000 €</strong>
+          </div>
+          <div class="breakeven-total">
+            <span>Gain net réel estimé</span>
+            <strong id="beGainNet">−68 445 €</strong>
+          </div>
+          <div class="breakeven-verdict negative" id="breakevenVerdict">🔴 Ce prix cible détruit de la valeur nette à ces hypothèses.</div>
+        </div>
+        <div class="fiscal-alert" id="targetFiscalAlert" style="display:none"></div>
+
+        <div class="wellbeing-title">Ce que ça signifie pour maman</div>
+        <div class="wellbeing-grid">
+          <div class="wellbeing-item wb-warn"><span class="wb-icon">⏳</span><span class="wb-label">Charge mentale</span><span class="wb-score">Modérée</span></div>
+          <div class="wellbeing-item wb-target"><span class="wb-icon">💶</span><span class="wb-label">Autonomie financière</span><span class="wb-score">Différée</span></div>
+          <div class="wellbeing-item wb-warn"><span class="wb-icon">🔒</span><span class="wb-label">Sécurité long terme</span><span class="wb-score">Conditionnelle</span></div>
+          <div class="wellbeing-item wb-warn"><span class="wb-icon">💛</span><span class="wb-label">Deuil de la maison</span><span class="wb-score">Suspendu</span></div>
+          <div class="wellbeing-item wb-warn"><span class="wb-icon">🎯</span><span class="wb-label">Pari sur le marché</span><span class="wb-score">Incertain</span></div>
+          <div class="wellbeing-item wb-warn"><span class="wb-icon">⚡</span><span class="wb-label">Fenêtre 70 ans</span><span class="wb-score">À risque</span></div>
+        </div>
+      </div>
+
+      <!-- 3 : LOUER -->
+      <div class="scenario-card neutral" id="card-rent">
         <div class="scenario-tag neutral">⚠ Défendable mais contraignant</div>
         <div class="scenario-title">Conserver<br>et louer</div>
         <div class="scenario-metric">
@@ -678,7 +445,8 @@ footer .footer-brand { font-family: var(--font-display); font-size: 0.95rem; col
         </div>
       </div>
 
-      <div class="scenario-card loser">
+      <!-- 4 : ATTENDRE 850 -->
+      <div class="scenario-card loser" id="card-wait">
         <div class="scenario-tag loser">✕ Pari risqué</div>
         <div class="scenario-title">Attendre<br>850 k€</div>
         <div class="scenario-metric">
@@ -711,48 +479,66 @@ footer .footer-brand { font-family: var(--font-display); font-size: 0.95rem; col
   </div>
 </section>
 
+<!-- SIMULATEUR -->
 <section class="section simulator-section" id="simulateur">
   <div class="container">
     <div class="reveal">
       <div class="section-label">Simulateur interactif</div>
       <h2 class="section-title">Ajuste les hypothèses,<br>observe l'impact immédiat</h2>
-      <p class="section-subtitle">Les valeurs par défaut correspondent à la situation réelle. Chaque curseur met à jour les revenus et le verdict en temps réel.</p>
+      <p class="section-subtitle">Les valeurs par défaut correspondent à la situation réelle. Les indicateurs ci-dessous se recalculent instantanément à chaque ajustement.</p>
     </div>
     <div class="sim-layout reveal reveal-delay-1">
       <div class="sim-inputs-panel">
         <h3>Paramètres de simulation</h3>
-        <p style="font-size:0.8rem;color:var(--slate);margin-bottom:1.75rem;line-height:1.6;">Faites glisser chaque curseur pour tester différentes hypothèses. Les indicateurs ci-dessous se recalculent instantanément à chaque ajustement.</p>
+        <p style="font-size:.8rem;color:var(--slate);margin-bottom:.5rem;line-height:1.6;">Faites glisser chaque curseur pour tester différentes hypothèses.</p>
+
+        <div class="sim-section-divider">Hypothèses de base</div>
+
         <div class="input-group">
           <label>Capital net vendeur <span class="input-value" id="val-capital">800 000 €</span></label>
-          <div class="input-hint">Ce que maman toucherait réellement après paiement de l'agence immobilière, une fois la vente signée. <span class="input-default">Valeur par défaut : 800 000 € (prix affiché 850 k€ − commission agence ~6%)</span></div>
+          <div class="input-hint">Ce que maman toucherait réellement après paiement de l'agence immobilière. <span class="input-default">Défaut : 800 000 € (prix affiché 850 k€ − commission ~6%)</span></div>
           <input type="range" id="input-capital" min="700000" max="870000" step="5000" value="800000">
         </div>
         <div class="input-group">
           <label>Taux de placement annuel <span class="input-value" id="val-rate">3,25%</span></label>
-          <div class="input-hint">Le rendement annuel d'un placement sécurisé du capital (assurance-vie fonds euros, livret, obligations). Plus ce taux est élevé, plus la rente est confortable. <span class="input-default">Valeur par défaut : 3,25% — fourchette réaliste en 2026 pour un placement prudent</span></div>
+          <div class="input-hint">Rendement d'un placement sécurisé (AV fonds euros, obligations). <span class="input-default">Défaut : 3,25% — fourchette réaliste 2026</span></div>
           <input type="range" id="input-rate" min="2.5" max="5" step="0.25" value="3.25">
         </div>
         <div class="input-group">
           <label>Loyer brut mensuel (si on garde la maison) <span class="input-value" id="val-rent">2 700 €</span></label>
-          <div class="input-hint">Ce qu'un locataire paierait chaque mois si la maison était mise en location. C'est le montant avant déduction des charges et impôts. <span class="input-default">Valeur par défaut : 2 700 €/mois — estimation réaliste pour une maison de 200 m² à l'ouest de Paris</span></div>
+          <div class="input-hint">Ce qu'un locataire paierait avant charges et impôts. <span class="input-default">Défaut : 2 700 €/mois — estimation réaliste pour 200 m², ouest parisien</span></div>
           <input type="range" id="input-rent" min="2000" max="3500" step="50" value="2700">
         </div>
         <div class="input-group">
           <label>Part perdue en charges + impôts (location) <span class="input-value" id="val-taxrate">35%</span></label>
-          <div class="input-hint">Sur chaque euro de loyer encaissé, une partie disparaît en charges de copropriété, taxe foncière, entretien et impôts sur revenus fonciers. Il reste le solde net. <span class="input-default">Valeur par défaut : 35% — fourchette réaliste pour ce type de bien (peut aller jusqu'à 40-45% selon la tranche d'imposition)</span></div>
+          <div class="input-hint">Charges de copropriété + taxe foncière + IR sur revenus fonciers. <span class="input-default">Défaut : 35% (peut atteindre 45% selon tranche d'imposition)</span></div>
           <input type="range" id="input-taxrate" min="25" max="45" step="5" value="35">
         </div>
         <div class="input-group">
-          <label>Délai avant une vente à 850 k€ (mois) <span class="input-value" id="val-delay">24 mois</span></label>
-          <div class="input-hint">Combien de temps supplémentaire faudrait-il attendre pour espérer vendre 50 000 € de plus ? Pendant ce temps, aucun revenu n'est généré. <span class="input-default">Valeur par défaut : 24 mois — estimation prudente sur un marché actuellement difficile pour ce type de bien</span></div>
+          <label>Délai attente 850 k€ (mois) <span class="input-value" id="val-delay">24 mois</span></label>
+          <div class="input-hint">Combien de temps pour espérer vendre 50 000 € de plus ? Zéro revenu pendant ce temps. <span class="input-default">Défaut : 24 mois — estimation prudente, marché difficile</span></div>
           <input type="range" id="input-delay" min="6" max="36" step="3" value="24">
         </div>
         <div class="input-group">
           <label>Surcoût fiscal si vente après 70 ans <span class="input-value" id="val-taxrisk">40 000 €</span></label>
-          <div class="input-hint">Si l'argent est placé en assurance-vie après les 70 ans de maman (15 janvier 2027), les avantages fiscaux pour les héritiers sont considérablement réduits. Ce curseur représente l'impact estimé en droits supplémentaires. <span class="input-default">Valeur par défaut : 40 000 € — ordre de grandeur à valider avec un notaire</span></div>
+          <div class="input-hint">Droits supplémentaires si l'AV est alimentée après les 70 ans de maman (15 janv. 2027). <span class="input-default">Défaut : 40 000 € — à valider avec un notaire</span></div>
           <input type="range" id="input-taxrisk" min="0" max="80000" step="5000" value="40000">
         </div>
+
+        <div class="sim-section-divider">🎯 Scénario prix cible</div>
+
+        <div class="input-group">
+          <label>Prix de vente cible <span class="input-value target-val" id="val-targetprice">870 000 €</span></label>
+          <div class="input-hint">Le prix auquel on espère vendre si on attend. Le net vendeur sera inférieur (frais agence ~5,9%). <span class="input-default">Défaut : 870 000 € — estimation actuelle de l'agence</span></div>
+          <input type="range" class="target-range" id="input-targetprice" min="850000" max="920000" step="5000" value="870000">
+        </div>
+        <div class="input-group">
+          <label>Délai estimé pour atteindre ce prix <span class="input-value target-val" id="val-targetdelay">1,5 an</span></label>
+          <div class="input-hint">Combien d'années faudrait-il patienter ? Pendant tout ce temps, aucun revenu n'est généré. <span class="input-default">Défaut : 1,5 an — scénario optimiste compte tenu du marché actuel</span></div>
+          <input type="range" class="target-range" id="input-targetdelay" min="0.5" max="2.5" step="0.5" value="1.5">
+        </div>
       </div>
+
       <div class="sim-results-panel">
         <div class="result-primary">
           <div class="result-primary-label">Revenu annuel net — Vente immédiate</div>
@@ -760,7 +546,7 @@ footer .footer-brand { font-family: var(--font-display); font-size: 0.95rem; col
           <div class="result-primary-sub" id="out-sell-monthly-text">soit ≈ 2 167 €/mois · Capital sécurisé, aucune gestion</div>
         </div>
         <div class="result-compare">
-          <div class="result-card" id="card-rent">
+          <div class="result-card" id="card-rent-res">
             <div class="result-card-label">Net locatif / an</div>
             <div class="result-card-value" id="out-rent-annual">21 060 €</div>
           </div>
@@ -772,22 +558,30 @@ footer .footer-brand { font-family: var(--font-display); font-size: 0.95rem; col
         <div class="result-delta">
           <div>
             <div class="result-delta-label">Coût total de l'attente pour 850 k€</div>
-            <div style="font-size:0.75rem;color:var(--slate);margin-top:0.2rem">Revenus perdus + risque fiscal succession</div>
+            <div style="font-size:.75rem;color:var(--slate);margin-top:.2rem">Revenus perdus + risque fiscal succession</div>
           </div>
           <div class="result-delta-value" id="out-wait-total">−92 000 €</div>
         </div>
-        <div class="result-delta" style="background: var(--success-soft); border: 1px solid rgba(58,125,92,0.2);">
+        <div class="result-delta" style="background:rgba(42,111,151,.1);border:1px solid rgba(42,111,151,.2);">
           <div>
-            <div class="result-delta-label" style="color: var(--success);">Complément de rente pour maman (en plus des 1 200 €/mois déjà perçus)</div>
-            <div style="font-size:0.75rem;color:var(--slate);margin-top:0.2rem" id="out-goal-text">Rente mensuelle : +2 167 €/mois supplémentaires. Total : 3 367 €/mois — indépendant d'Alexandre.</div>
+            <div class="result-delta-label" style="color:var(--accent);">🎯 Gain net réel — Scénario prix cible</div>
+            <div style="font-size:.75rem;color:var(--slate);margin-top:.2rem" id="out-target-sub">Upside brut − revenus perdus − inflation − entretien − risque fiscal</div>
           </div>
-          <div class="result-delta-value" style="color: var(--success);" id="out-goal-status">+2 167 €/mois</div>
+          <div class="result-delta-value" id="out-target-gain" style="color:var(--danger);">−68 445 €</div>
+        </div>
+        <div class="result-delta" style="background:var(--success-soft);border:1px solid rgba(58,125,92,.2);">
+          <div>
+            <div class="result-delta-label" style="color:var(--success);">Complément de rente pour maman (en plus des 1 200 €/mois déjà perçus)</div>
+            <div style="font-size:.75rem;color:var(--slate);margin-top:.2rem" id="out-goal-text">Rente mensuelle : +2 167 €/mois supplémentaires. Total : 3 367 €/mois — indépendant d'Alexandre.</div>
+          </div>
+          <div class="result-delta-value" style="color:var(--success);" id="out-goal-status">+2 167 €/mois</div>
         </div>
       </div>
     </div>
   </div>
 </section>
 
+<!-- GRAPHIQUE -->
 <section class="section chart-section" id="graphique">
   <div class="container">
     <div class="reveal">
@@ -796,9 +590,10 @@ footer .footer-brand { font-family: var(--font-display); font-size: 0.95rem; col
     </div>
     <div class="chart-wrapper reveal reveal-delay-1">
       <div class="chart-header">
-        <p style="font-size:0.82rem;color:var(--slate);">Comparaison des revenus nets cumulés selon le scénario choisi.</p>
+        <p style="font-size:.82rem;color:var(--slate);">Comparaison des revenus nets cumulés selon le scénario choisi.</p>
         <div class="chart-legend">
           <div class="chart-legend-item"><div class="chart-legend-dot sell"></div> Vente immédiate</div>
+          <div class="chart-legend-item"><div class="chart-legend-dot target"></div> Prix cible</div>
           <div class="chart-legend-item"><div class="chart-legend-dot rent"></div> Location</div>
           <div class="chart-legend-item"><div class="chart-legend-dot wait"></div> Attente 850 k€</div>
         </div>
@@ -808,6 +603,7 @@ footer .footer-brand { font-family: var(--font-display); font-size: 0.95rem; col
   </div>
 </section>
 
+<!-- ARGUMENTS -->
 <section class="section args-section" id="arguments">
   <div class="container">
     <div class="reveal">
@@ -850,23 +646,35 @@ footer .footer-brand { font-family: var(--font-display); font-size: 0.95rem; col
   </div>
 </section>
 
+<!-- BILAN 4 colonnes -->
 <section class="section bilan-section" id="bilan">
   <div class="container">
     <div class="reveal">
       <div class="section-label">Bilan consolidé</div>
       <h2 class="section-title">Ce que chaque scénario signifie concrètement pour maman</h2>
-      <p class="section-subtitle">Ces chiffres sont des estimations fondées sur les paramètres du simulateur ci-dessus. À affiner avec un notaire pour la fiscalité successorale précise avant toute décision.</p>
+      <p class="section-subtitle">Ces chiffres sont des estimations fondées sur les paramètres du simulateur ci-dessus. À affiner avec un notaire pour la fiscalité successorale précise.</p>
     </div>
     <div class="bilan-grid reveal reveal-delay-1">
+
       <div class="bilan-col winner">
         <div class="bilan-col-title">✓ Vente immédiate<br>≈ 800 k€</div>
         <div class="bilan-row"><span class="bilan-row-label">Rente annuelle nette</span><span class="bilan-row-value good" id="b-sell-annual">26 000 €</span></div>
-        <div class="bilan-row"><span class="bilan-row-label">Rente mensuelle pour maman</span><span class="bilan-row-value good" id="b-sell-monthly">2 167 €</span></div>
+        <div class="bilan-row"><span class="bilan-row-label">Rente mensuelle</span><span class="bilan-row-value good" id="b-sell-monthly">2 167 €</span></div>
         <div class="bilan-row"><span class="bilan-row-label">+ Retraite de base</span><span class="bilan-row-value good">1 200 €/mois</span></div>
-        <div class="bilan-row"><span class="bilan-row-label">Dépendance à Alexandre</span><span class="bilan-row-value good">Supprimée</span></div>
+        <div class="bilan-row"><span class="bilan-row-label">Dépendance Alexandre</span><span class="bilan-row-value good">Supprimée</span></div>
         <div class="bilan-row"><span class="bilan-row-label">Travaux à financer</span><span class="bilan-row-value good">0 €</span></div>
         <div class="bilan-row"><span class="bilan-row-label">Fenêtre AV avant 70 ans</span><span class="bilan-row-value good">Sécurisée</span></div>
       </div>
+
+      <div class="bilan-col target-col">
+        <div class="bilan-col-title">🎯 Prix cible<br><span id="b-target-price-title">870 000 €</span></div>
+        <div class="bilan-row"><span class="bilan-row-label">Net vendeur estimé</span><span class="bilan-row-value target" id="b-target-net">819 270 €</span></div>
+        <div class="bilan-row"><span class="bilan-row-label">Rente une fois vendu</span><span class="bilan-row-value target" id="b-target-annual">27 k€/an</span></div>
+        <div class="bilan-row"><span class="bilan-row-label">Gain net vs vendre maint.</span><span class="bilan-row-value bad" id="b-target-gain">−68 445 €</span></div>
+        <div class="bilan-row"><span class="bilan-row-label">Délai sans revenu</span><span class="bilan-row-value bad" id="b-target-delay-label">1,5 an</span></div>
+        <div class="bilan-row"><span class="bilan-row-label">Fenêtre AV avant 70 ans</span><span class="bilan-row-value bad" id="b-target-fiscal-risk">⚠ À risque</span></div>
+      </div>
+
       <div class="bilan-col neutral">
         <div class="bilan-col-title">⚠ Conserver<br>et louer</div>
         <div class="bilan-row"><span class="bilan-row-label">Revenu net / an</span><span class="bilan-row-value" id="b-rent-annual">21 060 €</span></div>
@@ -876,21 +684,22 @@ footer .footer-brand { font-family: var(--font-display); font-size: 0.95rem; col
         <div class="bilan-row"><span class="bilan-row-label">Charge mentale</span><span class="bilan-row-value bad">Forte</span></div>
         <div class="bilan-row"><span class="bilan-row-label">Aléas locatifs</span><span class="bilan-row-value bad">Importants</span></div>
       </div>
+
       <div class="bilan-col loser">
         <div class="bilan-col-title">✕ Attendre<br>850 k€</div>
         <div class="bilan-row"><span class="bilan-row-label">Revenu pendant attente</span><span class="bilan-row-value bad">0 €</span></div>
-        <div class="bilan-row"><span class="bilan-row-label">Revenus perdus (selon délai)</span><span class="bilan-row-value bad" id="b-wait-lost">−52 000 €</span></div>
-        <div class="bilan-row"><span class="bilan-row-label">Risque fiscal AV après 70 ans</span><span class="bilan-row-value bad" id="b-wait-taxrisk">−40 000 €</span></div>
-        <div class="bilan-row"><span class="bilan-row-label">Travaux + inflation chantier</span><span class="bilan-row-value bad">≥ 43 000 €</span></div>
-        <div class="bilan-row" style="border-top:1px solid rgba(168,66,66,0.3);margin-top:0.4rem;padding-top:0.5rem;">
-          <span class="bilan-row-label" style="font-weight:500;color:var(--pearl);">Gain net réel vs vendre maintenant</span>
+        <div class="bilan-row"><span class="bilan-row-label">Revenus perdus</span><span class="bilan-row-value bad" id="b-wait-lost">−52 000 €</span></div>
+        <div class="bilan-row"><span class="bilan-row-label">Risque fiscal AV &gt;70 ans</span><span class="bilan-row-value bad" id="b-wait-taxrisk">−40 000 €</span></div>
+        <div class="bilan-row"><span class="bilan-row-label">Travaux + inflation</span><span class="bilan-row-value bad">≥ 43 000 €</span></div>
+        <div class="bilan-row" style="border-top:1px solid rgba(168,66,66,.3);margin-top:.4rem;padding-top:.5rem;">
+          <span class="bilan-row-label" style="font-weight:500;color:var(--pearl);">Gain net réel</span>
           <span class="bilan-row-value bad" id="b-wait-net">−42 000 €</span>
         </div>
-        <div class="bilan-row" style="border-bottom:none;padding-top:0.1rem;">
-          <span class="bilan-row-label" style="font-size:0.69rem;font-style:italic;color:var(--slate);">gain prix (50k€) − revenus perdus − risque fiscal AV</span>
-          <span></span>
+        <div class="bilan-row" style="border-bottom:none;padding-top:.1rem;">
+          <span class="bilan-row-label" style="font-size:.68rem;font-style:italic;color:var(--slate);">gain prix (50k€) − revenus perdus − risque fiscal</span><span></span>
         </div>
       </div>
+
     </div>
   </div>
 </section>
@@ -910,156 +719,250 @@ footer .footer-brand { font-family: var(--font-display); font-size: 0.95rem; col
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
 <script>
-(function () {
-  'use strict';
+(function(){
+'use strict';
 
-  const nav = document.getElementById('nav');
-  window.addEventListener('scroll', () => { nav.classList.toggle('scrolled', window.scrollY > 60); });
+const nav = document.getElementById('nav');
+window.addEventListener('scroll',()=>{ nav.classList.toggle('scrolled',window.scrollY>60); });
 
-  const reveals = document.querySelectorAll('.reveal');
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
-  }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
-  reveals.forEach(el => observer.observe(el));
+const reveals = document.querySelectorAll('.reveal');
+const observer = new IntersectionObserver((entries)=>{ entries.forEach(e=>{ if(e.isIntersecting) e.target.classList.add('visible'); }); },{threshold:.12,rootMargin:'0px 0px -40px 0px'});
+reveals.forEach(el=>observer.observe(el));
 
-  function updateSliderFill(input) {
-    const pct = ((parseFloat(input.value) - parseFloat(input.min)) / (parseFloat(input.max) - parseFloat(input.min))) * 100;
-    input.style.setProperty('--pct', pct + '%');
-  }
-  document.querySelectorAll('input[type="range"]').forEach(input => {
-    updateSliderFill(input);
-    input.addEventListener('input', () => updateSliderFill(input));
-  });
+function updateSliderFill(input){
+  const pct=((parseFloat(input.value)-parseFloat(input.min))/(parseFloat(input.max)-parseFloat(input.min)))*100;
+  input.style.setProperty('--pct',pct+'%');
+}
+document.querySelectorAll('input[type="range"]').forEach(input=>{
+  updateSliderFill(input);
+  input.addEventListener('input',()=>updateSliderFill(input));
+});
 
-  function setVal(el, text) {
-    if (!el) return;
-    el.textContent = text;
-    el.classList.remove('updating');
-    void el.offsetWidth;
-    el.classList.add('updating');
-  }
+function setVal(el,text){
+  if(!el)return;
+  el.textContent=text;
+  el.classList.remove('updating');
+  void el.offsetWidth;
+  el.classList.add('updating');
+}
+const euro=n=>Math.round(n).toLocaleString('fr-FR')+' €';
 
-  const inputs = {
-    capital: document.getElementById('input-capital'),
-    rate:    document.getElementById('input-rate'),
-    rent:    document.getElementById('input-rent'),
-    taxrate: document.getElementById('input-taxrate'),
-    delay:   document.getElementById('input-delay'),
-    taxrisk: document.getElementById('input-taxrisk'),
-  };
+const inputs={
+  capital:     document.getElementById('input-capital'),
+  rate:        document.getElementById('input-rate'),
+  rent:        document.getElementById('input-rent'),
+  taxrate:     document.getElementById('input-taxrate'),
+  delay:       document.getElementById('input-delay'),
+  taxrisk:     document.getElementById('input-taxrisk'),
+  targetprice: document.getElementById('input-targetprice'),
+  targetdelay: document.getElementById('input-targetdelay'),
+};
 
-  const ctx = document.getElementById('revenueChart').getContext('2d');
-  const revenueChart = new Chart(ctx, {
-    type: 'line',
-    data: {
-      labels: ['Mois 0', 'An 1', 'An 2', 'An 3'],
-      datasets: [
-        { label: 'Vente immédiate', data: [0,26000,52000,78000], borderColor: '#3a7d5c', backgroundColor: 'rgba(58,125,92,0.1)', borderWidth: 2.5, pointRadius: 4, pointBackgroundColor: '#3a7d5c', tension: 0.3, fill: true },
-        { label: 'Location', data: [0,21060,42120,63180], borderColor: '#3d8ab5', backgroundColor: 'rgba(61,138,181,0.08)', borderWidth: 2, borderDash: [5,4], pointRadius: 4, pointBackgroundColor: '#3d8ab5', tension: 0.3, fill: true },
-        { label: 'Attente 850 k€', data: [0,0,27000,54000], borderColor: '#a84242', backgroundColor: 'rgba(168,66,66,0.08)', borderWidth: 2, pointRadius: 4, pointBackgroundColor: '#a84242', tension: 0.3, fill: true }
-      ]
+const ctx=document.getElementById('revenueChart').getContext('2d');
+const revenueChart=new Chart(ctx,{
+  type:'line',
+  data:{
+    labels:['Mois 0','An 1','An 2','An 3'],
+    datasets:[
+      {label:'Vente immédiate',data:[0,26000,52000,78000],borderColor:'#3a7d5c',backgroundColor:'rgba(58,125,92,.1)',borderWidth:2.5,pointRadius:4,pointBackgroundColor:'#3a7d5c',tension:.3,fill:true},
+      {label:'Prix cible',data:[0,0,27000,54000],borderColor:'#2a6f97',backgroundColor:'rgba(42,111,151,.08)',borderWidth:2,borderDash:[4,3],pointRadius:4,pointBackgroundColor:'#2a6f97',tension:.3,fill:true},
+      {label:'Location',data:[0,21060,42120,63180],borderColor:'#3d8ab5',backgroundColor:'rgba(61,138,181,.07)',borderWidth:2,borderDash:[5,4],pointRadius:4,pointBackgroundColor:'#3d8ab5',tension:.3,fill:true},
+      {label:'Attente 850 k€',data:[0,0,13000,39000],borderColor:'#a84242',backgroundColor:'rgba(168,66,66,.07)',borderWidth:2,pointRadius:4,pointBackgroundColor:'#a84242',tension:.3,fill:true}
+    ]
+  },
+  options:{
+    responsive:true,maintainAspectRatio:false,
+    animation:{duration:500,easing:'easeInOutQuart'},
+    plugins:{
+      legend:{display:false},
+      tooltip:{backgroundColor:'#1a2a3a',padding:12,titleFont:{family:"'DM Sans',sans-serif",size:12},bodyFont:{family:"'DM Sans',sans-serif",size:12},callbacks:{label:c=>' '+c.dataset.label+' : '+c.raw.toLocaleString('fr-FR')+' €'}}
     },
-    options: {
-      responsive: true, maintainAspectRatio: false,
-      animation: { duration: 500, easing: 'easeInOutQuart' },
-      plugins: {
-        legend: { display: false },
-        tooltip: { backgroundColor: '#1a2a3a', padding: 12, titleFont: { family: "'DM Sans', sans-serif", size: 12 }, bodyFont: { family: "'DM Sans', sans-serif", size: 12 }, callbacks: { label: c => ' ' + c.dataset.label + ' : ' + c.raw.toLocaleString('fr-FR') + ' €' } }
-      },
-      scales: {
-        x: { grid: { color: 'rgba(107,130,153,0.1)' }, ticks: { color: '#6b8299', font: { family: "'DM Sans', sans-serif", size: 11 } } },
-        y: { grid: { color: 'rgba(107,130,153,0.1)' }, ticks: { color: '#6b8299', font: { family: "'DM Sans', sans-serif", size: 11 }, callback: v => (v/1000).toFixed(0) + ' k€' } }
-      }
+    scales:{
+      x:{grid:{color:'rgba(107,130,153,.1)'},ticks:{color:'#6b8299',font:{family:"'DM Sans',sans-serif",size:11}}},
+      y:{grid:{color:'rgba(107,130,153,.1)'},ticks:{color:'#6b8299',font:{family:"'DM Sans',sans-serif",size:11},callback:v=>(v/1000).toFixed(0)+' k€'}}
     }
-  });
+  }
+});
 
-  function calculate() {
-    const capital  = parseFloat(inputs.capital.value);
-    const rate     = parseFloat(inputs.rate.value) / 100;
-    const rentBrut = parseFloat(inputs.rent.value) * 12;
-    const taxrate  = parseFloat(inputs.taxrate.value) / 100;
-    const delayMo  = parseFloat(inputs.delay.value);
-    const taxrisk  = parseFloat(inputs.taxrisk.value);
+function fmtDelay(d){
+  return d.toLocaleString('fr-FR',{minimumFractionDigits:1,maximumFractionDigits:1}).replace('.',',')+' an'+(d>1?'s':'');
+}
 
-    const sellAnnual  = capital * rate;
-    const sellMonthly = sellAnnual / 12;
-    const rentNet     = rentBrut * (1 - taxrate);
-    const rentDiff    = sellAnnual - rentNet;
-    const delayYears  = delayMo / 12;
-    const waitRevLost = sellAnnual * delayYears;
-    const waitTotal   = waitRevLost + taxrisk;
-    const waitNetGain = 50000 - waitRevLost - taxrisk;
-    const complement  = sellMonthly;
-    const totalRevenu = 1200 + complement;
+function calculate(){
+  const capital     = parseFloat(inputs.capital.value);
+  const rate        = parseFloat(inputs.rate.value)/100;
+  const rentBrut    = parseFloat(inputs.rent.value)*12;
+  const taxrate     = parseFloat(inputs.taxrate.value)/100;
+  const delayMo     = parseFloat(inputs.delay.value);
+  const taxrisk     = parseFloat(inputs.taxrisk.value);
+  const targetPrice = parseFloat(inputs.targetprice.value);
+  const targetDelay = parseFloat(inputs.targetdelay.value);
+  const works       = 40000;
 
-    const vText = document.getElementById('verdict-text');
-    const vSub  = document.getElementById('verdict-sub');
-    const vIcon = document.getElementById('verdict-icon');
-    if (sellAnnual > rentNet && complement >= 800) {
-      vText.textContent = 'Vendre maintenant à ≈ ' + capital.toLocaleString('fr-FR') + ' € domine les deux autres scénarios';
-      vSub.textContent  = 'Maman percevrait ' + Math.round(totalRevenu).toLocaleString('fr-FR') + ' €/mois au total (retraite + rente AV), en toute indépendance vis-à-vis d\'Alexandre. Chaque mois d\'attente coûte ≈ ' + Math.round(sellMonthly).toLocaleString('fr-FR') + ' € de revenus non générés.';
-      vIcon.className = 'verdict-icon'; vIcon.textContent = '✓';
-    } else if (rentNet > sellAnnual) {
-      vText.textContent = 'À ces paramètres, la location génère plus que le placement — à vérifier';
-      vSub.textContent  = 'Avant de conclure, vérifiez le taux de placement et les charges réelles estimées. La location reste contraignante même si le brut est élevé.';
-      vIcon.className = 'verdict-icon warn'; vIcon.textContent = '⚠';
-    } else {
-      vText.textContent = 'Le complément de rente reste faible à ce niveau de capital';
-      vSub.textContent  = 'Avec ce capital et ce taux, la rente mensuelle serait limitée. Testez un taux de placement plus élevé ou négociez un meilleur prix de vente.';
-      vIcon.className = 'verdict-icon danger'; vIcon.textContent = '!';
-    }
+  /* Scénario 1 : vente immédiate */
+  const sellAnnual  = capital*rate;
+  const sellMonthly = sellAnnual/12;
 
-    document.getElementById('val-capital').textContent = capital.toLocaleString('fr-FR') + ' €';
-    document.getElementById('val-rate').textContent    = parseFloat(inputs.rate.value).toFixed(2).replace('.', ',') + '%';
-    document.getElementById('val-rent').textContent    = parseFloat(inputs.rent.value).toLocaleString('fr-FR') + ' €';
-    document.getElementById('val-taxrate').textContent = inputs.taxrate.value + '%';
-    document.getElementById('val-delay').textContent   = inputs.delay.value + ' mois';
-    document.getElementById('val-taxrisk').textContent = parseFloat(inputs.taxrisk.value).toLocaleString('fr-FR') + ' €';
+  /* Scénario 3 : location */
+  const rentNet  = rentBrut*(1-taxrate);
+  const rentDiff = sellAnnual-rentNet;
 
-    setVal(document.getElementById('out-sell-annual'), Math.round(sellAnnual).toLocaleString('fr-FR') + ' €');
-    document.getElementById('out-sell-monthly-text').textContent = 'soit ≈ ' + Math.round(sellMonthly).toLocaleString('fr-FR') + ' €/mois · Capital sécurisé, aucune gestion';
+  /* Scénario 4 : attendre 850 */
+  const delayYears  = delayMo/12;
+  const waitRevLost = sellAnnual*delayYears;
+  const waitTotal   = waitRevLost+taxrisk;
+  const waitNetGain = 50000-waitRevLost-taxrisk;
 
-    setVal(document.getElementById('out-rent-annual'), Math.round(rentNet).toLocaleString('fr-FR') + ' €');
-    const diffEl = document.getElementById('out-diff');
-    const diffCard = document.getElementById('card-diff');
-    setVal(diffEl, (rentDiff >= 0 ? '+' : '') + Math.round(rentDiff).toLocaleString('fr-FR') + ' €');
-    diffCard.className = 'result-card ' + (rentDiff > 0 ? 'better' : 'worse');
-    document.getElementById('card-rent').className = 'result-card ' + (rentNet >= sellAnnual ? 'better' : '');
-    setVal(document.getElementById('out-wait-total'), '−' + Math.round(waitTotal).toLocaleString('fr-FR') + ' €');
+  /* Scénario 2 : prix cible */
+  const targetNetSeller    = targetPrice*0.941;
+  const targetUpsideBrut   = targetNetSeller-capital;
+  const targetRevenuPerdu  = capital*rate*targetDelay;
+  const targetInflation    = works*0.08*targetDelay;
+  const targetEntretien    = targetPrice*0.003*targetDelay;
+  const targetRisqueFiscal = taxrisk;
+  const targetGainNet      = targetUpsideBrut-targetRevenuPerdu-targetInflation-targetEntretien-targetRisqueFiscal;
+  const targetAnnualIncome = targetNetSeller*rate;
+  const targetMonthly      = targetAnnualIncome/12;
 
-    const goalEl   = document.getElementById('out-goal-status');
-    const goalText = document.getElementById('out-goal-text');
-    goalEl.textContent = '+' + Math.round(complement).toLocaleString('fr-FR') + ' €/mois';
-    goalEl.style.color = complement >= 800 ? 'var(--success)' : 'var(--warn)';
-    goalText.textContent = 'Rente mensuelle générée par la vente, EN PLUS de la retraite de base de 1 200 €. Total maman : ' + Math.round(totalRevenu).toLocaleString('fr-FR') + ' €/mois — indépendant d\'Alexandre.';
+  /* Complément maman */
+  const complement  = sellMonthly;
+  const totalRevenu = 1200+complement;
 
-    setVal(document.getElementById('sc-sell-revenue'), Math.round(sellAnnual * 0.95).toLocaleString('fr-FR') + ' – ' + Math.round(sellAnnual).toLocaleString('fr-FR') + ' €');
-    setVal(document.getElementById('sc-sell-monthly'), Math.round(sellAnnual * 0.95 / 12).toLocaleString('fr-FR') + ' – ' + Math.round(sellMonthly).toLocaleString('fr-FR') + ' €');
-    setVal(document.getElementById('sc-rent-revenue'), Math.round(rentNet * 0.88).toLocaleString('fr-FR') + ' – ' + Math.round(rentNet).toLocaleString('fr-FR') + ' €');
-    setVal(document.getElementById('sc-rent-monthly'), Math.round(rentNet * 0.88 / 12).toLocaleString('fr-FR') + ' – ' + Math.round(rentNet / 12).toLocaleString('fr-FR') + ' €');
-    setVal(document.getElementById('sc-wait-cost'), '−' + Math.round(waitRevLost).toLocaleString('fr-FR') + ' €');
+  /* VERDICT */
+  const vText=document.getElementById('verdict-text');
+  const vSub=document.getElementById('verdict-sub');
+  const vIcon=document.getElementById('verdict-icon');
 
-    setVal(document.getElementById('b-sell-annual'),  Math.round(sellAnnual).toLocaleString('fr-FR') + ' €');
-    setVal(document.getElementById('b-sell-monthly'), Math.round(sellMonthly).toLocaleString('fr-FR') + ' €');
-    setVal(document.getElementById('b-rent-annual'),  Math.round(rentNet).toLocaleString('fr-FR') + ' €');
-    setVal(document.getElementById('b-rent-monthly'), Math.round(rentNet / 12).toLocaleString('fr-FR') + ' €');
-    setVal(document.getElementById('b-wait-lost'), '−' + Math.round(waitRevLost).toLocaleString('fr-FR') + ' €');
-    setVal(document.getElementById('b-wait-taxrisk'), '−' + Math.round(taxrisk).toLocaleString('fr-FR') + ' €');
-    setVal(document.getElementById('b-wait-net'), (waitNetGain >= 0 ? '+' : '') + Math.round(waitNetGain).toLocaleString('fr-FR') + ' €');
-
-    revenueChart.data.datasets[0].data = [0, Math.round(sellAnnual), Math.round(sellAnnual*2), Math.round(sellAnnual*3)];
-    revenueChart.data.datasets[1].data = [0, Math.round(rentNet),    Math.round(rentNet*2),    Math.round(rentNet*3)];
-    revenueChart.data.datasets[2].data = [
-      0,
-      Math.round(sellAnnual * Math.max(0, 1 - delayYears)),
-      Math.round(sellAnnual * Math.max(0, 2 - delayYears)),
-      Math.round(sellAnnual * Math.max(0, 3 - delayYears))
-    ];
-    revenueChart.update();
+  if(sellAnnual>=rentNet && sellAnnual>=targetAnnualIncome && complement>=800){
+    vText.textContent='Vendre maintenant à '+capital.toLocaleString('fr-FR')+' € domine les autres scénarios';
+    vSub.textContent='Maman percevrait '+Math.round(totalRevenu).toLocaleString('fr-FR')+' €/mois au total (retraite + rente AV), en toute indépendance vis-à-vis d\'Alexandre. Chaque mois d\'attente coûte ≈ '+Math.round(sellMonthly).toLocaleString('fr-FR')+' € de revenus non générés.';
+    vIcon.className='verdict-icon'; vIcon.textContent='✓';
+  } else if(targetGainNet>10000 && targetAnnualIncome>sellAnnual){
+    vText.textContent='À ces hypothèses, le scénario prix cible devient défendable';
+    vSub.textContent='Si le marché permet d\'atteindre '+targetPrice.toLocaleString('fr-FR')+' € dans '+fmtDelay(targetDelay)+', le gain net estimé est positif. Vérifiez la fenêtre des 70 ans.';
+    vIcon.className='verdict-icon target-icon'; vIcon.textContent='🎯';
+  } else if(rentNet>sellAnnual){
+    vText.textContent='À ces paramètres, la location génère plus que le placement — à vérifier';
+    vSub.textContent='Avant de conclure, vérifiez le taux de placement et les charges réelles. La location reste contraignante même si le brut est élevé.';
+    vIcon.className='verdict-icon warn'; vIcon.textContent='⚠';
+  } else {
+    vText.textContent='Vendre maintenant reste le scénario le plus solide à ces hypothèses';
+    vSub.textContent='Le scénario prix cible ne génère pas un gain net suffisant pour compenser les revenus perdus et le risque fiscal. La vente immédiate protège mieux maman.';
+    vIcon.className='verdict-icon'; vIcon.textContent='✓';
   }
 
-  Object.values(inputs).forEach(i => i.addEventListener('input', calculate));
-  calculate();
+  /* LABELS SLIDERS */
+  document.getElementById('val-capital').textContent    =capital.toLocaleString('fr-FR')+' €';
+  document.getElementById('val-rate').textContent       =parseFloat(inputs.rate.value).toFixed(2).replace('.',',')+' %';
+  document.getElementById('val-rent').textContent       =parseFloat(inputs.rent.value).toLocaleString('fr-FR')+' €';
+  document.getElementById('val-taxrate').textContent    =inputs.taxrate.value+'%';
+  document.getElementById('val-delay').textContent      =inputs.delay.value+' mois';
+  document.getElementById('val-taxrisk').textContent    =parseFloat(inputs.taxrisk.value).toLocaleString('fr-FR')+' €';
+  document.getElementById('val-targetprice').textContent=targetPrice.toLocaleString('fr-FR')+' €';
+  document.getElementById('val-targetdelay').textContent=fmtDelay(targetDelay);
+
+  /* RÉSULTATS SIMULATEUR */
+  setVal(document.getElementById('out-sell-annual'),euro(sellAnnual));
+  document.getElementById('out-sell-monthly-text').textContent='soit ≈ '+Math.round(sellMonthly).toLocaleString('fr-FR')+' €/mois · Capital sécurisé, aucune gestion';
+  setVal(document.getElementById('out-rent-annual'),euro(rentNet));
+
+  const diffEl=document.getElementById('out-diff');
+  const diffCard=document.getElementById('card-diff');
+  setVal(diffEl,(rentDiff>=0?'+':'')+Math.round(rentDiff).toLocaleString('fr-FR')+' €');
+  diffCard.className='result-card '+(rentDiff>0?'better':'worse');
+  document.getElementById('card-rent-res').className='result-card '+(rentNet>=sellAnnual?'better':'');
+  setVal(document.getElementById('out-wait-total'),'−'+euro(waitTotal));
+
+  /* Scénario prix cible dans résultats */
+  const tGainResEl=document.getElementById('out-target-gain');
+  setVal(tGainResEl,(targetGainNet>=0?'+':'')+Math.round(targetGainNet).toLocaleString('fr-FR')+' €');
+  tGainResEl.style.color=targetGainNet>10000?'var(--success)':targetGainNet>=-5000?'var(--warn)':'var(--danger)';
+  document.getElementById('out-target-sub').textContent='Upside brut '+Math.round(targetUpsideBrut).toLocaleString('fr-FR')+' € − revenus perdus − frais − risque fiscal';
+
+  /* Complément maman */
+  const goalEl=document.getElementById('out-goal-status');
+  const goalText=document.getElementById('out-goal-text');
+  goalEl.textContent='+'+Math.round(complement).toLocaleString('fr-FR')+' €/mois';
+  goalEl.style.color=complement>=800?'var(--success)':'var(--warn)';
+  goalText.textContent='Rente mensuelle générée par la vente, EN PLUS de la retraite de base de 1 200 €. Total maman : '+Math.round(totalRevenu).toLocaleString('fr-FR')+' €/mois — indépendant d\'Alexandre.';
+
+  /* CARTES SCÉNARIOS */
+  setVal(document.getElementById('sc-sell-revenue'),Math.round(sellAnnual*.95).toLocaleString('fr-FR')+' – '+Math.round(sellAnnual).toLocaleString('fr-FR')+' €');
+  setVal(document.getElementById('sc-sell-monthly'),Math.round(sellAnnual*.95/12).toLocaleString('fr-FR')+' – '+Math.round(sellMonthly).toLocaleString('fr-FR')+' €');
+  setVal(document.getElementById('sc-rent-revenue'),Math.round(rentNet*.88).toLocaleString('fr-FR')+' – '+Math.round(rentNet).toLocaleString('fr-FR')+' €');
+  setVal(document.getElementById('sc-rent-monthly'),Math.round(rentNet*.88/12).toLocaleString('fr-FR')+' – '+Math.round(rentNet/12).toLocaleString('fr-FR')+' €');
+  setVal(document.getElementById('sc-wait-cost'),'−'+euro(waitRevLost));
+
+  /* Carte prix cible */
+  setVal(document.getElementById('sc-target-revenue'),euro(targetAnnualIncome));
+  setVal(document.getElementById('sc-target-monthly'),euro(targetMonthly));
+  document.getElementById('sc-target-price-label').textContent=targetPrice.toLocaleString('fr-FR')+' €';
+  document.getElementById('sc-target-delay-label').textContent=fmtDelay(targetDelay);
+  document.getElementById('sc-target-net-label').textContent=Math.round(targetNetSeller).toLocaleString('fr-FR')+' €';
+
+  /* BREAK-EVEN */
+  setVal(document.getElementById('beUpside'),'+'+euro(targetUpsideBrut));
+  setVal(document.getElementById('beRevenuPerdu'),euro(targetRevenuPerdu));
+  setVal(document.getElementById('beInflation'),euro(targetInflation));
+  setVal(document.getElementById('beEntretien'),euro(targetEntretien));
+  setVal(document.getElementById('beRisqueFiscal'),euro(targetRisqueFiscal));
+  const beGainEl=document.getElementById('beGainNet');
+  setVal(beGainEl,(targetGainNet>=0?'+':'')+Math.round(targetGainNet).toLocaleString('fr-FR')+' €');
+  beGainEl.style.color=targetGainNet>10000?'var(--success)':targetGainNet>=-5000?'var(--warn)':'var(--danger)';
+
+  const bv=document.getElementById('breakevenVerdict');
+  if(targetGainNet>10000){bv.textContent='✅ Le pari est défendable à ces hypothèses.';bv.className='breakeven-verdict positive';}
+  else if(targetGainNet>=-5000){bv.textContent='⚠️ Le gain est quasi nul — risque élevé pour peu.';bv.className='breakeven-verdict neutral';}
+  else{bv.textContent='🔴 Ce prix cible détruit de la valeur nette à ces hypothèses.';bv.className='breakeven-verdict negative';}
+
+  /* Alerte fenêtre 70 ans */
+  const alertDiv=document.getElementById('targetFiscalAlert');
+  if(targetDelay>=1.5){
+    alertDiv.textContent='⚠️ Un délai de '+fmtDelay(targetDelay)+' rapproche dangereusement de la fenêtre des 70 ans (15 janvier 2027). L\'avantage successoral assurance-vie peut être perdu.';
+    alertDiv.style.display='block';
+  } else {alertDiv.style.display='none';}
+
+  /* BILAN */
+  setVal(document.getElementById('b-sell-annual'),euro(sellAnnual));
+  setVal(document.getElementById('b-sell-monthly'),Math.round(sellMonthly).toLocaleString('fr-FR')+' €');
+  setVal(document.getElementById('b-rent-annual'),euro(rentNet));
+  setVal(document.getElementById('b-rent-monthly'),Math.round(rentNet/12).toLocaleString('fr-FR')+' €');
+  setVal(document.getElementById('b-wait-lost'),'−'+euro(waitRevLost));
+  setVal(document.getElementById('b-wait-taxrisk'),'−'+euro(taxrisk));
+  setVal(document.getElementById('b-wait-net'),(waitNetGain>=0?'+':'')+Math.round(waitNetGain).toLocaleString('fr-FR')+' €');
+
+  /* Bilan colonne prix cible */
+  document.getElementById('b-target-price-title').textContent=targetPrice.toLocaleString('fr-FR')+' €';
+  setVal(document.getElementById('b-target-net'),Math.round(targetNetSeller).toLocaleString('fr-FR')+' €');
+  setVal(document.getElementById('b-target-annual'),euro(targetAnnualIncome)+'/an');
+  const tGainBilanEl=document.getElementById('b-target-gain');
+  setVal(tGainBilanEl,(targetGainNet>=0?'+':'')+Math.round(targetGainNet).toLocaleString('fr-FR')+' €');
+  tGainBilanEl.className='bilan-row-value '+(targetGainNet>5000?'good':targetGainNet>=-5000?'target':'bad');
+  document.getElementById('b-target-delay-label').textContent=fmtDelay(targetDelay)+' sans revenu';
+  const fiscRiskEl=document.getElementById('b-target-fiscal-risk');
+  fiscRiskEl.textContent=targetDelay>=1.5?'⚠ Fenêtre à risque':'Acceptable';
+  fiscRiskEl.className='bilan-row-value '+(targetDelay>=1.5?'bad':'target');
+
+  /* GRAPHIQUE */
+  revenueChart.data.datasets[0].data=[0,Math.round(sellAnnual),Math.round(sellAnnual*2),Math.round(sellAnnual*3)];
+  revenueChart.data.datasets[1].data=[
+    0,
+    Math.round(targetAnnualIncome*Math.max(0,1-targetDelay)),
+    Math.round(targetAnnualIncome*Math.max(0,2-targetDelay)),
+    Math.round(targetAnnualIncome*Math.max(0,3-targetDelay))
+  ];
+  revenueChart.data.datasets[2].data=[0,Math.round(rentNet),Math.round(rentNet*2),Math.round(rentNet*3)];
+  revenueChart.data.datasets[3].data=[
+    0,
+    Math.round(sellAnnual*Math.max(0,1-delayYears)),
+    Math.round(sellAnnual*Math.max(0,2-delayYears)),
+    Math.round(sellAnnual*Math.max(0,3-delayYears))
+  ];
+  revenueChart.update();
+}
+
+Object.values(inputs).forEach(i=>i.addEventListener('input',calculate));
+calculate();
 })();
 </script>
 </body>
