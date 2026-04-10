@@ -1,4 +1,4 @@
-# Stratégie Patrimoniale — Simulation Maison Familiale
+# Introspection Patrimoniale · Maison familiale Saint François · Simulation 2026
 
 > Document interactif de décision patrimoniale · Usage familial · Avril 2026
 
