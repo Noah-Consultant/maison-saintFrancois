@@ -93,10 +93,6 @@ body {
   from { opacity: 0; transform: translateY(28px); }
   to   { opacity: 1; transform: translateY(0); }
 }
-@keyframes pulse-gold {
-  0%, 100% { box-shadow: 0 0 0 0 rgba(200, 164, 85, 0); }
-  50%       { box-shadow: 0 0 0 6px rgba(200, 164, 85, 0.15); }
-}
 @keyframes countUp {
   from { opacity: 0.4; transform: translateY(4px); }
   to   { opacity: 1; transform: translateY(0); }
@@ -187,7 +183,6 @@ nav.scrolled {
   opacity: 0; animation: fadeUp 0.8s var(--ease-out) 0.7s forwards;
 }
 
-/* Key figures hero */
 .hero-figures {
   display: flex; flex-wrap: wrap; gap: 2.5rem; margin-bottom: 3.5rem;
   opacity: 0; animation: fadeUp 0.8s var(--ease-out) 0.9s forwards;
@@ -222,16 +217,13 @@ nav.scrolled {
   padding: 2.5rem 0;
 }
 .verdict-inner {
-  display: flex; align-items: flex-start; gap: 2rem;
-  flex-wrap: wrap;
+  display: flex; align-items: flex-start; gap: 2rem; flex-wrap: wrap;
 }
 .verdict-icon {
-  flex-shrink: 0;
-  width: 52px; height: 52px;
+  flex-shrink: 0; width: 52px; height: 52px;
   background: var(--success-soft); border: 1px solid rgba(58,125,92,0.3);
   border-radius: 50%; display: flex; align-items: center; justify-content: center;
-  font-size: 1.3rem; margin-top: 0.2rem;
-  transition: all 0.5s var(--ease);
+  font-size: 1.3rem; margin-top: 0.2rem; transition: all 0.5s var(--ease);
 }
 .verdict-icon.warn { background: var(--warn-soft); border-color: rgba(196,122,58,0.3); }
 .verdict-icon.danger { background: var(--danger-soft); border-color: rgba(168,66,66,0.3); }
@@ -255,25 +247,15 @@ nav.scrolled {
    SCENARIO CARDS
    ═══════════════════════════════════════════ */
 .scenarios-section { background: var(--ivory); }
-
 .scenarios-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 1.25rem;
-  margin-top: 2.5rem;
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem; margin-top: 2.5rem;
 }
-@media (max-width: 768px) {
-  .scenarios-grid { grid-template-columns: 1fr; }
-}
+@media (max-width: 768px) { .scenarios-grid { grid-template-columns: 1fr; } }
 
 .scenario-card {
-  background: var(--white);
-  border: 1px solid var(--pearl);
-  border-radius: var(--r);
-  padding: 1.75rem;
-  transition: all 0.4s var(--ease);
-  position: relative;
-  overflow: hidden;
+  background: var(--white); border: 1px solid var(--pearl);
+  border-radius: var(--r); padding: 1.75rem;
+  transition: all 0.4s var(--ease); position: relative; overflow: hidden;
 }
 .scenario-card::before {
   content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
@@ -281,8 +263,7 @@ nav.scrolled {
 }
 .scenario-card.winner::before { background: var(--success); }
 .scenario-card.neutral::before { background: var(--warn); }
-.scenario-card.loser::before { background: var(--danger); }
-
+.scenario-card.loser::before  { background: var(--danger); }
 .scenario-card.winner { border-color: rgba(58,125,92,0.25); }
 .scenario-card.neutral { border-color: rgba(196,122,58,0.25); }
 .scenario-card.loser  { border-color: rgba(168,66,66,0.2); }
@@ -300,7 +281,6 @@ nav.scrolled {
   font-family: var(--font-display);
   font-size: 1.4rem; font-weight: 600; color: var(--ink); margin-bottom: 1.25rem;
 }
-
 .scenario-metric { margin-bottom: 0.9rem; }
 .scenario-metric-label {
   font-size: 0.72rem; font-weight: 500; color: var(--slate); text-transform: uppercase;
@@ -308,8 +288,7 @@ nav.scrolled {
 }
 .scenario-metric-value {
   font-family: var(--font-display);
-  font-size: 1.5rem; font-weight: 600; color: var(--ink);
-  transition: all 0.35s var(--ease);
+  font-size: 1.5rem; font-weight: 600; color: var(--ink); transition: all 0.35s var(--ease);
 }
 .scenario-metric-value.positive { color: var(--success); }
 .scenario-metric-value.neutral  { color: var(--warn); }
@@ -323,90 +302,61 @@ nav.scrolled {
   display: flex; align-items: flex-start; gap: 0.6rem; line-height: 1.5;
 }
 .scenario-facts li::before { content: '—'; color: var(--silver); flex-shrink: 0; margin-top: 0.05rem; }
-.scenario-facts li.bad::before { content: '✕'; color: var(--danger); }
+.scenario-facts li.bad::before  { content: '✕'; color: var(--danger); }
 .scenario-facts li.good::before { content: '✓'; color: var(--success); }
 
 /* ═══════════════════════════════════════════
    SIMULATEUR
    ═══════════════════════════════════════════ */
 .simulator-section { background: var(--white); }
-
 .sim-layout {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 2rem;
-  margin-top: 2.5rem;
+  display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 2.5rem;
 }
-@media (max-width: 768px) {
-  .sim-layout { grid-template-columns: 1fr; }
-}
+@media (max-width: 768px) { .sim-layout { grid-template-columns: 1fr; } }
 
-.sim-inputs-panel {
-  background: var(--ivory);
-  border-radius: var(--r);
-  padding: 2rem;
-}
+.sim-inputs-panel { background: var(--ivory); border-radius: var(--r); padding: 2rem; }
 .sim-inputs-panel h3 {
   font-family: var(--font-display);
   font-size: 1.2rem; font-weight: 600; color: var(--ink); margin-bottom: 1.75rem;
 }
-
 .input-group { margin-bottom: 1.5rem; }
 .input-group label {
   display: flex; justify-content: space-between; align-items: baseline;
   font-size: 0.82rem; font-weight: 500; color: var(--ink-muted); margin-bottom: 0.2rem;
 }
-.input-hint {
-  font-size: 0.73rem; color: var(--slate); margin-bottom: 0.55rem; line-height: 1.4;
-}
-.input-default {
-  font-size: 0.68rem; color: var(--silver); font-style: italic;
-}
-.input-value {
-  font-family: var(--font-display);
-  font-size: 1rem; font-weight: 600; color: var(--gold);
-}
+.input-hint { font-size: 0.73rem; color: var(--slate); margin-bottom: 0.55rem; line-height: 1.4; }
+.input-default { font-size: 0.68rem; color: var(--silver); font-style: italic; }
+.input-value { font-family: var(--font-display); font-size: 1rem; font-weight: 600; color: var(--gold); }
 
 input[type="range"] {
-  -webkit-appearance: none;
-  width: 100%; height: 4px; border-radius: 2px;
+  -webkit-appearance: none; width: 100%; height: 4px; border-radius: 2px;
   background: linear-gradient(to right, var(--gold) 0%, var(--gold) var(--pct, 50%), var(--pearl) var(--pct, 50%));
-  outline: none; cursor: pointer;
-  transition: background 0.2s var(--ease);
+  outline: none; cursor: pointer; transition: background 0.2s var(--ease);
 }
 input[type="range"]::-webkit-slider-thumb {
-  -webkit-appearance: none;
-  width: 18px; height: 18px;
-  border-radius: 50%;
+  -webkit-appearance: none; width: 18px; height: 18px; border-radius: 50%;
   background: var(--gold); border: 2px solid var(--white);
   box-shadow: 0 2px 8px rgba(200,164,85,0.3);
   transition: transform 0.2s var(--ease), box-shadow 0.2s var(--ease);
 }
 input[type="range"]::-webkit-slider-thumb:hover {
-  transform: scale(1.2);
-  box-shadow: 0 4px 16px rgba(200,164,85,0.4);
+  transform: scale(1.2); box-shadow: 0 4px 16px rgba(200,164,85,0.4);
 }
 input[type="range"]::-moz-range-thumb {
-  width: 18px; height: 18px;
-  border-radius: 50%; border: 2px solid var(--white);
-  background: var(--gold);
-  box-shadow: 0 2px 8px rgba(200,164,85,0.3);
+  width: 18px; height: 18px; border-radius: 50%; border: 2px solid var(--white);
+  background: var(--gold); box-shadow: 0 2px 8px rgba(200,164,85,0.3);
 }
 
 /* ═══════════════════════════════════════════
    RESULTS PANEL
    ═══════════════════════════════════════════ */
 .sim-results-panel { display: flex; flex-direction: column; gap: 1rem; }
-
 .result-primary {
-  background: var(--ink);
-  border-radius: var(--r);
-  padding: 1.75rem;
+  background: var(--ink); border-radius: var(--r); padding: 1.75rem;
   position: relative; overflow: hidden;
 }
 .result-primary::before {
-  content: ''; position: absolute; top: -50%; right: -20%;
-  width: 200px; height: 200px;
+  content: ''; position: absolute; top: -50%; right: -20%; width: 200px; height: 200px;
   background: radial-gradient(ellipse, rgba(200,164,85,0.08) 0%, transparent 70%);
 }
 .result-primary-label {
@@ -414,83 +364,58 @@ input[type="range"]::-moz-range-thumb {
   color: var(--gold); margin-bottom: 0.6rem;
 }
 .result-primary-number {
-  font-family: var(--font-display);
-  font-size: clamp(2rem, 3vw, 2.8rem);
+  font-family: var(--font-display); font-size: clamp(2rem, 3vw, 2.8rem);
   font-weight: 600; color: var(--gold-light); line-height: 1; margin-bottom: 0.35rem;
-  transition: all 0.3s var(--ease-out);
-  display: inline-block;
+  transition: all 0.3s var(--ease-out); display: inline-block;
 }
-.result-primary-sub {
-  font-size: 0.82rem; color: var(--silver); line-height: 1.5;
-}
+.result-primary-sub { font-size: 0.82rem; color: var(--silver); line-height: 1.5; }
 
-.result-compare {
-  display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem;
-}
-
+.result-compare { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; }
 .result-card {
   background: var(--ivory); border: 1px solid var(--pearl);
-  border-radius: var(--r); padding: 1.25rem;
-  transition: all 0.3s var(--ease);
+  border-radius: var(--r); padding: 1.25rem; transition: all 0.3s var(--ease);
 }
 .result-card.better { background: var(--success-soft); border-color: rgba(58,125,92,0.2); }
 .result-card.worse  { background: var(--danger-soft); border-color: rgba(168,66,66,0.15); }
-
 .result-card-label {
   font-size: 0.68rem; font-weight: 500; color: var(--slate); text-transform: uppercase;
   letter-spacing: 0.1em; margin-bottom: 0.4rem;
 }
 .result-card-value {
-  font-family: var(--font-display);
-  font-size: 1.4rem; font-weight: 600; color: var(--ink);
+  font-family: var(--font-display); font-size: 1.4rem; font-weight: 600; color: var(--ink);
   transition: all 0.3s var(--ease-out);
 }
 .result-card.better .result-card-value { color: var(--success); }
 .result-card.worse  .result-card-value { color: var(--danger); }
 
 .result-delta {
-  background: var(--ink-soft); border-radius: var(--r);
-  padding: 1.25rem 1.5rem;
-  display: flex; align-items: center; justify-content: space-between;
-  flex-wrap: wrap; gap: 0.75rem;
+  background: var(--ink-soft); border-radius: var(--r); padding: 1.25rem 1.5rem;
+  display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 0.75rem;
 }
-.result-delta-label {
-  font-size: 0.78rem; color: var(--silver); font-weight: 400;
-}
+.result-delta-label { font-size: 0.78rem; color: var(--silver); font-weight: 400; }
 .result-delta-value {
-  font-family: var(--font-display);
-  font-size: 1.6rem; font-weight: 600; color: var(--gold-light);
+  font-family: var(--font-display); font-size: 1.6rem; font-weight: 600; color: var(--gold-light);
   transition: all 0.3s var(--ease-out);
 }
 
 /* ═══════════════════════════════════════════
-   GRAPHIQUE COMPARATIF
+   GRAPHIQUE
    ═══════════════════════════════════════════ */
 .chart-section { background: var(--ivory); }
 .chart-wrapper {
-  margin-top: 2.5rem;
-  background: var(--white); border: 1px solid var(--pearl);
-  border-radius: var(--r); padding: 2rem;
-  overflow: hidden;
+  margin-top: 2.5rem; background: var(--white); border: 1px solid var(--pearl);
+  border-radius: var(--r); padding: 2rem; overflow: hidden;
 }
 .chart-header {
   display: flex; justify-content: space-between; align-items: center;
   flex-wrap: wrap; gap: 1rem; margin-bottom: 2rem;
 }
-.chart-legend {
-  display: flex; gap: 1.5rem; flex-wrap: wrap;
-}
-.chart-legend-item {
-  display: flex; align-items: center; gap: 0.5rem;
-  font-size: 0.75rem; color: var(--slate);
-}
-.chart-legend-dot {
-  width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0;
-}
-.chart-legend-dot.sell  { background: var(--success); }
-.chart-legend-dot.rent  { background: var(--accent-light); }
-.chart-legend-dot.wait  { background: var(--danger); }
-
+.chart-legend { display: flex; gap: 1.5rem; flex-wrap: wrap; }
+.chart-legend-item { display: flex; align-items: center; gap: 0.5rem; font-size: 0.75rem; color: var(--slate); }
+.chart-legend-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+.chart-legend-dot.sell { background: var(--success); }
+.chart-legend-dot.rent { background: var(--accent-light); }
+.chart-legend-dot.wait { background: var(--danger); }
 .chart-canvas-wrap { position: relative; height: 260px; }
 canvas { width: 100% !important; display: block; }
 
@@ -499,29 +424,18 @@ canvas { width: 100% !important; display: block; }
    ═══════════════════════════════════════════ */
 .args-section { background: var(--white); }
 .args-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 1.5rem; margin-top: 2.5rem;
 }
-.arg-card {
-  padding: 1.75rem;
-  border: 1px solid var(--pearl); border-radius: var(--r);
-  position: relative;
-}
+.arg-card { padding: 1.75rem; border: 1px solid var(--pearl); border-radius: var(--r); position: relative; }
 .arg-card::before {
-  content: ''; position: absolute; top: 0; left: 1.75rem; right: 1.75rem; height: 1px;
-  background: var(--gold);
+  content: ''; position: absolute; top: 0; left: 1.75rem; right: 1.75rem; height: 1px; background: var(--gold);
 }
 .arg-number {
-  font-family: var(--font-display);
-  font-size: 3rem; font-weight: 600; color: var(--gold-soft);
-  line-height: 1; margin-bottom: 0.5rem;
-  color: rgba(200, 164, 85, 0.2);
+  font-family: var(--font-display); font-size: 3rem; font-weight: 600;
+  line-height: 1; margin-bottom: 0.5rem; color: rgba(200, 164, 85, 0.2);
 }
-.arg-title {
-  font-family: var(--font-display);
-  font-size: 1.15rem; font-weight: 600; color: var(--ink); margin-bottom: 0.6rem;
-}
+.arg-title { font-family: var(--font-display); font-size: 1.15rem; font-weight: 600; color: var(--ink); margin-bottom: 0.6rem; }
 .arg-text { font-size: 0.88rem; color: var(--slate); line-height: 1.7; }
 
 /* ═══════════════════════════════════════════
@@ -531,23 +445,22 @@ canvas { width: 100% !important; display: block; }
 .bilan-section .section-title { color: var(--pearl); }
 .bilan-section .section-subtitle { color: var(--silver); }
 .bilan-section .section-label { color: var(--gold); }
-
 .bilan-grid {
   display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin-top: 2.5rem;
 }
 @media (max-width: 640px) { .bilan-grid { grid-template-columns: 1fr; } }
-
 .bilan-col { padding: 1.75rem; border-radius: var(--r); }
 .bilan-col.winner { background: rgba(58,125,92,0.12); border: 1px solid rgba(58,125,92,0.25); }
 .bilan-col.neutral { background: rgba(196,122,58,0.08); border: 1px solid rgba(196,122,58,0.2); }
 .bilan-col.loser  { background: rgba(168,66,66,0.08); border: 1px solid rgba(168,66,66,0.15); }
-
 .bilan-col-title {
   font-family: var(--font-display); font-size: 1.15rem; font-weight: 600;
   color: var(--pearl); margin-bottom: 1.25rem;
 }
-.bilan-row { display: flex; justify-content: space-between; gap: 1rem;
-  padding: 0.5rem 0; border-bottom: 1px solid rgba(255,255,255,0.05); font-size: 0.83rem; }
+.bilan-row {
+  display: flex; justify-content: space-between; gap: 1rem;
+  padding: 0.5rem 0; border-bottom: 1px solid rgba(255,255,255,0.05); font-size: 0.83rem;
+}
 .bilan-row:last-child { border-bottom: none; }
 .bilan-row-label { color: var(--silver); }
 .bilan-row-value { font-weight: 500; color: var(--pearl); text-align: right; }
@@ -555,31 +468,14 @@ canvas { width: 100% !important; display: block; }
 .bilan-row-value.bad  { color: #e08080; }
 
 /* ═══════════════════════════════════════════
-   DISCLAIMER
+   DISCLAIMER & FOOTER
    ═══════════════════════════════════════════ */
-.disclaimer {
-  background: var(--ink-soft);
-  border-top: 1px solid rgba(200,164,85,0.1);
-  padding: 1.5rem 0;
-}
-.disclaimer p {
-  font-size: 0.78rem; color: var(--slate); text-align: center; line-height: 1.7;
-}
-
-/* ═══════════════════════════════════════════
-   FOOTER
-   ═══════════════════════════════════════════ */
-footer {
-  background: var(--ink); padding: 1.5rem 0;
-  border-top: 1px solid rgba(200,164,85,0.15);
-}
-footer .container {
-  display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.75rem;
-}
+.disclaimer { background: var(--ink-soft); border-top: 1px solid rgba(200,164,85,0.1); padding: 1.5rem 0; }
+.disclaimer p { font-size: 0.78rem; color: var(--slate); text-align: center; line-height: 1.7; }
+footer { background: var(--ink); padding: 1.5rem 0; border-top: 1px solid rgba(200,164,85,0.15); }
+footer .container { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.75rem; }
 footer p { font-size: 0.76rem; color: var(--slate); }
-footer .footer-brand {
-  font-family: var(--font-display); font-size: 0.95rem; color: var(--pearl);
-}
+footer .footer-brand { font-family: var(--font-display); font-size: 0.95rem; color: var(--pearl); }
 
 /* ═══════════════════════════════════════════
    MOBILE TWEAKS
@@ -596,10 +492,7 @@ footer .footer-brand {
   .verdict-inner { gap: 1rem; }
 }
 
-/* number update animation */
-.updating {
-  animation: countUp 0.3s var(--ease-out);
-}
+.updating { animation: countUp 0.3s var(--ease-out); }
 
 /* ═══════════════════════════════════════════
    BLOC NARRATIF MAMAN
@@ -633,19 +526,22 @@ footer .footer-brand {
    GRILLE QUALITATIVE BIEN-ÊTRE
    ═══════════════════════════════════════════ */
 .wellbeing-grid {
-  display: grid; grid-template-columns: 1fr 1fr; gap: 0.45rem;
-  margin-top: 1.25rem;
+  display: grid; grid-template-columns: 1fr 1fr; gap: 0.45rem; margin-top: 1.25rem;
 }
 .wellbeing-item {
-  display: flex; align-items: center; gap: 0.55rem;
-  font-size: 0.76rem; padding: 0.5rem 0.65rem;
-  border-radius: 3px; line-height: 1.3;
+  display: flex; align-items: center; gap: 0.45rem;
+  font-size: 0.74rem; padding: 0.45rem 0.55rem; border-radius: 3px; line-height: 1.3;
+  min-width: 0;
 }
-.wellbeing-item .wb-icon { font-size: 0.95rem; flex-shrink: 0; }
-.wellbeing-item .wb-label { color: var(--slate); flex: 1; }
+.wellbeing-item .wb-icon { font-size: 0.9rem; flex-shrink: 0; }
+.wellbeing-item .wb-label { color: var(--slate); flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .wellbeing-item .wb-score {
-  font-weight: 600; font-size: 0.68rem; letter-spacing: 0.04em;
-  padding: 0.12rem 0.45rem; border-radius: 2px; white-space: nowrap;
+  font-weight: 600; font-size: 0.65rem; letter-spacing: 0.03em;
+  padding: 0.1rem 0.38rem; border-radius: 2px; white-space: nowrap; flex-shrink: 0;
+}
+@media (max-width: 480px) {
+  .wellbeing-grid { grid-template-columns: 1fr; }
+  .wellbeing-item .wb-label { white-space: normal; overflow: visible; text-overflow: clip; }
 }
 .wb-good { background: rgba(58,125,92,0.08); }
 .wb-good .wb-score { background: rgba(58,125,92,0.15); color: var(--success); }
@@ -665,7 +561,6 @@ footer .footer-brand {
 
 <body>
 
-<!-- ═══════════ NAV ═══════════ -->
 <nav id="nav">
   <div class="nav-inner">
     <div class="nav-brand">Introspection Patrimoniale</div>
@@ -673,88 +568,49 @@ footer .footer-brand {
   </div>
 </nav>
 
-<!-- ═══════════ HERO ═══════════ -->
 <header class="hero">
   <div class="hero-content">
     <div class="hero-eyebrow">Document familial · Maison familiale · Ouest parisien · Avril 2026</div>
-    <h1>
-      Vendre maintenant<br>ou <em>reporter</em> la vente ?
-    </h1>
-    <p class="hero-sub">
-      Ce document a été préparé pour maman, mes frères et Alexandre — pour que nous puissions décider ensemble, en connaissance de cause, sans pression et sans biais. Les chiffres sont réels, les hypothèses sont ajustables, le verdict est clair.
-    </p>
-
+    <h1>Vendre maintenant<br>ou <em>reporter</em> la vente ?</h1>
+    <p class="hero-sub">Ce document a été préparé pour maman, mes frères et Alexandre — pour que nous puissions décider ensemble, en connaissance de cause, sans pression et sans biais. Les chiffres sont réels, les hypothèses sont ajustables, le verdict est clair.</p>
     <div class="hero-figures">
-      <div class="hero-figure">
-        <div class="hero-figure-number">870 k€</div>
-        <div class="hero-figure-label">Estimation actuelle</div>
-      </div>
-      <div class="hero-figure">
-        <div class="hero-figure-number">≈ 800 k€</div>
-        <div class="hero-figure-label">Net vendeur réaliste</div>
-      </div>
-      <div class="hero-figure">
-        <div class="hero-figure-number">26 k€</div>
-        <div class="hero-figure-label">Rente annuelle possible</div>
-      </div>
-      <div class="hero-figure">
-        <div class="hero-figure-number">4 mois</div>
-        <div class="hero-figure-label">En vente sans offre ferme</div>
-      </div>
+      <div class="hero-figure"><div class="hero-figure-number">870 k€</div><div class="hero-figure-label">Estimation actuelle</div></div>
+      <div class="hero-figure"><div class="hero-figure-number">≈ 800 k€</div><div class="hero-figure-label">Net vendeur réaliste</div></div>
+      <div class="hero-figure"><div class="hero-figure-number">26 k€</div><div class="hero-figure-label">Rente annuelle possible</div></div>
+      <div class="hero-figure"><div class="hero-figure-number">4 mois</div><div class="hero-figure-label">En vente sans offre ferme</div></div>
     </div>
-
-    <div class="hero-deadline">
-      Échéance critique : 15 janvier 2027 — 70 ans · Fenêtre assurance-vie & succession
-    </div>
+    <div class="hero-deadline">Échéance critique : 15 janvier 2027 — 70 ans · Fenêtre assurance-vie &amp; succession</div>
   </div>
 </header>
 
-<!-- ═══════════ VERDICT ═══════════ -->
 <section class="verdict">
   <div class="container">
     <div class="verdict-inner">
       <div class="verdict-icon" id="verdict-icon">✓</div>
       <div class="verdict-body">
         <div class="verdict-label">Verdict de la simulation</div>
-        <div class="verdict-text" id="verdict-text">
-          Vendre maintenant à ≈ 800 k€ domine les deux autres scénarios
-        </div>
-        <div class="verdict-sub" id="verdict-sub">
-          À ces hypothèses, chaque mois d'attente coûte ≈ 2 000 € de revenus perdus, et fragilise la fenêtre fiscale avant 70 ans.
-        </div>
+        <div class="verdict-text" id="verdict-text">Vendre maintenant à ≈ 800 k€ domine les deux autres scénarios</div>
+        <div class="verdict-sub" id="verdict-sub">À ces hypothèses, chaque mois d'attente coûte ≈ 2 000 € de revenus perdus, et fragilise la fenêtre fiscale avant 70 ans.</div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ═══════════ BLOC NARRATIF MAMAN ═══════════ -->
 <section class="narrative">
   <div class="container">
     <div class="narrative-inner reveal">
       <div class="narrative-eyebrow">Un mot avant les chiffres</div>
-      <div class="narrative-quote">
-        "Maman, cette maison n'est pas qu'un bien immobilier pour toi.<br>
-        C'est un morceau de notre histoire. Nous le savons."
-      </div>
+      <div class="narrative-quote">"Maman, cette maison n'est pas qu'un bien immobilier pour toi.<br>C'est un morceau de notre histoire. Nous le savons."</div>
       <div class="narrative-body">
-        <p>
-          Ce document n'a pas été préparé pour te convaincre de quoi que ce soit, ni pour minimiser ce que tu ressens. Il a été préparé parce que nous t'aimons, et parce que nous voulons que <strong>cette décision soit la tienne</strong> — éclairée, sereine, et prise en famille plutôt que subie dans l'urgence.
-        </p>
-        <p>
-          Nous savons que l'idée de vendre ressemble à un arrachement. Tu as déjà vécu beaucoup de changements de repères ces dernières années. Cette maison représente une continuité, une présence, quelque chose qui ne se résume pas à un prix au mètre carré. <strong>Tout cela est légitime.</strong>
-        </p>
-        <p>
-          Et c'est précisément parce que nous prenons cela au sérieux que nous avons voulu poser les chiffres clairement. Parce qu'on ne peut pas décider sainement sans les voir. Non pas pour remplacer l'émotion par une feuille de calcul — mais pour que l'émotion ne soit pas, elle non plus, remplacée par une incertitude qui dure, une charge mentale qui s'installe, une situation qui se dégrade sans qu'on ait choisi.
-        </p>
-        <p>
-          <strong>Ce que nous souhaitons pour toi, c'est une retraite sereine. Avec des revenus à toi. Sans dépendre d'Alexandre pour le quotidien. Et sans avoir à penser à cette maison chaque semaine.</strong> C'est ça, l'objectif. Pas "faire un coup financier". Protéger maman.
-        </p>
+        <p>Ce document n'a pas été préparé pour te convaincre de quoi que ce soit, ni pour minimiser ce que tu ressens. Il a été préparé parce que nous t'aimons, et parce que nous voulons que <strong>cette décision soit la tienne</strong> — éclairée, sereine, et prise en famille plutôt que subie dans l'urgence.</p>
+        <p>Nous savons que l'idée de vendre ressemble à un arrachement. Tu as déjà vécu beaucoup de changements de repères ces dernières années. Cette maison représente une continuité, une présence, quelque chose qui ne se résume pas à un prix au mètre carré. <strong>Tout cela est légitime.</strong></p>
+        <p>Et c'est précisément parce que nous prenons cela au sérieux que nous avons voulu poser les chiffres clairement. Parce qu'on ne peut pas décider sainement sans les voir. Non pas pour remplacer l'émotion par une feuille de calcul — mais pour que l'émotion ne soit pas, elle non plus, remplacée par une incertitude qui dure, une charge mentale qui s'installe, une situation qui se dégrade sans qu'on ait choisi.</p>
+        <p><strong>Ce que nous souhaitons pour toi, c'est une retraite sereine. Avec des revenus à toi. Sans dépendre d'Alexandre pour le quotidien. Et sans avoir à penser à cette maison chaque semaine.</strong> C'est ça, l'objectif. Pas "faire un coup financier". Protéger maman.</p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ═══════════ SCÉNARIOS ═══════════ -->
 <section class="section scenarios-section" id="scenarios">
   <div class="container">
     <div class="reveal">
@@ -762,14 +618,11 @@ footer .footer-brand {
       <h2 class="section-title">Trois options — les chiffres<br><em>et</em> ce que ça change vraiment pour maman</h2>
       <p class="section-subtitle">Chaque scénario est évalué sur deux niveaux : le revenu net réel disponible, et ce qu'il implique concrètement en termes de charge mentale, d'autonomie et de sérénité.</p>
     </div>
-
     <div class="scenarios-grid reveal reveal-delay-1">
 
-      <!-- OPTION A : VENDRE -->
       <div class="scenario-card winner">
         <div class="scenario-tag winner">✓ Recommandé</div>
         <div class="scenario-title">Vendre maintenant<br>≈ 800 k€ net</div>
-
         <div class="scenario-metric">
           <div class="scenario-metric-label">Revenu annuel net</div>
           <div class="scenario-metric-value positive" id="sc-sell-revenue">24 000 – 26 000 €</div>
@@ -778,56 +631,27 @@ footer .footer-brand {
           <div class="scenario-metric-label">Revenu mensuel</div>
           <div class="scenario-metric-value positive" id="sc-sell-monthly">2 000 – 2 167 €</div>
         </div>
-
         <div class="scenario-divider"></div>
-
         <ul class="scenario-facts">
           <li class="good">Capital placé à 3 – 3,25% sans gestion</li>
           <li class="good">Fenêtre assurance-vie avant 70 ans sécurisée</li>
           <li class="good">Zéro travaux, zéro locataire, zéro aléa</li>
           <li class="good">Indépendance financière de maman dès le 1er mois</li>
         </ul>
-
         <div class="wellbeing-title">Ce que ça signifie pour maman</div>
         <div class="wellbeing-grid">
-          <div class="wellbeing-item wb-good">
-            <span class="wb-icon">🧘</span>
-            <span class="wb-label">Charge mentale</span>
-            <span class="wb-score">Libérée</span>
-          </div>
-          <div class="wellbeing-item wb-good">
-            <span class="wb-icon">💶</span>
-            <span class="wb-label">Autonomie financière</span>
-            <span class="wb-score">Totale</span>
-          </div>
-          <div class="wellbeing-item wb-good">
-            <span class="wb-icon">🔒</span>
-            <span class="wb-label">Sécurité à long terme</span>
-            <span class="wb-score">Forte</span>
-          </div>
-          <div class="wellbeing-item wb-warn">
-            <span class="wb-icon">💛</span>
-            <span class="wb-label">Deuil de la maison</span>
-            <span class="wb-score">À traverser</span>
-          </div>
-          <div class="wellbeing-item wb-good">
-            <span class="wb-icon">🤝</span>
-            <span class="wb-label">Décision familiale claire</span>
-            <span class="wb-score">Oui</span>
-          </div>
-          <div class="wellbeing-item wb-good">
-            <span class="wb-icon">🌿</span>
-            <span class="wb-label">Page tournée</span>
-            <span class="wb-score">Consciente</span>
-          </div>
+          <div class="wellbeing-item wb-good"><span class="wb-icon">🧘</span><span class="wb-label">Charge mentale</span><span class="wb-score">Libérée</span></div>
+          <div class="wellbeing-item wb-good"><span class="wb-icon">💶</span><span class="wb-label">Autonomie financière</span><span class="wb-score">Totale</span></div>
+          <div class="wellbeing-item wb-good"><span class="wb-icon">🔒</span><span class="wb-label">Sécurité long terme</span><span class="wb-score">Forte</span></div>
+          <div class="wellbeing-item wb-warn"><span class="wb-icon">💛</span><span class="wb-label">Deuil de la maison</span><span class="wb-score">À traverser</span></div>
+          <div class="wellbeing-item wb-good"><span class="wb-icon">🤝</span><span class="wb-label">Décision familiale</span><span class="wb-score">Claire</span></div>
+          <div class="wellbeing-item wb-good"><span class="wb-icon">🌿</span><span class="wb-label">Page tournée</span><span class="wb-score">Consciente</span></div>
         </div>
       </div>
 
-      <!-- OPTION B : LOUER -->
       <div class="scenario-card neutral">
         <div class="scenario-tag neutral">⚠ Défendable mais contraignant</div>
         <div class="scenario-title">Conserver<br>et louer</div>
-
         <div class="scenario-metric">
           <div class="scenario-metric-label">Revenu annuel net</div>
           <div class="scenario-metric-value neutral" id="sc-rent-revenue">18 000 – 22 000 €</div>
@@ -836,113 +660,57 @@ footer .footer-brand {
           <div class="scenario-metric-label">Revenu mensuel</div>
           <div class="scenario-metric-value neutral" id="sc-rent-monthly">1 500 – 1 833 €</div>
         </div>
-
         <div class="scenario-divider"></div>
-
         <ul class="scenario-facts">
           <li class="bad">Travaux cave : 40 k€ minimum à avancer</li>
           <li class="bad">Charges + foncier + IR : −30 à 40% du brut</li>
           <li class="bad">Risque DPE, vacance locative, impayés</li>
           <li class="bad">Fenêtre succession 70 ans potentiellement ratée</li>
         </ul>
-
         <div class="wellbeing-title">Ce que ça signifie pour maman</div>
         <div class="wellbeing-grid">
-          <div class="wellbeing-item wb-bad">
-            <span class="wb-icon">⚡</span>
-            <span class="wb-label">Charge mentale</span>
-            <span class="wb-score">Forte</span>
-          </div>
-          <div class="wellbeing-item wb-warn">
-            <span class="wb-icon">💶</span>
-            <span class="wb-label">Autonomie financière</span>
-            <span class="wb-score">Partielle</span>
-          </div>
-          <div class="wellbeing-item wb-warn">
-            <span class="wb-icon">🔒</span>
-            <span class="wb-label">Sécurité à long terme</span>
-            <span class="wb-score">Incertaine</span>
-          </div>
-          <div class="wellbeing-item wb-good">
-            <span class="wb-icon">🏠</span>
-            <span class="wb-label">Lien à la maison</span>
-            <span class="wb-score">Préservé</span>
-          </div>
-          <div class="wellbeing-item wb-bad">
-            <span class="wb-icon">📞</span>
-            <span class="wb-label">Gestion locative</span>
-            <span class="wb-score">Permanente</span>
-          </div>
-          <div class="wellbeing-item wb-bad">
-            <span class="wb-icon">🌀</span>
-            <span class="wb-label">Incertitude familiale</span>
-            <span class="wb-score">Continue</span>
-          </div>
+          <div class="wellbeing-item wb-bad"><span class="wb-icon">⚡</span><span class="wb-label">Charge mentale</span><span class="wb-score">Forte</span></div>
+          <div class="wellbeing-item wb-warn"><span class="wb-icon">💶</span><span class="wb-label">Autonomie financière</span><span class="wb-score">Partielle</span></div>
+          <div class="wellbeing-item wb-warn"><span class="wb-icon">🔒</span><span class="wb-label">Sécurité long terme</span><span class="wb-score">Incertaine</span></div>
+          <div class="wellbeing-item wb-good"><span class="wb-icon">🏠</span><span class="wb-label">Lien à la maison</span><span class="wb-score">Préservé</span></div>
+          <div class="wellbeing-item wb-bad"><span class="wb-icon">📞</span><span class="wb-label">Gestion locative</span><span class="wb-score">Permanente</span></div>
+          <div class="wellbeing-item wb-bad"><span class="wb-icon">🌀</span><span class="wb-label">Incertitude familiale</span><span class="wb-score">Continue</span></div>
         </div>
       </div>
 
-      <!-- OPTION C : ATTENDRE 850 -->
       <div class="scenario-card loser">
         <div class="scenario-tag loser">✕ Pari risqué</div>
         <div class="scenario-title">Attendre<br>850 k€</div>
-
         <div class="scenario-metric">
           <div class="scenario-metric-label">Revenu pendant l'attente</div>
           <div class="scenario-metric-value negative">0 €</div>
         </div>
         <div class="scenario-metric">
-          <div class="scenario-metric-label">Coût d'opportunité (selon délai)</div>
+          <div class="scenario-metric-label">Revenus perdus (hors risque fiscal)</div>
           <div class="scenario-metric-value negative" id="sc-wait-cost">−52 000 €</div>
         </div>
-
         <div class="scenario-divider"></div>
-
         <ul class="scenario-facts">
           <li class="bad">Revenus perdus pendant toute la période d'attente</li>
-          <li class="bad">Risque fiscal succession si &gt; 70 ans : ≈ 40 k€</li>
+          <li class="bad">+ Risque fiscal succession si &gt; 70 ans : ≈ 40 k€ supplémentaires</li>
           <li class="bad">Marché baissier — les 850 k€ sont hypothétiques</li>
           <li class="bad">Inflation des travaux pendant l'attente</li>
         </ul>
-
         <div class="wellbeing-title">Ce que ça signifie pour maman</div>
         <div class="wellbeing-grid">
-          <div class="wellbeing-item wb-bad">
-            <span class="wb-icon">⚡</span>
-            <span class="wb-label">Charge mentale</span>
-            <span class="wb-score">Maximum</span>
-          </div>
-          <div class="wellbeing-item wb-bad">
-            <span class="wb-icon">💶</span>
-            <span class="wb-label">Autonomie financière</span>
-            <span class="wb-score">Aucune</span>
-          </div>
-          <div class="wellbeing-item wb-bad">
-            <span class="wb-icon">🔒</span>
-            <span class="wb-label">Sécurité à long terme</span>
-            <span class="wb-score">Fragile</span>
-          </div>
-          <div class="wellbeing-item wb-bad">
-            <span class="wb-icon">🌀</span>
-            <span class="wb-label">Incertitude du marché</span>
-            <span class="wb-score">Permanente</span>
-          </div>
-          <div class="wellbeing-item wb-bad">
-            <span class="wb-icon">⏳</span>
-            <span class="wb-label">Dépendance à Alexandre</span>
-            <span class="wb-score">Prolongée</span>
-          </div>
-          <div class="wellbeing-item wb-bad">
-            <span class="wb-icon">🌀</span>
-            <span class="wb-label">Tension familiale</span>
-            <span class="wb-score">Risque réel</span>
-          </div>
+          <div class="wellbeing-item wb-bad"><span class="wb-icon">⚡</span><span class="wb-label">Charge mentale</span><span class="wb-score">Maximum</span></div>
+          <div class="wellbeing-item wb-bad"><span class="wb-icon">💶</span><span class="wb-label">Autonomie financière</span><span class="wb-score">Aucune</span></div>
+          <div class="wellbeing-item wb-bad"><span class="wb-icon">🔒</span><span class="wb-label">Sécurité long terme</span><span class="wb-score">Fragile</span></div>
+          <div class="wellbeing-item wb-bad"><span class="wb-icon">🌀</span><span class="wb-label">Incertitude du marché</span><span class="wb-score">Permanente</span></div>
+          <div class="wellbeing-item wb-bad"><span class="wb-icon">⏳</span><span class="wb-label">Dépendance à Alexandre</span><span class="wb-score">Prolongée</span></div>
+          <div class="wellbeing-item wb-bad"><span class="wb-icon">💬</span><span class="wb-label">Tension familiale</span><span class="wb-score">Risque réel</span></div>
         </div>
       </div>
+
     </div>
   </div>
 </section>
 
-<!-- ═══════════ SIMULATEUR ═══════════ -->
 <section class="section simulator-section" id="simulateur">
   <div class="container">
     <div class="reveal">
@@ -950,60 +718,47 @@ footer .footer-brand {
       <h2 class="section-title">Ajuste les hypothèses,<br>observe l'impact immédiat</h2>
       <p class="section-subtitle">Les valeurs par défaut correspondent à la situation réelle. Chaque curseur met à jour les revenus et le verdict en temps réel.</p>
     </div>
-
     <div class="sim-layout reveal reveal-delay-1">
-
-      <!-- INPUTS -->
       <div class="sim-inputs-panel">
         <h3>Paramètres de simulation</h3>
-        <p style="font-size:0.8rem;color:var(--slate);margin-bottom:1.75rem;line-height:1.6;">Faites glisser chaque curseur pour tester différentes hypothèses. Les résultats à droite se mettent à jour instantanément.</p>
-
+        <p style="font-size:0.8rem;color:var(--slate);margin-bottom:1.75rem;line-height:1.6;">Faites glisser chaque curseur pour tester différentes hypothèses. Les indicateurs ci-dessous se recalculent instantanément à chaque ajustement.</p>
         <div class="input-group">
           <label>Capital net vendeur <span class="input-value" id="val-capital">800 000 €</span></label>
           <div class="input-hint">Ce que maman toucherait réellement après paiement de l'agence immobilière, une fois la vente signée. <span class="input-default">Valeur par défaut : 800 000 € (prix affiché 850 k€ − commission agence ~6%)</span></div>
           <input type="range" id="input-capital" min="700000" max="870000" step="5000" value="800000">
         </div>
-
         <div class="input-group">
           <label>Taux de placement annuel <span class="input-value" id="val-rate">3,25%</span></label>
           <div class="input-hint">Le rendement annuel d'un placement sécurisé du capital (assurance-vie fonds euros, livret, obligations). Plus ce taux est élevé, plus la rente est confortable. <span class="input-default">Valeur par défaut : 3,25% — fourchette réaliste en 2026 pour un placement prudent</span></div>
           <input type="range" id="input-rate" min="2.5" max="5" step="0.25" value="3.25">
         </div>
-
         <div class="input-group">
           <label>Loyer brut mensuel (si on garde la maison) <span class="input-value" id="val-rent">2 700 €</span></label>
           <div class="input-hint">Ce qu'un locataire paierait chaque mois si la maison était mise en location. C'est le montant avant déduction des charges et impôts. <span class="input-default">Valeur par défaut : 2 700 €/mois — estimation réaliste pour une maison de 200 m² à l'ouest de Paris</span></div>
           <input type="range" id="input-rent" min="2000" max="3500" step="50" value="2700">
         </div>
-
         <div class="input-group">
           <label>Part perdue en charges + impôts (location) <span class="input-value" id="val-taxrate">35%</span></label>
           <div class="input-hint">Sur chaque euro de loyer encaissé, une partie disparaît en charges de copropriété, taxe foncière, entretien et impôts sur revenus fonciers. Il reste le solde net. <span class="input-default">Valeur par défaut : 35% — fourchette réaliste pour ce type de bien (peut aller jusqu'à 40-45% selon la tranche d'imposition)</span></div>
           <input type="range" id="input-taxrate" min="25" max="45" step="5" value="35">
         </div>
-
         <div class="input-group">
           <label>Délai avant une vente à 850 k€ (mois) <span class="input-value" id="val-delay">24 mois</span></label>
           <div class="input-hint">Combien de temps supplémentaire faudrait-il attendre pour espérer vendre 50 000 € de plus ? Pendant ce temps, aucun revenu n'est généré. <span class="input-default">Valeur par défaut : 24 mois — estimation prudente sur un marché actuellement difficile pour ce type de bien</span></div>
           <input type="range" id="input-delay" min="6" max="36" step="3" value="24">
         </div>
-
         <div class="input-group">
           <label>Surcoût fiscal si vente après 70 ans <span class="input-value" id="val-taxrisk">40 000 €</span></label>
           <div class="input-hint">Si l'argent est placé en assurance-vie après les 70 ans de maman (15 janvier 2027), les avantages fiscaux pour les héritiers sont considérablement réduits. Ce curseur représente l'impact estimé en droits supplémentaires. <span class="input-default">Valeur par défaut : 40 000 € — ordre de grandeur à valider avec un notaire</span></div>
           <input type="range" id="input-taxrisk" min="0" max="80000" step="5000" value="40000">
         </div>
       </div>
-
-      <!-- OUTPUTS -->
       <div class="sim-results-panel">
-
         <div class="result-primary">
           <div class="result-primary-label">Revenu annuel net — Vente immédiate</div>
           <div class="result-primary-number" id="out-sell-annual">26 000 €</div>
           <div class="result-primary-sub" id="out-sell-monthly-text">soit ≈ 2 167 €/mois · Capital sécurisé, aucune gestion</div>
         </div>
-
         <div class="result-compare">
           <div class="result-card" id="card-rent">
             <div class="result-card-label">Net locatif / an</div>
@@ -1014,7 +769,6 @@ footer .footer-brand {
             <div class="result-card-value" id="out-diff">+4 940 €</div>
           </div>
         </div>
-
         <div class="result-delta">
           <div>
             <div class="result-delta-label">Coût total de l'attente pour 850 k€</div>
@@ -1022,7 +776,6 @@ footer .footer-brand {
           </div>
           <div class="result-delta-value" id="out-wait-total">−92 000 €</div>
         </div>
-
         <div class="result-delta" style="background: var(--success-soft); border: 1px solid rgba(58,125,92,0.2);">
           <div>
             <div class="result-delta-label" style="color: var(--success);">Complément de rente pour maman (en plus des 1 200 €/mois déjà perçus)</div>
@@ -1030,13 +783,11 @@ footer .footer-brand {
           </div>
           <div class="result-delta-value" style="color: var(--success);" id="out-goal-status">+2 167 €/mois</div>
         </div>
-
       </div>
     </div>
   </div>
 </section>
 
-<!-- ═══════════ GRAPHIQUE ═══════════ -->
 <section class="section chart-section" id="graphique">
   <div class="container">
     <div class="reveal">
@@ -1052,14 +803,11 @@ footer .footer-brand {
           <div class="chart-legend-item"><div class="chart-legend-dot wait"></div> Attente 850 k€</div>
         </div>
       </div>
-      <div class="chart-canvas-wrap">
-        <canvas id="revenueChart"></canvas>
-      </div>
+      <div class="chart-canvas-wrap"><canvas id="revenueChart"></canvas></div>
     </div>
   </div>
 </section>
 
-<!-- ═══════════ ARGUMENTATION ═══════════ -->
 <section class="section args-section" id="arguments">
   <div class="container">
     <div class="reveal">
@@ -1067,38 +815,32 @@ footer .footer-brand {
       <h2 class="section-title">Pourquoi vendre maintenant<br>est la décision la plus saine</h2>
       <p class="section-subtitle">Six points factuels, sans biais émotionnel — pour arbitrer sereinement.</p>
     </div>
-
     <div class="args-grid">
       <div class="arg-card reveal reveal-delay-1">
         <div class="arg-number">01</div>
         <div class="arg-title">Le marché pénalise les maisons à rénover</div>
         <p class="arg-text">Depuis fin 2023, les acheteurs sont frileux et déduisent systématiquement le coût des travaux — souvent au-delà du réel. La cave dégradée, le DPE, l'état général : chaque mois d'attente augmente le risque qu'une future offre soit encore plus basse que 800 k€.</p>
       </div>
-
       <div class="arg-card reveal reveal-delay-2">
         <div class="arg-number">02</div>
         <div class="arg-title">Les travaux coûtent plus cher chaque année</div>
         <p class="arg-text">L'inflation des matériaux et de la main-d'œuvre dans le bâtiment tourne autour de 5–8%/an. Les 40 k€ de travaux cave estimés aujourd'hui deviendront 43–45 k€ dans un an. Conserver la maison, c'est laisser ces coûts grossir — qu'on loue ou qu'on attende.</p>
       </div>
-
       <div class="arg-card reveal reveal-delay-3">
         <div class="arg-number">03</div>
         <div class="arg-title">L'écart 800 / 850 k€ est une illusion comptable</div>
         <p class="arg-text">50 k€ de gain brut hypothétique sur le prix. Mais 2 ans d'attente = 52 k€ de revenus non perçus par maman + jusqu'à 40 k€ de risque fiscal succession = on peut perdre 92 k€ pour espérer gagner 50 k€. Le calcul ne tient pas.</p>
       </div>
-
       <div class="arg-card reveal reveal-delay-1">
         <div class="arg-number">04</div>
         <div class="arg-title">La fenêtre assurance-vie avant 70 ans ne se rattrape pas</div>
         <p class="arg-text">Les versements en assurance-vie réalisés avant les 70 ans de maman (15 janvier 2027) bénéficient d'un abattement successoral de 152 500 € par bénéficiaire pour les fils. Après 70 ans, seul un abattement global de 30 500 € s'applique. C'est une différence majeure dans ce que chacun héritera.</p>
       </div>
-
       <div class="arg-card reveal reveal-delay-2">
         <div class="arg-number">05</div>
         <div class="arg-title">Louer ne rapporte pas autant qu'on croit</div>
         <p class="arg-text">2 700 €/mois de loyer brut, ça paraît confortable. Mais une fois les charges de copropriété, la taxe foncière, les travaux courants et les impôts sur revenus fonciers déduits, il reste environ 1 700–1 800 €/mois net. Soit moins que la rente d'un capital placé — avec beaucoup plus de contraintes et d'aléas pour les fils et pour maman.</p>
       </div>
-
       <div class="arg-card reveal reveal-delay-3">
         <div class="arg-number">06</div>
         <div class="arg-title">L'indépendance financière de maman ne peut pas attendre</div>
@@ -1108,7 +850,6 @@ footer .footer-brand {
   </div>
 </section>
 
-<!-- ═══════════ BILAN GLOBAL ═══════════ -->
 <section class="section bilan-section" id="bilan">
   <div class="container">
     <div class="reveal">
@@ -1116,7 +857,6 @@ footer .footer-brand {
       <h2 class="section-title">Ce que chaque scénario signifie concrètement pour maman</h2>
       <p class="section-subtitle">Ces chiffres sont des estimations fondées sur les paramètres du simulateur ci-dessus. À affiner avec un notaire pour la fiscalité successorale précise avant toute décision.</p>
     </div>
-
     <div class="bilan-grid reveal reveal-delay-1">
       <div class="bilan-col winner">
         <div class="bilan-col-title">✓ Vente immédiate<br>≈ 800 k€</div>
@@ -1127,40 +867,40 @@ footer .footer-brand {
         <div class="bilan-row"><span class="bilan-row-label">Travaux à financer</span><span class="bilan-row-value good">0 €</span></div>
         <div class="bilan-row"><span class="bilan-row-label">Fenêtre AV avant 70 ans</span><span class="bilan-row-value good">Sécurisée</span></div>
       </div>
-
       <div class="bilan-col neutral">
         <div class="bilan-col-title">⚠ Conserver<br>et louer</div>
         <div class="bilan-row"><span class="bilan-row-label">Revenu net / an</span><span class="bilan-row-value" id="b-rent-annual">21 060 €</span></div>
-        <div class="bilan-row"><span class="bilan-row-label">Revenu / mois</span><span class="bilan-row-value" id="b-rent-monthly">1 755 €</span></div>
+        <div class="bilan-row"><span class="bilan-row-label">Revenu net / mois</span><span class="bilan-row-value" id="b-rent-monthly">1 755 €</span></div>
         <div class="bilan-row"><span class="bilan-row-label">Travaux à avancer</span><span class="bilan-row-value bad">≥ 40 000 €</span></div>
         <div class="bilan-row"><span class="bilan-row-label">Risque fiscal &gt;70 ans</span><span class="bilan-row-value bad">Élevé</span></div>
         <div class="bilan-row"><span class="bilan-row-label">Charge mentale</span><span class="bilan-row-value bad">Forte</span></div>
         <div class="bilan-row"><span class="bilan-row-label">Aléas locatifs</span><span class="bilan-row-value bad">Importants</span></div>
       </div>
-
       <div class="bilan-col loser">
         <div class="bilan-col-title">✕ Attendre<br>850 k€</div>
         <div class="bilan-row"><span class="bilan-row-label">Revenu pendant attente</span><span class="bilan-row-value bad">0 €</span></div>
         <div class="bilan-row"><span class="bilan-row-label">Revenus perdus (selon délai)</span><span class="bilan-row-value bad" id="b-wait-lost">−52 000 €</span></div>
+        <div class="bilan-row"><span class="bilan-row-label">Risque fiscal AV après 70 ans</span><span class="bilan-row-value bad" id="b-wait-taxrisk">−40 000 €</span></div>
         <div class="bilan-row"><span class="bilan-row-label">Travaux + inflation chantier</span><span class="bilan-row-value bad">≥ 43 000 €</span></div>
-        <div class="bilan-row"><span class="bilan-row-label">Risque fiscal &gt;70 ans</span><span class="bilan-row-value bad">Très élevé</span></div>
-        <div class="bilan-row"><span class="bilan-row-label">Gain net réel vs vendre maintenant</span><span class="bilan-row-value bad" id="b-wait-net">−42 000 €</span></div>
-        <div class="bilan-row" style="border-top: 1px solid rgba(168,66,66,0.2); margin-top:0.5rem; padding-top:0.5rem;"><span class="bilan-row-label" style="font-size:0.72rem;font-style:italic;">= gain prix (50k€) − revenus perdus − risque fiscal</span><span class="bilan-row-value bad"></span></div>
+        <div class="bilan-row" style="border-top:1px solid rgba(168,66,66,0.3);margin-top:0.4rem;padding-top:0.5rem;">
+          <span class="bilan-row-label" style="font-weight:500;color:var(--pearl);">Gain net réel vs vendre maintenant</span>
+          <span class="bilan-row-value bad" id="b-wait-net">−42 000 €</span>
+        </div>
+        <div class="bilan-row" style="border-bottom:none;padding-top:0.1rem;">
+          <span class="bilan-row-label" style="font-size:0.69rem;font-style:italic;color:var(--slate);">gain prix (50k€) − revenus perdus − risque fiscal AV</span>
+          <span></span>
+        </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ═══════════ DISCLAIMER ═══════════ -->
 <div class="disclaimer">
   <div class="container">
-    <p>
-      Ce document a été préparé pour usage familial uniquement — il ne constitue pas un conseil juridique, fiscal ou patrimonial. Les chiffres sont des estimations fondées sur les données partagées en famille et des hypothèses de marché raisonnables. Pour toute décision engageant le patrimoine, nous vous recommandons de consulter ensemble un notaire et un conseiller en gestion de patrimoine indépendant.
-    </p>
+    <p>Ce document a été préparé pour usage familial uniquement — il ne constitue pas un conseil juridique, fiscal ou patrimonial. Les chiffres sont des estimations fondées sur les données partagées en famille et des hypothèses de marché raisonnables. Pour toute décision engageant le patrimoine, nous vous recommandons de consulter ensemble un notaire et un conseiller en gestion de patrimoine indépendant.</p>
   </div>
 </div>
 
-<!-- ═══════════ FOOTER ═══════════ -->
 <footer>
   <div class="container">
     <p>Document familial · Maison familiale, Ouest parisien · Avril 2026</p>
@@ -1168,34 +908,22 @@ footer .footer-brand {
   </div>
 </footer>
 
-<!-- ═══════════ CHART.JS ═══════════ -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
-
 <script>
 (function () {
   'use strict';
 
-  /* ── Nav scroll ── */
   const nav = document.getElementById('nav');
-  window.addEventListener('scroll', () => {
-    nav.classList.toggle('scrolled', window.scrollY > 60);
-  });
+  window.addEventListener('scroll', () => { nav.classList.toggle('scrolled', window.scrollY > 60); });
 
-  /* ── Scroll reveal ── */
   const reveals = document.querySelectorAll('.reveal');
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
   }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
   reveals.forEach(el => observer.observe(el));
 
-  /* ══════════════════════════════════════
-     SLIDER RANGE FILL
-  ══════════════════════════════════════ */
   function updateSliderFill(input) {
-    const min = parseFloat(input.min);
-    const max = parseFloat(input.max);
-    const val = parseFloat(input.value);
-    const pct = ((val - min) / (max - min)) * 100;
+    const pct = ((parseFloat(input.value) - parseFloat(input.min)) / (parseFloat(input.max) - parseFloat(input.min))) * 100;
     input.style.setProperty('--pct', pct + '%');
   }
   document.querySelectorAll('input[type="range"]').forEach(input => {
@@ -1203,16 +931,6 @@ footer .footer-brand {
     input.addEventListener('input', () => updateSliderFill(input));
   });
 
-  /* ══════════════════════════════════════
-     FORMATTER
-  ══════════════════════════════════════ */
-  const fmtK = n => n >= 1000 ? (n / 1000).toLocaleString('fr-FR', { minimumFractionDigits: 0, maximumFractionDigits: 1 }) + ' k€' : n.toLocaleString('fr-FR') + ' €';
-  const fmt  = n => n.toLocaleString('fr-FR') + ' €';
-  const fmtM = n => (n / 1000).toFixed(1).replace('.', ',') + ' k€';
-
-  /* ══════════════════════════════════════
-     NUMBER UPDATE WITH ANIMATION
-  ══════════════════════════════════════ */
   function setVal(el, text) {
     if (!el) return;
     el.textContent = text;
@@ -1221,216 +939,128 @@ footer .footer-brand {
     el.classList.add('updating');
   }
 
-  /* ══════════════════════════════════════
-     INPUTS
-  ══════════════════════════════════════ */
   const inputs = {
-    capital:  document.getElementById('input-capital'),
-    rate:     document.getElementById('input-rate'),
-    rent:     document.getElementById('input-rent'),
-    taxrate:  document.getElementById('input-taxrate'),
-    delay:    document.getElementById('input-delay'),
-    taxrisk:  document.getElementById('input-taxrisk'),
+    capital: document.getElementById('input-capital'),
+    rate:    document.getElementById('input-rate'),
+    rent:    document.getElementById('input-rent'),
+    taxrate: document.getElementById('input-taxrate'),
+    delay:   document.getElementById('input-delay'),
+    taxrisk: document.getElementById('input-taxrisk'),
   };
 
-  /* ══════════════════════════════════════
-     CHART SETUP
-  ══════════════════════════════════════ */
   const ctx = document.getElementById('revenueChart').getContext('2d');
-  const chartData = {
-    labels: ['Mois 0', 'An 1', 'An 2', 'An 3'],
-    datasets: [
-      {
-        label: 'Vente immédiate',
-        data: [0, 26000, 52000, 78000],
-        borderColor: '#3a7d5c',
-        backgroundColor: 'rgba(58,125,92,0.1)',
-        borderWidth: 2.5,
-        pointRadius: 4, pointBackgroundColor: '#3a7d5c',
-        tension: 0.3, fill: true,
-      },
-      {
-        label: 'Location',
-        data: [0, 21060, 42120, 63180],
-        borderColor: '#3d8ab5',
-        backgroundColor: 'rgba(61,138,181,0.08)',
-        borderWidth: 2, borderDash: [5, 4],
-        pointRadius: 4, pointBackgroundColor: '#3d8ab5',
-        tension: 0.3, fill: true,
-      },
-      {
-        label: 'Attente 850 k€',
-        data: [0, 0, 27000, 54000],
-        borderColor: '#a84242',
-        backgroundColor: 'rgba(168,66,66,0.08)',
-        borderWidth: 2,
-        pointRadius: 4, pointBackgroundColor: '#a84242',
-        tension: 0.3, fill: true,
-      }
-    ]
-  };
-
   const revenueChart = new Chart(ctx, {
     type: 'line',
-    data: chartData,
+    data: {
+      labels: ['Mois 0', 'An 1', 'An 2', 'An 3'],
+      datasets: [
+        { label: 'Vente immédiate', data: [0,26000,52000,78000], borderColor: '#3a7d5c', backgroundColor: 'rgba(58,125,92,0.1)', borderWidth: 2.5, pointRadius: 4, pointBackgroundColor: '#3a7d5c', tension: 0.3, fill: true },
+        { label: 'Location', data: [0,21060,42120,63180], borderColor: '#3d8ab5', backgroundColor: 'rgba(61,138,181,0.08)', borderWidth: 2, borderDash: [5,4], pointRadius: 4, pointBackgroundColor: '#3d8ab5', tension: 0.3, fill: true },
+        { label: 'Attente 850 k€', data: [0,0,27000,54000], borderColor: '#a84242', backgroundColor: 'rgba(168,66,66,0.08)', borderWidth: 2, pointRadius: 4, pointBackgroundColor: '#a84242', tension: 0.3, fill: true }
+      ]
+    },
     options: {
-      responsive: true,
-      maintainAspectRatio: false,
+      responsive: true, maintainAspectRatio: false,
       animation: { duration: 500, easing: 'easeInOutQuart' },
       plugins: {
         legend: { display: false },
-        tooltip: {
-          backgroundColor: '#1a2a3a',
-          titleFont: { family: "'DM Sans', sans-serif", size: 12 },
-          bodyFont: { family: "'DM Sans', sans-serif", size: 12 },
-          padding: 12,
-          callbacks: {
-            label: ctx => ' ' + ctx.dataset.label + ' : ' + ctx.raw.toLocaleString('fr-FR') + ' €'
-          }
-        }
+        tooltip: { backgroundColor: '#1a2a3a', padding: 12, titleFont: { family: "'DM Sans', sans-serif", size: 12 }, bodyFont: { family: "'DM Sans', sans-serif", size: 12 }, callbacks: { label: c => ' ' + c.dataset.label + ' : ' + c.raw.toLocaleString('fr-FR') + ' €' } }
       },
       scales: {
-        x: {
-          grid: { color: 'rgba(107,130,153,0.1)' },
-          ticks: { color: '#6b8299', font: { family: "'DM Sans', sans-serif", size: 11 } }
-        },
-        y: {
-          grid: { color: 'rgba(107,130,153,0.1)' },
-          ticks: {
-            color: '#6b8299', font: { family: "'DM Sans', sans-serif", size: 11 },
-            callback: v => (v / 1000).toFixed(0) + ' k€'
-          }
-        }
+        x: { grid: { color: 'rgba(107,130,153,0.1)' }, ticks: { color: '#6b8299', font: { family: "'DM Sans', sans-serif", size: 11 } } },
+        y: { grid: { color: 'rgba(107,130,153,0.1)' }, ticks: { color: '#6b8299', font: { family: "'DM Sans', sans-serif", size: 11 }, callback: v => (v/1000).toFixed(0) + ' k€' } }
       }
     }
   });
 
-  /* ══════════════════════════════════════
-     CALCULATE & UPDATE
-  ══════════════════════════════════════ */
   function calculate() {
-    const capital   = parseFloat(inputs.capital.value);
-    const rate      = parseFloat(inputs.rate.value) / 100;
-    const rentBrut  = parseFloat(inputs.rent.value) * 12;
-    const taxrate   = parseFloat(inputs.taxrate.value) / 100;
-    const delayMo   = parseFloat(inputs.delay.value);
-    const taxrisk   = parseFloat(inputs.taxrisk.value);
+    const capital  = parseFloat(inputs.capital.value);
+    const rate     = parseFloat(inputs.rate.value) / 100;
+    const rentBrut = parseFloat(inputs.rent.value) * 12;
+    const taxrate  = parseFloat(inputs.taxrate.value) / 100;
+    const delayMo  = parseFloat(inputs.delay.value);
+    const taxrisk  = parseFloat(inputs.taxrisk.value);
 
-    // SELL
     const sellAnnual  = capital * rate;
     const sellMonthly = sellAnnual / 12;
+    const rentNet     = rentBrut * (1 - taxrate);
+    const rentDiff    = sellAnnual - rentNet;
+    const delayYears  = delayMo / 12;
+    const waitRevLost = sellAnnual * delayYears;
+    const waitTotal   = waitRevLost + taxrisk;
+    const waitNetGain = 50000 - waitRevLost - taxrisk;
+    const complement  = sellMonthly;
+    const totalRevenu = 1200 + complement;
 
-    // RENT
-    const rentNet    = rentBrut * (1 - taxrate);
-    const rentDiff   = sellAnnual - rentNet;
-
-    // WAIT
-    const delayYears   = delayMo / 12;
-    const waitRevLost  = sellAnnual * delayYears;
-    const waitTotal    = waitRevLost + taxrisk;
-    const waitNetGain  = 50000 - waitRevLost - taxrisk; // 50k hypothetical gain
-
-    // GOAL — complément de retraite au-dessus des 1200€ déjà perçus
-    const retraiteBase = 1200; // retraite existante déjà assurée
-    const complement   = sellMonthly; // la rente AV vient EN PLUS
-    const totalRevenu  = retraiteBase + complement;
-
-    // VERDICT
     const vText = document.getElementById('verdict-text');
     const vSub  = document.getElementById('verdict-sub');
     const vIcon = document.getElementById('verdict-icon');
-
     if (sellAnnual > rentNet && complement >= 800) {
       vText.textContent = 'Vendre maintenant à ≈ ' + capital.toLocaleString('fr-FR') + ' € domine les deux autres scénarios';
       vSub.textContent  = 'Maman percevrait ' + Math.round(totalRevenu).toLocaleString('fr-FR') + ' €/mois au total (retraite + rente AV), en toute indépendance vis-à-vis d\'Alexandre. Chaque mois d\'attente coûte ≈ ' + Math.round(sellMonthly).toLocaleString('fr-FR') + ' € de revenus non générés.';
-      vIcon.className   = 'verdict-icon';
-      vIcon.textContent = '✓';
+      vIcon.className = 'verdict-icon'; vIcon.textContent = '✓';
     } else if (rentNet > sellAnnual) {
       vText.textContent = 'À ces paramètres, la location génère plus que le placement — à vérifier';
       vSub.textContent  = 'Avant de conclure, vérifiez le taux de placement et les charges réelles estimées. La location reste contraignante même si le brut est élevé.';
-      vIcon.className   = 'verdict-icon warn';
-      vIcon.textContent = '⚠';
+      vIcon.className = 'verdict-icon warn'; vIcon.textContent = '⚠';
     } else {
       vText.textContent = 'Le complément de rente reste faible à ce niveau de capital';
       vSub.textContent  = 'Avec ce capital et ce taux, la rente mensuelle serait limitée. Testez un taux de placement plus élevé ou négociez un meilleur prix de vente.';
-      vIcon.className   = 'verdict-icon danger';
-      vIcon.textContent = '!';
+      vIcon.className = 'verdict-icon danger'; vIcon.textContent = '!';
     }
 
-    // Display value labels
     document.getElementById('val-capital').textContent = capital.toLocaleString('fr-FR') + ' €';
-    document.getElementById('val-rate').textContent    = parseFloat(inputs.rate.value).toFixed(2) + '%';
+    document.getElementById('val-rate').textContent    = parseFloat(inputs.rate.value).toFixed(2).replace('.', ',') + '%';
     document.getElementById('val-rent').textContent    = parseFloat(inputs.rent.value).toLocaleString('fr-FR') + ' €';
     document.getElementById('val-taxrate').textContent = inputs.taxrate.value + '%';
     document.getElementById('val-delay').textContent   = inputs.delay.value + ' mois';
     document.getElementById('val-taxrisk').textContent = parseFloat(inputs.taxrisk.value).toLocaleString('fr-FR') + ' €';
 
-    // Output updates
     setVal(document.getElementById('out-sell-annual'), Math.round(sellAnnual).toLocaleString('fr-FR') + ' €');
-    document.getElementById('out-sell-monthly-text').textContent =
-      'soit ≈ ' + Math.round(sellMonthly).toLocaleString('fr-FR') + ' €/mois · Capital sécurisé, aucune gestion';
+    document.getElementById('out-sell-monthly-text').textContent = 'soit ≈ ' + Math.round(sellMonthly).toLocaleString('fr-FR') + ' €/mois · Capital sécurisé, aucune gestion';
 
     setVal(document.getElementById('out-rent-annual'), Math.round(rentNet).toLocaleString('fr-FR') + ' €');
-
     const diffEl = document.getElementById('out-diff');
     const diffCard = document.getElementById('card-diff');
     setVal(diffEl, (rentDiff >= 0 ? '+' : '') + Math.round(rentDiff).toLocaleString('fr-FR') + ' €');
     diffCard.className = 'result-card ' + (rentDiff > 0 ? 'better' : 'worse');
-
-    const rentCard = document.getElementById('card-rent');
-    rentCard.className = 'result-card ' + (rentNet >= sellAnnual ? 'better' : '');
-
+    document.getElementById('card-rent').className = 'result-card ' + (rentNet >= sellAnnual ? 'better' : '');
     setVal(document.getElementById('out-wait-total'), '−' + Math.round(waitTotal).toLocaleString('fr-FR') + ' €');
 
-    // Goal display
     const goalEl   = document.getElementById('out-goal-status');
     const goalText = document.getElementById('out-goal-text');
-    goalEl.textContent  = '+' + Math.round(complement).toLocaleString('fr-FR') + ' €/mois';
-    goalEl.style.color  = complement >= 800 ? 'var(--success)' : 'var(--warn)';
+    goalEl.textContent = '+' + Math.round(complement).toLocaleString('fr-FR') + ' €/mois';
+    goalEl.style.color = complement >= 800 ? 'var(--success)' : 'var(--warn)';
     goalText.textContent = 'Rente mensuelle générée par la vente, EN PLUS de la retraite de base de 1 200 €. Total maman : ' + Math.round(totalRevenu).toLocaleString('fr-FR') + ' €/mois — indépendant d\'Alexandre.';
 
-    // Scenario cards
     setVal(document.getElementById('sc-sell-revenue'), Math.round(sellAnnual * 0.95).toLocaleString('fr-FR') + ' – ' + Math.round(sellAnnual).toLocaleString('fr-FR') + ' €');
     setVal(document.getElementById('sc-sell-monthly'), Math.round(sellAnnual * 0.95 / 12).toLocaleString('fr-FR') + ' – ' + Math.round(sellMonthly).toLocaleString('fr-FR') + ' €');
     setVal(document.getElementById('sc-rent-revenue'), Math.round(rentNet * 0.88).toLocaleString('fr-FR') + ' – ' + Math.round(rentNet).toLocaleString('fr-FR') + ' €');
     setVal(document.getElementById('sc-rent-monthly'), Math.round(rentNet * 0.88 / 12).toLocaleString('fr-FR') + ' – ' + Math.round(rentNet / 12).toLocaleString('fr-FR') + ' €');
     setVal(document.getElementById('sc-wait-cost'), '−' + Math.round(waitRevLost).toLocaleString('fr-FR') + ' €');
 
-    // Bilan
-    setVal(document.getElementById('b-sell-annual'), Math.round(sellAnnual).toLocaleString('fr-FR') + ' €');
+    setVal(document.getElementById('b-sell-annual'),  Math.round(sellAnnual).toLocaleString('fr-FR') + ' €');
     setVal(document.getElementById('b-sell-monthly'), Math.round(sellMonthly).toLocaleString('fr-FR') + ' €');
-    setVal(document.getElementById('b-rent-annual'), Math.round(rentNet).toLocaleString('fr-FR') + ' €');
+    setVal(document.getElementById('b-rent-annual'),  Math.round(rentNet).toLocaleString('fr-FR') + ' €');
     setVal(document.getElementById('b-rent-monthly'), Math.round(rentNet / 12).toLocaleString('fr-FR') + ' €');
     setVal(document.getElementById('b-wait-lost'), '−' + Math.round(waitRevLost).toLocaleString('fr-FR') + ' €');
+    setVal(document.getElementById('b-wait-taxrisk'), '−' + Math.round(taxrisk).toLocaleString('fr-FR') + ' €');
     setVal(document.getElementById('b-wait-net'), (waitNetGain >= 0 ? '+' : '') + Math.round(waitNetGain).toLocaleString('fr-FR') + ' €');
 
-    // Chart update
-    const y1s = sellAnnual;
-    const y1r = rentNet;
-    const y1w = sellAnnual * Math.max(0, 1 - delayYears);
-
-    revenueChart.data.datasets[0].data = [0, Math.round(y1s), Math.round(y1s * 2), Math.round(y1s * 3)];
-    revenueChart.data.datasets[1].data = [0, Math.round(y1r), Math.round(y1r * 2), Math.round(y1r * 3)];
-
-    // Wait scenario: earns 0 during delay, then starts accumulating
-    const waitStart = Math.max(0, 1 - delayYears);
+    revenueChart.data.datasets[0].data = [0, Math.round(sellAnnual), Math.round(sellAnnual*2), Math.round(sellAnnual*3)];
+    revenueChart.data.datasets[1].data = [0, Math.round(rentNet),    Math.round(rentNet*2),    Math.round(rentNet*3)];
     revenueChart.data.datasets[2].data = [
       0,
-      Math.round(sellAnnual * waitStart),
+      Math.round(sellAnnual * Math.max(0, 1 - delayYears)),
       Math.round(sellAnnual * Math.max(0, 2 - delayYears)),
       Math.round(sellAnnual * Math.max(0, 3 - delayYears))
     ];
     revenueChart.update();
   }
 
-  Object.values(inputs).forEach(input => {
-    input.addEventListener('input', calculate);
-  });
-
+  Object.values(inputs).forEach(i => i.addEventListener('input', calculate));
   calculate();
-
 })();
 </script>
-
 </body>
 </html>
