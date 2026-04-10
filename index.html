@@ -39,6 +39,18 @@ body{font-family:var(--font-body);color:var(--ink);background:var(--white);line-
 .reveal-delay-1{transition-delay:.1s;}.reveal-delay-2{transition-delay:.2s;}.reveal-delay-3{transition-delay:.3s;}
 .updating{animation:countUp .3s var(--ease-out);}
 
+/* ── Valeurs dynamiques liées aux curseurs ── */
+.dv{display:inline-flex;align-items:center;gap:.22rem;font-weight:700;color:var(--gold);background:rgba(200,164,85,.11);border:1px dashed rgba(200,164,85,.45);border-radius:3px;padding:.04rem .38rem;font-size:.93em;white-space:nowrap;transition:all .25s var(--ease);cursor:default;vertical-align:baseline;}
+.dv::before{content:'⟳';font-size:.68em;opacity:.55;line-height:1;}
+.dv.dv-target{color:var(--accent);background:rgba(42,111,151,.1);border-color:rgba(42,111,151,.4);}
+.dv.updating{animation:countUp .3s var(--ease-out);}
+
+/* Légende d'aide dans le panneau de simulation */
+.sim-legend{display:flex;align-items:center;gap:.55rem;font-size:.71rem;color:var(--slate);margin-top:.75rem;margin-bottom:-.25rem;padding:.45rem .7rem;background:rgba(200,164,85,.05);border:1px dashed rgba(200,164,85,.22);border-radius:var(--r);line-height:1.4;}
+.dv-demo{display:inline-flex;align-items:center;gap:.2rem;font-weight:600;color:var(--gold);background:rgba(200,164,85,.1);border:1px dashed rgba(200,164,85,.4);border-radius:3px;padding:.03rem .32rem;font-size:.85em;}
+.dv-demo::before{content:'⟳';font-size:.68em;opacity:.55;}
+.dv-demo.t{color:var(--accent);background:rgba(42,111,151,.1);border-color:rgba(42,111,151,.4);}
+
 /* NAV */
 nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:1.1rem 0;transition:all .4s var(--ease);background:transparent;}
 nav.scrolled{background:rgba(15,25,35,.96);backdrop-filter:blur(20px);padding:.7rem 0;box-shadow:0 1px 0 rgba(200,164,85,.12);}
@@ -331,11 +343,11 @@ footer .footer-brand{font-family:var(--font-display);font-size:.95rem;color:var(
         <div class="scenario-title">Vendre maintenant<br>≈ 800 k€ net</div>
         <div class="scenario-metric">
           <div class="scenario-metric-label">Revenu annuel net</div>
-          <div class="scenario-metric-value positive" id="sc-sell-revenue">24 000 – 26 000 €</div>
+          <div class="scenario-metric-value positive"><span class="dv" id="sc-sell-revenue">24 000 – 26 000 €</span></div>
         </div>
         <div class="scenario-metric">
           <div class="scenario-metric-label">Revenu mensuel</div>
-          <div class="scenario-metric-value positive" id="sc-sell-monthly">2 000 – 2 167 €</div>
+          <div class="scenario-metric-value positive"><span class="dv" id="sc-sell-monthly">2 000 – 2 167 €</span></div>
         </div>
         <div class="scenario-divider"></div>
         <ul class="scenario-facts">
@@ -361,16 +373,16 @@ footer .footer-brand{font-family:var(--font-display);font-size:.95rem;color:var(
         <div class="scenario-title">Vendre à prix cible<br><span style="font-size:.95rem;font-weight:400;color:var(--slate);">si le marché le permet</span></div>
         <div class="scenario-metric">
           <div class="scenario-metric-label">Revenu annuel une fois vendu</div>
-          <div class="scenario-metric-value target-color" id="sc-target-revenue">27 419 €</div>
+          <div class="scenario-metric-value target-color"><span class="dv dv-target" id="sc-target-revenue">27 419 €</span></div>
         </div>
         <div class="scenario-metric">
           <div class="scenario-metric-label">Revenu mensuel une fois vendu</div>
-          <div class="scenario-metric-value target-color" id="sc-target-monthly">2 285 €</div>
+          <div class="scenario-metric-value target-color"><span class="dv dv-target" id="sc-target-monthly">2 285 €</span></div>
         </div>
         <div class="scenario-divider"></div>
         <ul class="scenario-facts">
-          <li>Hypothèse : vendre à <strong id="sc-target-price-label">870 000 €</strong> dans <strong id="sc-target-delay-label">1,5 an</strong></li>
-          <li>Net vendeur estimé (−5,9% agence) : <strong id="sc-target-net-label">819 270 €</strong></li>
+          <li>Hypothèse : vendre à <span class="dv dv-target" id="sc-target-price-label">870 000 €</span> dans <span class="dv dv-target" id="sc-target-delay-label">1,5 an</span></li>
+          <li>Net vendeur estimé (−5,9% agence) : <span class="dv dv-target" id="sc-target-net-label">819 270 €</span></li>
           <li class="bad">Aucun revenu pendant la période d'attente</li>
           <li class="bad">Risque réel : le marché peut ne jamais atteindre ce prix</li>
         </ul>
@@ -378,23 +390,23 @@ footer .footer-brand{font-family:var(--font-display);font-size:.95rem;color:var(
         <div class="breakeven-box">
           <div class="breakeven-line">
             <span>Upside brut (prix supérieur)</span>
-            <strong id="beUpside">+19 270 €</strong>
+            <span class="dv dv-target" id="beUpside">+19 270 €</span>
           </div>
           <div class="breakeven-line neg">
             <span>− Revenus placement perdus</span>
-            <strong id="beRevenuPerdu">39 000 €</strong>
+            <span class="dv" id="beRevenuPerdu">39 000 €</span>
           </div>
           <div class="breakeven-line neg">
             <span>− Inflation chantier / matériaux</span>
-            <strong id="beInflation">4 800 €</strong>
+            <span class="dv" id="beInflation">4 800 €</span>
           </div>
           <div class="breakeven-line neg">
             <span>− Entretien pendant l'attente</span>
-            <strong id="beEntretien">3 915 €</strong>
+            <span class="dv" id="beEntretien">3 915 €</span>
           </div>
           <div class="breakeven-line neg">
             <span>− Risque fiscal / successoral</span>
-            <strong id="beRisqueFiscal">40 000 €</strong>
+            <span class="dv" id="beRisqueFiscal">40 000 €</span>
           </div>
           <div class="breakeven-total">
             <span>Gain net réel estimé</span>
@@ -421,11 +433,11 @@ footer .footer-brand{font-family:var(--font-display);font-size:.95rem;color:var(
         <div class="scenario-title">Conserver<br>et louer</div>
         <div class="scenario-metric">
           <div class="scenario-metric-label">Revenu annuel net</div>
-          <div class="scenario-metric-value neutral" id="sc-rent-revenue">18 000 – 22 000 €</div>
+          <div class="scenario-metric-value neutral"><span class="dv" style="color:var(--warn);background:rgba(196,122,58,.1);border-color:rgba(196,122,58,.4);" id="sc-rent-revenue">18 000 – 22 000 €</span></div>
         </div>
         <div class="scenario-metric">
           <div class="scenario-metric-label">Revenu mensuel</div>
-          <div class="scenario-metric-value neutral" id="sc-rent-monthly">1 500 – 1 833 €</div>
+          <div class="scenario-metric-value neutral"><span class="dv" style="color:var(--warn);background:rgba(196,122,58,.1);border-color:rgba(196,122,58,.4);" id="sc-rent-monthly">1 500 – 1 833 €</span></div>
         </div>
         <div class="scenario-divider"></div>
         <ul class="scenario-facts">
@@ -455,7 +467,7 @@ footer .footer-brand{font-family:var(--font-display);font-size:.95rem;color:var(
         </div>
         <div class="scenario-metric">
           <div class="scenario-metric-label">Revenus perdus (hors risque fiscal)</div>
-          <div class="scenario-metric-value negative" id="sc-wait-cost">−52 000 €</div>
+          <div class="scenario-metric-value negative"><span class="dv" style="color:var(--danger);background:rgba(168,66,66,.1);border-color:rgba(168,66,66,.4);" id="sc-wait-cost">−52 000 €</span></div>
         </div>
         <div class="scenario-divider"></div>
         <ul class="scenario-facts">
@@ -491,6 +503,13 @@ footer .footer-brand{font-family:var(--font-display);font-size:.95rem;color:var(
       <div class="sim-inputs-panel">
         <h3>Paramètres de simulation</h3>
         <p style="font-size:.8rem;color:var(--slate);margin-bottom:.5rem;line-height:1.6;">Faites glisser chaque curseur pour tester différentes hypothèses.</p>
+        <div class="sim-legend">
+          <span>Les valeurs</span>
+          <span class="dv-demo">⟳ 1,5 an</span>
+          <span>et</span>
+          <span class="dv-demo t">⟳ 870 000 €</span>
+          <span>dans les cartes sont liées aux curseurs ci-dessous — elles se mettent à jour en temps réel.</span>
+        </div>
 
         <div class="sim-section-divider">Hypothèses de base</div>
 
@@ -744,6 +763,9 @@ function setVal(el,text){
   el.classList.remove('updating');
   void el.offsetWidth;
   el.classList.add('updating');
+  // propagate animation to parent .dv wrapper if needed
+  const dvParent = el.closest ? el.closest('.dv') : null;
+  if(dvParent){ dvParent.classList.remove('updating'); void dvParent.offsetWidth; dvParent.classList.add('updating'); }
 }
 const euro=n=>Math.round(n).toLocaleString('fr-FR')+' €';
 
