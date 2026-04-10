@@ -354,7 +354,13 @@ nav.scrolled {
 .input-group { margin-bottom: 1.5rem; }
 .input-group label {
   display: flex; justify-content: space-between; align-items: baseline;
-  font-size: 0.82rem; font-weight: 500; color: var(--ink-muted); margin-bottom: 0.6rem;
+  font-size: 0.82rem; font-weight: 500; color: var(--ink-muted); margin-bottom: 0.2rem;
+}
+.input-hint {
+  font-size: 0.73rem; color: var(--slate); margin-bottom: 0.55rem; line-height: 1.4;
+}
+.input-default {
+  font-size: 0.68rem; color: var(--silver); font-style: italic;
 }
 .input-value {
   font-family: var(--font-display);
@@ -610,13 +616,12 @@ footer .footer-brand {
 <!-- ═══════════ HERO ═══════════ -->
 <header class="hero">
   <div class="hero-content">
-    <div class="hero-eyebrow">Analyse de décision · Maison familiale · Ouest parisien</div>
+    <div class="hero-eyebrow">Document familial · Maison familiale · Ouest parisien · Avril 2026</div>
     <h1>
       Vendre maintenant<br>ou <em>reporter</em> la vente ?
     </h1>
     <p class="hero-sub">
-      Simulation patrimoniale fondée sur les chiffres réels.
-      Trois scénarios, un verdict clair — pour que la famille décide en connaissance de cause.
+      Ce document a été préparé pour maman, mes frères et Alexandre — pour que nous puissions décider ensemble, en connaissance de cause, sans pression et sans biais. Les chiffres sont réels, les hypothèses sont ajustables, le verdict est clair.
     </p>
 
     <div class="hero-figures">
@@ -768,34 +773,41 @@ footer .footer-brand {
       <!-- INPUTS -->
       <div class="sim-inputs-panel">
         <h3>Paramètres de simulation</h3>
+        <p style="font-size:0.8rem;color:var(--slate);margin-bottom:1.75rem;line-height:1.6;">Faites glisser chaque curseur pour tester différentes hypothèses. Les résultats à droite se mettent à jour instantanément.</p>
 
         <div class="input-group">
           <label>Capital net vendeur <span class="input-value" id="val-capital">800 000 €</span></label>
+          <div class="input-hint">Ce que maman toucherait réellement après paiement de l'agence immobilière, une fois la vente signée. <span class="input-default">Valeur par défaut : 800 000 € (prix affiché 850 k€ − commission agence ~6%)</span></div>
           <input type="range" id="input-capital" min="700000" max="870000" step="5000" value="800000">
         </div>
 
         <div class="input-group">
-          <label>Taux de placement annuel <span class="input-value" id="val-rate">3.25%</span></label>
+          <label>Taux de placement annuel <span class="input-value" id="val-rate">3,25%</span></label>
+          <div class="input-hint">Le rendement annuel d'un placement sécurisé du capital (assurance-vie fonds euros, livret, obligations). Plus ce taux est élevé, plus la rente est confortable. <span class="input-default">Valeur par défaut : 3,25% — fourchette réaliste en 2026 pour un placement prudent</span></div>
           <input type="range" id="input-rate" min="2.5" max="5" step="0.25" value="3.25">
         </div>
 
         <div class="input-group">
-          <label>Loyer brut mensuel (si location) <span class="input-value" id="val-rent">2 700 €</span></label>
+          <label>Loyer brut mensuel (si on garde la maison) <span class="input-value" id="val-rent">2 700 €</span></label>
+          <div class="input-hint">Ce qu'un locataire paierait chaque mois si la maison était mise en location. C'est le montant avant déduction des charges et impôts. <span class="input-default">Valeur par défaut : 2 700 €/mois — estimation réaliste pour une maison de 200 m² à l'ouest de Paris</span></div>
           <input type="range" id="input-rent" min="2000" max="3500" step="50" value="2700">
         </div>
 
         <div class="input-group">
-          <label>Taux de charges + fiscalité locative <span class="input-value" id="val-taxrate">35%</span></label>
+          <label>Part perdue en charges + impôts (location) <span class="input-value" id="val-taxrate">35%</span></label>
+          <div class="input-hint">Sur chaque euro de loyer encaissé, une partie disparaît en charges de copropriété, taxe foncière, entretien et impôts sur revenus fonciers. Il reste le solde net. <span class="input-default">Valeur par défaut : 35% — fourchette réaliste pour ce type de bien (peut aller jusqu'à 40-45% selon la tranche d'imposition)</span></div>
           <input type="range" id="input-taxrate" min="25" max="45" step="5" value="35">
         </div>
 
         <div class="input-group">
-          <label>Délai d'attente pour 850 k€ (mois) <span class="input-value" id="val-delay">24 mois</span></label>
+          <label>Délai avant une vente à 850 k€ (mois) <span class="input-value" id="val-delay">24 mois</span></label>
+          <div class="input-hint">Combien de temps supplémentaire faudrait-il attendre pour espérer vendre 50 000 € de plus ? Pendant ce temps, aucun revenu n'est généré. <span class="input-default">Valeur par défaut : 24 mois — estimation prudente sur un marché actuellement difficile pour ce type de bien</span></div>
           <input type="range" id="input-delay" min="6" max="36" step="3" value="24">
         </div>
 
         <div class="input-group">
-          <label>Coût fiscal succession si &gt; 70 ans <span class="input-value" id="val-taxrisk">40 000 €</span></label>
+          <label>Surcoût fiscal si vente après 70 ans <span class="input-value" id="val-taxrisk">40 000 €</span></label>
+          <div class="input-hint">Si l'argent est placé en assurance-vie après les 70 ans de maman (15 janvier 2027), les avantages fiscaux pour les héritiers sont considérablement réduits. Ce curseur représente l'impact estimé en droits supplémentaires. <span class="input-default">Valeur par défaut : 40 000 € — ordre de grandeur à valider avec un notaire</span></div>
           <input type="range" id="input-taxrisk" min="0" max="80000" step="5000" value="40000">
         </div>
       </div>
@@ -830,10 +842,10 @@ footer .footer-brand {
 
         <div class="result-delta" style="background: var(--success-soft); border: 1px solid rgba(58,125,92,0.2);">
           <div>
-            <div class="result-delta-label" style="color: var(--success);">Objectif retraite (1 200 €/mois)</div>
-            <div style="font-size:0.75rem;color:var(--slate);margin-top:0.2rem" id="out-goal-text">Couvert avec 967 €/mois de marge</div>
+            <div class="result-delta-label" style="color: var(--success);">Complément de rente pour maman (en plus des 1 200 €/mois déjà perçus)</div>
+            <div style="font-size:0.75rem;color:var(--slate);margin-top:0.2rem" id="out-goal-text">Rente mensuelle : +2 167 €/mois supplémentaires. Total : 3 367 €/mois — indépendant d'Alexandre.</div>
           </div>
-          <div class="result-delta-value" style="color: var(--success);" id="out-goal-status">✓ Atteint</div>
+          <div class="result-delta-value" style="color: var(--success);" id="out-goal-status">+2 167 €/mois</div>
         </div>
 
       </div>
@@ -876,38 +888,38 @@ footer .footer-brand {
     <div class="args-grid">
       <div class="arg-card reveal reveal-delay-1">
         <div class="arg-number">01</div>
-        <div class="arg-title">Le marché est baissier pour ce type de bien</div>
-        <p class="arg-text">Les maisons anciennes avec travaux sont sous pression depuis fin 2023. Les acheteurs déduisent les travaux du prix proposé, souvent au-delà du coût réel. Chaque mois d'attente augmente le risque d'une offre encore plus basse.</p>
+        <div class="arg-title">Le marché pénalise les maisons à rénover</div>
+        <p class="arg-text">Depuis fin 2023, les acheteurs sont frileux et déduisent systématiquement le coût des travaux — souvent au-delà du réel. La cave dégradée, le DPE, l'état général : chaque mois d'attente augmente le risque qu'une future offre soit encore plus basse que 800 k€.</p>
       </div>
 
       <div class="arg-card reveal reveal-delay-2">
         <div class="arg-number">02</div>
         <div class="arg-title">Les travaux coûtent plus cher chaque année</div>
-        <p class="arg-text">L'inflation des matériaux et de la main-d'œuvre tourne autour de 5–8%/an dans le bâtiment. Les 40 k€ de travaux cave nécessaires aujourd'hui deviendront 43–45 k€ dans 12 mois — et continueront de peser sur le prix de vente.</p>
+        <p class="arg-text">L'inflation des matériaux et de la main-d'œuvre dans le bâtiment tourne autour de 5–8%/an. Les 40 k€ de travaux cave estimés aujourd'hui deviendront 43–45 k€ dans un an. Conserver la maison, c'est laisser ces coûts grossir — qu'on loue ou qu'on attende.</p>
       </div>
 
       <div class="arg-card reveal reveal-delay-3">
         <div class="arg-number">03</div>
         <div class="arg-title">L'écart 800 / 850 k€ est une illusion comptable</div>
-        <p class="arg-text">50 k€ d'écart brut sur le prix. Mais 2 ans d'attente = 52 k€ de revenus perdus + jusqu'à 40 k€ de risque fiscal succession = −92 k€. Vouloir 850 k€ peut coûter 92 k€ de plus qu'accepter 800 k€ aujourd'hui.</p>
+        <p class="arg-text">50 k€ de gain brut hypothétique sur le prix. Mais 2 ans d'attente = 52 k€ de revenus non perçus par maman + jusqu'à 40 k€ de risque fiscal succession = on peut perdre 92 k€ pour espérer gagner 50 k€. Le calcul ne tient pas.</p>
       </div>
 
       <div class="arg-card reveal reveal-delay-1">
         <div class="arg-number">04</div>
-        <div class="arg-title">La fenêtre assurance-vie avant 70 ans est irremplaçable</div>
-        <p class="arg-text">Les versements en assurance-vie réalisés avant 70 ans bénéficient d'un abattement successoral de 152 500 € par bénéficiaire. Après 70 ans, seul l'abattement de 30 500 € s'applique sur les primes — une différence considérable dans la transmission.</p>
+        <div class="arg-title">La fenêtre assurance-vie avant 70 ans ne se rattrape pas</div>
+        <p class="arg-text">Les versements en assurance-vie réalisés avant les 70 ans de maman (15 janvier 2027) bénéficient d'un abattement successoral de 152 500 € par bénéficiaire pour les fils. Après 70 ans, seul un abattement global de 30 500 € s'applique. C'est une différence majeure dans ce que chacun héritera.</p>
       </div>
 
       <div class="arg-card reveal reveal-delay-2">
         <div class="arg-number">05</div>
-        <div class="arg-title">La location ne compense pas le placement du capital</div>
-        <p class="arg-text">800 k€ placés à 3,25% génèrent 26 k€/an nets, sans aucune gestion. La location du même bien génère 18–22 k€ nets avec locataires, travaux, risques DPE et fiscalité foncière. La vente domine en rendement net réel.</p>
+        <div class="arg-title">Louer ne rapporte pas autant qu'on croit</div>
+        <p class="arg-text">2 700 €/mois de loyer brut, ça paraît confortable. Mais une fois les charges de copropriété, la taxe foncière, les travaux courants et les impôts sur revenus fonciers déduits, il reste environ 1 700–1 800 €/mois net. Soit moins que la rente d'un capital placé — avec beaucoup plus de contraintes et d'aléas pour les fils et pour maman.</p>
       </div>
 
       <div class="arg-card reveal reveal-delay-3">
         <div class="arg-number">06</div>
-        <div class="arg-title">Sécuriser l'indépendance financière de la propriétaire</div>
-        <p class="arg-text">L'objectif prioritaire est clair : un revenu propre de ≥ 1 200 €/mois, indépendant des revenus du conjoint. La vente atteint cet objectif dès le premier mois, de façon simple, sécurisée et durable. La location l'atteint sous conditions et avec risques.</p>
+        <div class="arg-title">L'indépendance financière de maman ne peut pas attendre</div>
+        <p class="arg-text">Aujourd'hui maman vit sur les revenus d'Alexandre. C'est une fragilité. Vendre maintenant, c'est lui donner un revenu propre, régulier, sécurisé — dès le premier mois, sans locataire à gérer, sans dépendance. C'est la priorité numéro un que les fils ont tous identifiée.</p>
       </div>
     </div>
   </div>
@@ -918,19 +930,19 @@ footer .footer-brand {
   <div class="container">
     <div class="reveal">
       <div class="section-label">Bilan consolidé</div>
-      <h2 class="section-title">Vue d'ensemble des trois scénarios</h2>
-      <p class="section-subtitle">Chiffres à titre indicatif — à affiner avec un notaire ou conseiller patrimonial pour la fiscalité successorale précise.</p>
+      <h2 class="section-title">Ce que chaque scénario signifie concrètement pour maman</h2>
+      <p class="section-subtitle">Ces chiffres sont des estimations fondées sur les paramètres du simulateur ci-dessus. À affiner avec un notaire pour la fiscalité successorale précise avant toute décision.</p>
     </div>
 
     <div class="bilan-grid reveal reveal-delay-1">
       <div class="bilan-col winner">
         <div class="bilan-col-title">✓ Vente immédiate<br>≈ 800 k€</div>
-        <div class="bilan-row"><span class="bilan-row-label">Revenu net / an</span><span class="bilan-row-value good" id="b-sell-annual">26 000 €</span></div>
-        <div class="bilan-row"><span class="bilan-row-label">Revenu / mois</span><span class="bilan-row-value good" id="b-sell-monthly">2 167 €</span></div>
-        <div class="bilan-row"><span class="bilan-row-label">Travaux à avancer</span><span class="bilan-row-value good">0 €</span></div>
-        <div class="bilan-row"><span class="bilan-row-label">Risque fiscal &gt;70 ans</span><span class="bilan-row-value good">Évité</span></div>
-        <div class="bilan-row"><span class="bilan-row-label">Charge mentale</span><span class="bilan-row-value good">Minimale</span></div>
-        <div class="bilan-row"><span class="bilan-row-label">Dépendance du conjoint</span><span class="bilan-row-value good">Supprimée</span></div>
+        <div class="bilan-row"><span class="bilan-row-label">Rente annuelle nette</span><span class="bilan-row-value good" id="b-sell-annual">26 000 €</span></div>
+        <div class="bilan-row"><span class="bilan-row-label">Rente mensuelle pour maman</span><span class="bilan-row-value good" id="b-sell-monthly">2 167 €</span></div>
+        <div class="bilan-row"><span class="bilan-row-label">+ Retraite de base</span><span class="bilan-row-value good">1 200 €/mois</span></div>
+        <div class="bilan-row"><span class="bilan-row-label">Dépendance à Alexandre</span><span class="bilan-row-value good">Supprimée</span></div>
+        <div class="bilan-row"><span class="bilan-row-label">Travaux à financer</span><span class="bilan-row-value good">0 €</span></div>
+        <div class="bilan-row"><span class="bilan-row-label">Fenêtre AV avant 70 ans</span><span class="bilan-row-value good">Sécurisée</span></div>
       </div>
 
       <div class="bilan-col neutral">
@@ -946,11 +958,11 @@ footer .footer-brand {
       <div class="bilan-col loser">
         <div class="bilan-col-title">✕ Attendre<br>850 k€</div>
         <div class="bilan-row"><span class="bilan-row-label">Revenu pendant attente</span><span class="bilan-row-value bad">0 €</span></div>
-        <div class="bilan-row"><span class="bilan-row-label">Revenus perdus (2 ans)</span><span class="bilan-row-value bad" id="b-wait-lost">−52 000 €</span></div>
-        <div class="bilan-row"><span class="bilan-row-label">Travaux + inflation</span><span class="bilan-row-value bad">≥ 43 000 €</span></div>
+        <div class="bilan-row"><span class="bilan-row-label">Revenus perdus (selon délai)</span><span class="bilan-row-value bad" id="b-wait-lost">−52 000 €</span></div>
+        <div class="bilan-row"><span class="bilan-row-label">Travaux + inflation chantier</span><span class="bilan-row-value bad">≥ 43 000 €</span></div>
         <div class="bilan-row"><span class="bilan-row-label">Risque fiscal &gt;70 ans</span><span class="bilan-row-value bad">Très élevé</span></div>
-        <div class="bilan-row"><span class="bilan-row-label">Gain net total estimé</span><span class="bilan-row-value bad" id="b-wait-net">−42 000 €</span></div>
-        <div class="bilan-row"><span class="bilan-row-label">Charge mentale</span><span class="bilan-row-value bad">Maximum</span></div>
+        <div class="bilan-row"><span class="bilan-row-label">Gain net réel vs vendre maintenant</span><span class="bilan-row-value bad" id="b-wait-net">−42 000 €</span></div>
+        <div class="bilan-row" style="border-top: 1px solid rgba(168,66,66,0.2); margin-top:0.5rem; padding-top:0.5rem;"><span class="bilan-row-label" style="font-size:0.72rem;font-style:italic;">= gain prix (50k€) − revenus perdus − risque fiscal</span><span class="bilan-row-value bad"></span></div>
       </div>
     </div>
   </div>
@@ -960,7 +972,7 @@ footer .footer-brand {
 <div class="disclaimer">
   <div class="container">
     <p>
-      Cette simulation est fournie à titre informatif et illustratif uniquement. Les chiffres présentés sont des estimations fondées sur les données partagées en famille et des hypothèses de marché raisonnables (taux de placement, fiscalité locative, coûts de travaux). Ils ne constituent pas un conseil juridique, fiscal ou patrimonial. Pour toute décision engageant votre patrimoine, consultez un notaire et un conseiller en gestion de patrimoine.
+      Ce document a été préparé pour usage familial uniquement — il ne constitue pas un conseil juridique, fiscal ou patrimonial. Les chiffres sont des estimations fondées sur les données partagées en famille et des hypothèses de marché raisonnables. Pour toute décision engageant le patrimoine, nous vous recommandons de consulter ensemble un notaire et un conseiller en gestion de patrimoine indépendant.
     </p>
   </div>
 </div>
@@ -968,8 +980,8 @@ footer .footer-brand {
 <!-- ═══════════ FOOTER ═══════════ -->
 <footer>
   <div class="container">
-    <p>Simulation préparée pour usage familial · Maison familiale, Ouest parisien · Avril 2026</p>
-    <div class="footer-brand">Stratégie Patrimoniale</div>
+    <p>Document familial · Maison familiale, Ouest parisien · Avril 2026</p>
+    <div class="footer-brand">Pour maman, mes frères et Alexandre</div>
   </div>
 </footer>
 
@@ -1135,29 +1147,29 @@ footer .footer-brand {
     const waitTotal    = waitRevLost + taxrisk;
     const waitNetGain  = 50000 - waitRevLost - taxrisk; // 50k hypothetical gain
 
-    // GOAL
-    const goalTarget = 1200;
-    const goalMargin = sellMonthly - goalTarget;
-    const goalMet    = sellMonthly >= goalTarget;
+    // GOAL — complément de retraite au-dessus des 1200€ déjà perçus
+    const retraiteBase = 1200; // retraite existante déjà assurée
+    const complement   = sellMonthly; // la rente AV vient EN PLUS
+    const totalRevenu  = retraiteBase + complement;
 
     // VERDICT
     const vText = document.getElementById('verdict-text');
     const vSub  = document.getElementById('verdict-sub');
     const vIcon = document.getElementById('verdict-icon');
 
-    if (sellAnnual > rentNet && sellMonthly >= goalTarget) {
-      vText.textContent = 'Vendre maintenant à ≈ ' + fmtK(Math.round(capital / 1000) * 1000) + ' domine les deux autres scénarios';
-      vSub.textContent  = 'Chaque mois d\'attente coûte ≈ ' + Math.round(sellMonthly).toLocaleString('fr-FR') + ' € de revenus perdus, et fragilise la fenêtre fiscale avant 70 ans.';
+    if (sellAnnual > rentNet && complement >= 800) {
+      vText.textContent = 'Vendre maintenant à ≈ ' + capital.toLocaleString('fr-FR') + ' € domine les deux autres scénarios';
+      vSub.textContent  = 'Maman percevrait ' + Math.round(totalRevenu).toLocaleString('fr-FR') + ' €/mois au total (retraite + rente AV), en toute indépendance vis-à-vis d\'Alexandre. Chaque mois d\'attente coûte ≈ ' + Math.round(sellMonthly).toLocaleString('fr-FR') + ' € de revenus non générés.';
       vIcon.className   = 'verdict-icon';
       vIcon.textContent = '✓';
     } else if (rentNet > sellAnnual) {
-      vText.textContent = 'À ces paramètres, la location devient plus rentable que le placement';
-      vSub.textContent  = 'Vérifiez le taux de placement et le niveau de charges — la situation évolue.';
+      vText.textContent = 'À ces paramètres, la location génère plus que le placement — à vérifier';
+      vSub.textContent  = 'Avant de conclure, vérifiez le taux de placement et les charges réelles estimées. La location reste contraignante même si le brut est élevé.';
       vIcon.className   = 'verdict-icon warn';
       vIcon.textContent = '⚠';
     } else {
-      vText.textContent = 'Objectif retraite non atteint à ce niveau de capital';
-      vSub.textContent  = 'Le capital net vendeur semble insuffisant pour couvrir les 1 200 €/mois. Réévaluez les hypothèses.';
+      vText.textContent = 'Le complément de rente reste faible à ce niveau de capital';
+      vSub.textContent  = 'Avec ce capital et ce taux, la rente mensuelle serait limitée. Testez un taux de placement plus élevé ou négociez un meilleur prix de vente.';
       vIcon.className   = 'verdict-icon danger';
       vIcon.textContent = '!';
     }
@@ -1187,18 +1199,12 @@ footer .footer-brand {
 
     setVal(document.getElementById('out-wait-total'), '−' + Math.round(waitTotal).toLocaleString('fr-FR') + ' €');
 
-    // Goal
+    // Goal display
     const goalEl   = document.getElementById('out-goal-status');
     const goalText = document.getElementById('out-goal-text');
-    if (goalMet) {
-      goalEl.textContent   = '✓ Atteint';
-      goalEl.style.color   = 'var(--success)';
-      goalText.textContent = 'Couvert avec ' + Math.round(goalMargin).toLocaleString('fr-FR') + ' €/mois de marge';
-    } else {
-      goalEl.textContent   = '✕ Non atteint';
-      goalEl.style.color   = 'var(--danger)';
-      goalText.textContent = 'Déficit de ' + Math.round(-goalMargin).toLocaleString('fr-FR') + ' €/mois';
-    }
+    goalEl.textContent  = '+' + Math.round(complement).toLocaleString('fr-FR') + ' €/mois';
+    goalEl.style.color  = complement >= 800 ? 'var(--success)' : 'var(--warn)';
+    goalText.textContent = 'Rente mensuelle générée par la vente, EN PLUS de la retraite de base de 1 200 €. Total maman : ' + Math.round(totalRevenu).toLocaleString('fr-FR') + ' €/mois — indépendant d\'Alexandre.';
 
     // Scenario cards
     setVal(document.getElementById('sc-sell-revenue'), Math.round(sellAnnual * 0.95).toLocaleString('fr-FR') + ' – ' + Math.round(sellAnnual).toLocaleString('fr-FR') + ' €');
